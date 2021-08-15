@@ -440,7 +440,10 @@ Donde $\beta_i$ son los parámetros del modelo representando el efecto promedio 
 De igual manera, la forma habitual de estimar los parámetros es mediante el uso de mínimos cuadrados para minimizar la suma de los residuales al cuadrado:
 
 $$
-RSS = \sum_{i = 1}^n(y_i-f(x_i))^2 = \sum_{i = 1}^n(y_i-\hat y_i)^2 = \sum_{i = 1}^n(y_i-\hat\beta_0-\hat\beta_1x_{i1}-\hat\beta_2x_{i2}-\cdots-\hat\beta_px_{ip})^2 = \sum_{i = 1}^n\left(y_i-\beta_0-\sum_{j = 1}^px_{ij}\beta_j\right)^2
+\begin{split}
+RSS &= \sum_{i = 1}^n(y_i-f(x_i))^2 = \sum_{i = 1}^n(y_i-\hat y_i)^2 = \sum_{i = 1}^n(y_i-\hat\beta_0-\hat\beta_1x_{i1}-\hat\beta_2x_{i2}-\cdots-\hat\beta_px_{ip})^2\\
+&= \sum_{i = 1}^n\left(y_i-\beta_0-\sum_{j = 1}^px_{ij}\beta_j\right)^2
+\end{esplit}
 $$
 
 Vamos a seguir tomando el ejemplo de los ingresos en el estado de Aguascalientes de acuerdo a la [Encuesta Nacional de Ingresos y Gastos de los Hogares (ENIGH). 2018 Nueva serie](https://www.inegi.org.mx/programas/enigh/nc/2018/#Microdatos). Vamos a ajustar un modelo con las variables que tengan la mejor correlación con el ingreso eliminando previamente algunos outliers que se consiguen en ciertas variables.
@@ -793,8 +796,8 @@ Entoces, al tener que los aumentos en el calzado aumentaran los del vestido y ve
 
 $$
 \begin{split}
-\log(ing\_cor) = & \beta_{0} + \beta_{1}\sqrt{transporte} + \beta_{2}\sqrt{alimentos} + \beta_{3}\sqrt{limpieza} + \beta_{4}\sqrt{personales} + \beta_5\sqrt{calzado} + \beta_6\sqrt{vestido} + \beta_7\sqrt{calzado}\times \sqrt{vestido} + \epsilon\\
-& \beta_{0} + \beta_{1}\sqrt{transporte} + \beta_{2}\sqrt{alimentos} + \beta_{3}\sqrt{limpieza} + \beta_{4}\sqrt{personales} + \widetilde{\beta_5}\sqrt{calzado} + \beta_6\sqrt{vestido} + \epsilon
+\log(ing\_cor) = & \beta_{0} + \beta_{1}\sqrt{transporte} + \beta_{2}\sqrt{alimentos} + \beta_{3}\sqrt{limpieza} + \beta_{4}\sqrt{personales} \\&+ \beta_5\sqrt{calzado} + \beta_6\sqrt{vestido} + \beta_7\sqrt{calzado}\times \sqrt{vestido} + \epsilon\\
+=& \beta_{0} + \beta_{1}\sqrt{transporte} + \beta_{2}\sqrt{alimentos} + \beta_{3}\sqrt{limpieza} + \beta_{4}\sqrt{personales} +\\& \widetilde{\beta_5}\sqrt{calzado} + \beta_6\sqrt{vestido} + \epsilon
 \end{split}
 $$
 

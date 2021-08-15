@@ -270,7 +270,10 @@ f(X) = Y = \beta_0 +\beta_1X_1+\beta_2X_2+\dots + \beta_pX_p+\epsilon = \beta_0 
 <p>Donde <span class="math inline">\(\beta_i\)</span> son los parámetros del modelo representando el efecto promedio en <span class="math inline">\(Y\)</span> de un incremento de una unidad en <span class="math inline">\(X_i\)</span>, <strong>manteniendo todos los otros predictores fijos</strong> y <span class="math inline">\(\epsilon\sim N(0,\sigma^2)\)</span>.</p>
 <p>De igual manera, la forma habitual de estimar los parámetros es mediante el uso de mínimos cuadrados para minimizar la suma de los residuales al cuadrado:</p>
 <p><span class="math display">\[
-RSS = \sum_{i = 1}^n(y_i-f(x_i))^2 = \sum_{i = 1}^n(y_i-\hat y_i)^2 = \sum_{i = 1}^n(y_i-\hat\beta_0-\hat\beta_1x_{i1}-\hat\beta_2x_{i2}-\cdots-\hat\beta_px_{ip})^2 = \sum_{i = 1}^n\left(y_i-\beta_0-\sum_{j = 1}^px_{ij}\beta_j\right)^2
+\begin{split}
+RSS &amp;= \sum_{i = 1}^n(y_i-f(x_i))^2 = \sum_{i = 1}^n(y_i-\hat y_i)^2 = \sum_{i = 1}^n(y_i-\hat\beta_0-\hat\beta_1x_{i1}-\hat\beta_2x_{i2}-\cdots-\hat\beta_px_{ip})^2\\
+&amp;= \sum_{i = 1}^n\left(y_i-\beta_0-\sum_{j = 1}^px_{ij}\beta_j\right)^2
+\end{esplit}
 \]</span></p>
 <p>Vamos a seguir tomando el ejemplo de los ingresos en el estado de Aguascalientes de acuerdo a la <a href="https://www.inegi.org.mx/programas/enigh/nc/2018/#Microdatos">Encuesta Nacional de Ingresos y Gastos de los Hogares (ENIGH). 2018 Nueva serie</a>. Vamos a ajustar un modelo con las variables que tengan la mejor correlación con el ingreso eliminando previamente algunos outliers que se consiguen en ciertas variables.</p>
 <p>Para facilitarnos esto, veamos el siguiente gráfico de correlación con la correlación de spearman para ver relaciones monotonas y después diagramas de dispersión junto a la correlación de pearson que se consigue por pares.</p>
@@ -578,8 +581,8 @@ F-statistic: 362.7 on 6 and 2295 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Entoces, al tener que los aumentos en el calzado aumentaran los del vestido y veceversa, esto viola el supuesto de aditividad en el modelo lineal. Para solucionar esto agregamos una <strong>interacción</strong> al modelo con estas variables, es decir que agregaremos el término <span class="math inline">\(\beta_iX_{calzado}X_{vestido}\)</span> al modelo, entonces ahora nuestro modelo sería el siguiente:</p>
 <p><span class="math display">\[
 \begin{split}
-\log(ing\_cor) = &amp; \beta_{0} + \beta_{1}\sqrt{transporte} + \beta_{2}\sqrt{alimentos} + \beta_{3}\sqrt{limpieza} + \beta_{4}\sqrt{personales} + \beta_5\sqrt{calzado} + \beta_6\sqrt{vestido} + \beta_7\sqrt{calzado}\times \sqrt{vestido} + \epsilon\\
-&amp; \beta_{0} + \beta_{1}\sqrt{transporte} + \beta_{2}\sqrt{alimentos} + \beta_{3}\sqrt{limpieza} + \beta_{4}\sqrt{personales} + \widetilde{\beta_5}\sqrt{calzado} + \beta_6\sqrt{vestido} + \epsilon
+\log(ing\_cor) = &amp; \beta_{0} + \beta_{1}\sqrt{transporte} + \beta_{2}\sqrt{alimentos} + \beta_{3}\sqrt{limpieza} + \beta_{4}\sqrt{personales} \\&amp;+ \beta_5\sqrt{calzado} + \beta_6\sqrt{vestido} + \beta_7\sqrt{calzado}\times \sqrt{vestido} + \epsilon\\
+=&amp; \beta_{0} + \beta_{1}\sqrt{transporte} + \beta_{2}\sqrt{alimentos} + \beta_{3}\sqrt{limpieza} + \beta_{4}\sqrt{personales} +\\&amp; \widetilde{\beta_5}\sqrt{calzado} + \beta_6\sqrt{vestido} + \epsilon
 \end{split}
 \]</span></p>
 <p>En la última expresión suponemos que <span class="math inline">\(\widetilde{\beta_5} = \beta_5+\beta_7\sqrt{X_{vestido}}\)</span> y así podemos seguir viendo nuestro modelo “sin interacciones,” sólo que ahora un cambio en el calzado tendrá un efecto en el vestido y veceversa</p>
