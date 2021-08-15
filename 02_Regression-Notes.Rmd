@@ -28,9 +28,13 @@ $\beta_0$ nos indica el valor de $y$ cuando la variable predictora esta ausente.
 
 Es sencillo realizar una regresión lineal en R, simplemente podemos utilizar el comando `base::lm()` agregando una fórmula (`~`) como parámetro. Por ejemplo, consideremos la base de datos `datasets::cars` donde se tiene la velocidad y la distancia que recorrió un coche para detenerse; estos datos fueron recolectados en 1920.
 
-```{r}
-cars %>% ggplot(aes(x = speed, y = dist)) + labs(x = "Velocidad", y = "Distancia") + geom_point(colour = "purple3") + general_theme
+<center>
+
+```{r, class.source = "to_left"}
+ggplotly(cars %>% ggplot(aes(x = speed, y = dist)) + labs(x = "Velocidad", y = "Distancia") + geom_point(colour = "purple3") + general_theme)
 ```
+
+</center>
 
 Ahora, realizaremos nuestro modelo lineal simple:
 
@@ -59,14 +63,18 @@ $$
 
 Y ahora podemos generar la siguiente gráfica
 
-```{r}
-cars %>% ggplot(aes(x = speed, y = dist)) + 
+<center>
+
+```{r, class.source = "to_left"}
+ggplotly(cars %>% ggplot(aes(x = speed, y = dist)) + 
   labs(x = "Velocidad", y = "Distancia") + general_theme +
   geom_point(colour = "purple3") + 
   geom_abline(intercept = car_regression$coefficients[1], 
               slope = car_regression$coefficients[2],
-              colour = "red")
+              colour = "red"))
 ```
+
+</center>
 
 Hay cosas importantes que ver en este tema y aquí se comenzará con un pequeño análisis de correlación.
 
@@ -88,20 +96,24 @@ starwars
 
 Sólo para estos fines, eliminaremos un outlier sobre el peso y consideraremos sólo esta y la altura para ver si existe algún tipo de relación entre estas variables.
 
-```{r, class.output = "scroll-300"}
+<center>
+
+```{r, class.source = "to_left"}
 new_starwars <- starwars %>% filter(mass < max(starwars$mass, na.rm = T))
 
 pearson_star <- cor(new_starwars$height, new_starwars$mass)
 spearman_star <- cor(new_starwars$height, new_starwars$mass, method = "spearman")
 kendall_star <- cor(new_starwars$height, new_starwars$mass, method = "kendall")
 
-new_starwars %>% ggplot(aes(x = height, y = mass)) + 
+ggplotly(new_starwars %>% ggplot(aes(x = height, y = mass)) + 
   geom_point(color = "royalblue4") + labs(x = "Altura (cm)", y = "Peso (kg)") +
   annotate("text", x = 100, y = 150, label = paste("Pearson: ", pearson_star, collapse = "")) +
   annotate("text", x = 100, y = 140, label = paste("Spearman: ", spearman_star, collapse = "")) +
   annotate("text", x = 100, y = 130, label = paste("Kendall: ", kendall_star, collapse = "")) +
-  general_theme
+  general_theme)
 ```
+
+</center>
 
 Como vemos, el coeficiente de correlación de pearson tiene un valor cercano al de Spearman, aunque este último nos inidica que existe una relación monótona, por lo que podríamos aplicar una transformación para otorgar un comportamiento más cercano al lineal con una función monóntona como lo es el logaritmo.
 
@@ -110,12 +122,12 @@ pearson_star <- cor(new_starwars$height, log(new_starwars$mass))
 spearman_star <- cor(new_starwars$height, log(new_starwars$mass), method = "spearman")
 kendall_star <- cor(new_starwars$height, log(new_starwars$mass), method = "kendall")
 
-new_starwars %>% ggplot(aes(x = height, y = log(mass))) + 
+ggplotly(new_starwars %>% ggplot(aes(x = height, y = log(mass))) + 
   geom_point(color = "royalblue4") + labs(x = "Altura (cm)", y = "Peso (kg)") +
   annotate("text", x = 100, y = 4.8, label = paste("Pearson: ", pearson_star, collapse = "")) +
   annotate("text", x = 100, y = 4.6, label = paste("Spearman: ", spearman_star, collapse = "")) +
   annotate("text", x = 100, y = 4.4, label = paste("Kendall: ", kendall_star, collapse = "")) +
-  general_theme
+  general_theme)
 ```
 
 Nuestro coeficiente de correlación lineal aumente significativamente y surge la siguiente pregunta: ¿Cuándo utilizar alguna transformación y cuál? En general, cualquier función que sólo cambie la escala y este definida para los datos que se estén considerando se puede utilizar, como un logaritmo (que nos ayuda a reducir dispersión y dar valores pequeños), una raíz cuadrada, una función inversa, etc; aunque hay que tener cuidado. Por ejemplo ¿Qué pasaría con si tengo valores iguales a cero y aplico un logaritmo? ¿La interpretación sobre los coeficientes cambiaría o no? Este último punto se verá después.
@@ -141,7 +153,6 @@ Es difícil pensar que realmente existe una relación entre dichas variables en 
 Otro punto interesante es, ¿Qué tanto podemos confiar sólo en nuestras estadísticas? Consideremos la siguiente información obtenida del paquete `datasauRus`.
 
 ```{r}
-library(datasauRus)
 dino_data <- datasauRus::datasaurus_dozen %>% filter(dataset == "dino")
   datasaurus_dozen %>% 
     group_by(dataset) %>% 
@@ -256,29 +267,29 @@ data_income <- data %>% dplyr::select(-c(entidad, sexo_jefe, paq_turist))
 
 
 ```{r}
-library(corrplot)
 corrplot(cor(data_income), type = "lower", diag = F)
 ```
 
 Tenemos otras alternativas que nos permiten tener un comportamiento similar al paquete ggplot, como lo es la función `ggcorrplot::ggcorrplot()`.
 
-```{r}
-library(ggcorrplot)
-ggcorrplot(cor(data_income), 
+<center>
+
+```{r, class.source = "to_left"}
+ggplotly(ggcorrplot(cor(data_income), 
            #method = "circle"  #Método de visualización, "square" por default.
            hc.order = TRUE, #Orden jerárquico sobre los valores obtenidos.
            outline.col = "white", #Color del margen de los cuadrádos o círculos.
            type = "lower" #Elementos a desplegar en la gráfica
            #lab = TRUE # Anotaciones de los valores obtenidos en cada celda de la matriz.
            #colors = c("green", "black", "red") #Colores 
-           )
+           ))
 ```
+
+</center>
 
 Además de un correlograma, podemos obtener las correlaciones más importantes en otro tipo de gráfico, esto es lo que hace el paquete `lares` con las funciones `corr_cross()` y `corr_var()`. Para más información se sugiere revisar el siguiente [post](https://datascienceplus.com/find-insights-with-ranked-cross-correlations/)
 
 ```{r}
-library(lares)
-
 corr_cross(data_income,
   max_pvalue = 0.05,  # Correlaciones significantes a mostrar (a un nivel del 5%)
   top = 10            # Cantidad de variables a mostrar con mayor significancia
@@ -293,7 +304,6 @@ corr_var(data_income,
 Igual podríamos elegir una visualización más tradicional pero con un formato más elegante, como el proporcionado con la función `modelsummary::datasummary_correlation()`
 
 ```{r}
-library(modelsummary)
 datasummary_correlation(data_income, 
                         method = "pearspear" # "pearson", "kendall", "spearman", or "pearspear" (Pearson correlations above and Spearman correlations below the diagonal)
                         ) %>% 
@@ -307,9 +317,11 @@ datasummary_correlation(data_income,
 
 + Con ggplot podemos añadir de manera rápida una recta de regresión a nuestros datos; véase como se hace uso de la base de datos de las olimpiadas y de la función `ggplot::geom_smooth()` para agregar una capa con la recta de regresión.
 
-```{r}
+<center>
+
+```{r,  class.source = "to_left"}
 olympics <- read_csv("athlete_events.csv") %>% distinct()
-olympics %>% filter(!is.na(Medal) & !is.na(Age)) %>% 
+ggplotly(olympics %>% filter(!is.na(Medal) & !is.na(Age)) %>% 
   filter(!(Year %in% c(1994, 1998, 2002, 2006, 2010, 2014))) %>% #Eliminamos algunos valores inluyentes
   group_by(Year) %>%
   count(Medal) %>% 
@@ -317,14 +329,14 @@ olympics %>% filter(!is.na(Medal) & !is.na(Age)) %>%
   geom_point() + 
   general_theme + 
   geom_smooth(formula = y~x, method = "lm") +
-  labs(x = "Año", y = "Cantidad de medallas")
+  labs(x = "Año", y = "Cantidad de medallas"))
 ```
 
+</center>
 
 ### TidyModels::Broom
 
 ```{r}
-library(broom)
 glance(car_regression)
 tidy(car_regression)
 ```
@@ -341,7 +353,6 @@ Consideremos la base de datos de la encuesta ingreso-gasto del 2018 en Aguascali
 ```
 
 ```{r, class.output = "scroll-300"}
-library(skimr)
 fancy_summary <- skim_with(
   numeric = sfl(
     Min = min,
@@ -414,6 +425,12 @@ Hasta este momento sólo se ha construido un modelo de manera sencilla sin haber
 
 
 # Regresión lineal múltiple
+
+```{css, echo=FALSE}
+.to_left {
+  text-align: left;;
+}
+```
 
 ```{css, echo=FALSE}
 pre {
@@ -495,7 +512,6 @@ first_m_model %>% summary()
 ```
 
 ```{r}
-library(equatiomatic)
 extract_eq(first_m_model)
 ```
 
@@ -596,6 +612,16 @@ Entonces lo que buscamos es que $\hat{\beta_i}$ este lo más alejado del 0, es d
 ```{r}
 GGally::ggcoef_model(first_m_model) + general_theme
 ```
+
+Véase que al hacer el anterior objeto ggplot interactivo con la función `plotly::ggplotly()` podemos obtener toda la información de los coeficientes de una manera más compacta.
+
+<center>
+
+```{r, class.source = "to_left"}
+ggplotly(GGally::ggcoef_model(first_m_model) + general_theme)
+```
+
+</center>
 
 Por lo que, al considerar que la raíz cuadrada es una función monótona y creciente, al igual que el logaritmo en el rango que estamos considerando ($\mathbb{R^{+}}$), los cambios en los gastos personales, en promedio, son lo que más puede afectar en el ingreso si los demás gastos permanecen constantes; de hecho por cada \$1,000 más en los gastos personales, se necesitará entre \$1000.018 y \$1000.043 pesos mexicanos que aumente el ingreso.
 
@@ -1383,7 +1409,6 @@ third_model_BX %>% plot()
 O bien con la función `ggfortify::autoplot()`
 
 ```{r}
-library(ggfortify)
 third_model_BX %>% autoplot()
 ```
 
@@ -1401,7 +1426,6 @@ third_model_BX %>% residuals() %>% shapiro.test()
   - Prueba de White: `lmtest::bptest()`
 
 ```{r}
-library(lmtest)
 third_model_BX %>% bptest()
 ```
 
@@ -1435,7 +1459,6 @@ Donde $R^2_{X_j|X_{-j}}$ es la $R^2$ de la regresión de $X_j$ a todos los demá
 Buscamos valores pequeños y lo más pequeño que se puede obtener para cada variable es un $VIF = 1$ lo cual indica una completa ausencia de colinearidad. Por regla de dedo, un $VIF$ mayor a 5 o 10 indica problemas de colinearidad. En R podemos obtener el $VIF$ para cada variable con la función `faraway::vif()`
 
 ```{r}
-library(faraway)
 third_model_BX %>% vif()
 ```
 
@@ -1508,18 +1531,21 @@ simple_model %>% predict(new_data, interval = "prediction")
 
 En este caso de una regresión lineal simple podemos visualizar mejor dichos intervalos
 
-```{r}
+<center>
+
+```{r, class.source = "to_left"}
 pred_int <- predict(simple_model, interval = "prediction")
 
-mutated_data_income %>% filter(vestido<7500 & vestido>0) %>% bind_cols(pred_int %>% as_tibble()) %>% 
+ggplotly(mutated_data_income %>% filter(vestido<7500 & vestido>0) %>% bind_cols(pred_int %>% as_tibble()) %>% 
   ggplot(aes(x = sqrt(vestido), y = log(ing_cor))) + 
   geom_point() + 
   geom_smooth(method = "lm") + #Intervalos de confianza
   geom_line(aes(y = lwr), color = "red", linetype = "dashed") + #intervalos de predicción
   geom_line(aes(y = upr), color = "red", linetype = "dashed") + 
-  general_theme
+  general_theme)
 ```
 
+</center>
 
 # Otros puntos importantes
 
@@ -1633,7 +1659,6 @@ res_1 + res_2
 Aveces es difícil determinar si una observación debe ser considerado como outlier con la primera gráfica, pero en la segunda es más sencillo. De acuerdo al libro @james2013introduction, observaciones con residuales estudentizados que son más grandes que 3, en valor absoluto, pueden ser considerados como posibles outliers. Lo cual tiene sentido, ya que al "normalizar" los residuales así, se esta haciendo que estos sigan una distribución $t-student$ con $n-k-1$ grados de libertad, en nuestro caso $df = 1398-1-1 = 1396$
 
 ```{r}
-library(latex2exp)
 tibble(x= c(-4, 4)) %>% 
   ggplot(aes(x = x)) + stat_function(fun = ~dt(.x, 1396)) +
   labs(y = "Densidad") + 
@@ -1679,8 +1704,10 @@ filter_data_ToOutliers %>% filter(rStudent< -3 | rStudent>3)
 
 Si dicho outlier fue generado por un error de recolección de información, podemos eliminar la observación sin problemas, aunque hay que considerar que si no es el caso, entonces nuestro modelo simplemente no es lo suficientemente bueno para predecir valores que pueden suceder. En este caso vamos a eliminarlos considerando un limite en 3.5.
 
-```{r}
-filter_data_ToOutliers %>% 
+<center>
+
+```{r, class.source = "to_left"}
+ggplotly(filter_data_ToOutliers %>% 
   ggplot(aes(y = rStudent, x = fitted_values)) + 
   geom_hline(yintercept = c(-3.5, 3.5), alpha = 0.5) + 
   labs(x = "Valores ajustados", y = "Residuales estudentizados") +
@@ -1690,9 +1717,10 @@ filter_data_ToOutliers %>%
       mutate(index = row_number()) %>% 
       dplyr::filter(rStudent< -3.5 | rStudent>3.5),
     aes(label=index), nudge_x = 0.2
-  )+ general_theme
+  )+ general_theme)
 ```
 
+</center>
 
 ```{r}
 fourth_model_1 <- filter_data_ToOutliers %>% filter(rStudent>=-3.5 & rStudent<=3.5) %>%
@@ -1754,11 +1782,13 @@ Con la ecuación anterior podemos ver que $h_i$ incrementa con la distancia entr
 
 Ya habíamos retirado algunos outliers, vamos a ver si estas observaciones también son tienen un alto leverage. En R, podemos utilizar la función `stats::hatvalues()`
 
-```{r, class.output = "scroll-300"}
+<center>
+
+```{r, class.source = "to_left"}
 filter_data_ToLeverage <- filter_data_ToOutliers %>% 
   mutate(leverage = third_model_BX %>% hatvalues(),index = row_number())
 
-(Leverage_analysis <- filter_data_ToLeverage %>% 
+ggplotly((Leverage_analysis <- filter_data_ToLeverage %>% 
   ggplot(aes(x = index, y = leverage)) + 
   geom_point(alpha = 0.5, color = "#447e9e") + 
   geom_hline(yintercept = (5+1)/third_model_BX$fitted.values %>% length(), 
@@ -1769,8 +1799,10 @@ filter_data_ToLeverage <- filter_data_ToOutliers %>%
   geom_text( 
     data = filter_data_ToLeverage %>% dplyr::filter(leverage >=0.016), 
     aes(label=index), nudge_x = 100
-  )+ general_theme)
+  )+ general_theme))
 ```
+
+</center>
 
 Las lineas de colores tan sólo son distintos umbrales o cortes para establecer que observación tiene un alto apalancamiento. En este caso no tenemos que algún outlier también tiene un alto apalancamiento, lo cual es lo ideal.
 
@@ -1819,19 +1851,23 @@ donde $r_i$ es el residual estandarizado aunque algunos autores prefieren los re
 
 El umbral que se establezca también dependerá de la información aunque algunos autores sugieren valores cercanos o más grandes que 1 son valores con gran influencia
 
-```{r}
+<center>
+
+```{r, class.source = "to_left"}
 filter_data_ToCook <- filter_data_ToLeverage %>% 
   mutate(Cook = third_model_BX %>% cooks.distance())
 
-(Cook_analysis <- filter_data_ToCook %>% 
+ggplotly((Cook_analysis <- filter_data_ToCook %>% 
   ggplot(aes(x = index, y = Cook)) + 
   geom_point(alpha = 0.5, color = "#447e9e") + 
   geom_hline(yintercept = 0.03, color = "black", alpha = 0.5)+
   geom_text( 
     data = filter_data_ToCook %>% dplyr::filter(Cook >= 0.03), 
     aes(label=index), nudge_x = 100
-  )+ general_theme)
+  )+ general_theme))
 ```
+
+</center>
 
 Es preferible estudiar los valores influyentes y outliers en conjunto, para determinar aquellos valores que tengan más problemas en conjunto
 

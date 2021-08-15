@@ -33,7 +33,7 @@
 <link rel="prev" href="otros-puntos-importantes-1.html"/>
 <link rel="next" href="librerías-para-eda.html"/>
 <script src="libs/header-attrs-2.7.3/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.5.1/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -54,6 +54,13 @@
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <link href="libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.3/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
@@ -263,8 +270,8 @@ pre[class] {
   max-height: 300px;
 }
 </style>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="anova-vs-regresión-lineal.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aov</span>(ing_cor_log<span class="sc">~</span>transporte_sqrt <span class="sc">+</span> alimentos_sqrt <span class="sc">+</span>limpieza_sqrt <span class="sc">+</span> personales_sqrt, <span class="at">data =</span> mutated_data_income) <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span></code></pre></div>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="anova-vs-regresión-lineal.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(<span class="fu">aov</span>(ing_cor_log<span class="sc">~</span>transporte_sqrt <span class="sc">+</span> alimentos_sqrt <span class="sc">+</span>limpieza_sqrt <span class="sc">+</span> personales_sqrt, <span class="at">data =</span> mutated_data_income))</span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="anova-vs-regresión-lineal.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aov</span>(ing_cor_log<span class="sc">~</span>transporte_sqrt <span class="sc">+</span> alimentos_sqrt <span class="sc">+</span>limpieza_sqrt <span class="sc">+</span> personales_sqrt, <span class="at">data =</span> mutated_data_income) <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="anova-vs-regresión-lineal.html#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(<span class="fu">aov</span>(ing_cor_log<span class="sc">~</span>transporte_sqrt <span class="sc">+</span> alimentos_sqrt <span class="sc">+</span>limpieza_sqrt <span class="sc">+</span> personales_sqrt, <span class="at">data =</span> mutated_data_income))</span></code></pre></div>
 <p>La tabla ANOVA no sólo se puede utilizar en el ámbito de la regresión lineal. Si no que se puede utilizar como una prueba paramétrica (por lo que tiene una gran potencia en comparación de las pruebas no paramétricas) para determinar diferencias entre poblaciones.</p>
 <p>Aquí se deja un conjunto de enlaces:</p>
 <ul>
