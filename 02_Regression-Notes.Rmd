@@ -14,8 +14,6 @@ pre[class] {
 ```
 
 
-**NOTA**: Este trabajo es una continuación directa del trabajo _Statistical Notes_ que se puede encontrar en el siguiente [enlace](https://rpubs.com/CarlosFVG/734736)
-
 Nuestro objetivo en un modelo de regresión será ajustar o asociar una variable, a la que llamaremos variable __respuesta__ o __dependediente__, con una o más variables distintas llamadas variables __predictoras__ o __independientes__, con el fin de poder predecir valores futuros de la variable respuesta y analizar los efectos que tendría esta variable con alteraciones en el resto de variables del modelo.
 
 En este caso, el de la regresión __lineal simple__ consideramos dos variables (1 predictora ($x$) y otra como respuesta ($y$)) y establecemos este modelo de la siguiente manera:
@@ -443,7 +441,7 @@ $$
 \begin{split}
 RSS &= \sum_{i = 1}^n(y_i-f(x_i))^2 = \sum_{i = 1}^n(y_i-\hat y_i)^2 = \sum_{i = 1}^n(y_i-\hat\beta_0-\hat\beta_1x_{i1}-\hat\beta_2x_{i2}-\cdots-\hat\beta_px_{ip})^2\\
 &= \sum_{i = 1}^n\left(y_i-\beta_0-\sum_{j = 1}^px_{ij}\beta_j\right)^2
-\end{esplit}
+\end{split}
 $$
 
 Vamos a seguir tomando el ejemplo de los ingresos en el estado de Aguascalientes de acuerdo a la [Encuesta Nacional de Ingresos y Gastos de los Hogares (ENIGH). 2018 Nueva serie](https://www.inegi.org.mx/programas/enigh/nc/2018/#Microdatos). Vamos a ajustar un modelo con las variables que tengan la mejor correlación con el ingreso eliminando previamente algunos outliers que se consiguen en ciertas variables.
@@ -1523,7 +1521,7 @@ mutated_data_income %>% filter(vestido<7500 & vestido>0) %>% bind_cols(pred_int 
 ```
 
 
-# Otros puntos importantes de regresión lineal
+# Otros puntos importantes
 
 ```{css, echo=FALSE}
 pre {
@@ -1581,7 +1579,7 @@ https://vincentarelbundock.github.io/modelsummary/articles/modelsummary.html
 
 ### Outliers
 
-Como ya se ha mencionado, ay algunos datos que nos pueden generar problemas, y por lo mismo previamente se han eliminado algunos datos, como ciertos outliers y ceros en nuestras variables.
+Como ya se ha mencionado, hay algunos datos que nos pueden generar problemas, y por lo mismo previamente se han eliminado algunos datos, como ciertos outliers y ceros en nuestras variables.
 
 Un *outlier* en nuestro modelo de regresión será aquel que sea lejano a su valor predicho. Para ver esto gráficamente vamos considerar nuestro ejemplo de regresión lineal simple visto en la sección de predicción ($\log(ing\_cor) = 10.265703 + 0.016142\times \sqrt{vestido}$) 
 

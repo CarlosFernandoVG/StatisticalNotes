@@ -1,4 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap');
+
+/*-----
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap');
+
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
+----- */
 
 body{
     text-align: justify;
@@ -22,7 +30,7 @@ body{
 /* TOC book title */
 
 .summary > li:first-child a {
-    font-size: 11.5px;
+    font-size: 22px;
     font-weight: bold;
     text-transform: uppercase;
     white-space: normal !important;
@@ -43,26 +51,25 @@ body{
   color: #001d57;
 }
 
-
 /*------------- Body and header text---------------- */
 .book.font-family-1 {
-  font-family: 'Titillium Web', sans-serif;
+  font-family: 'Dosis', sans-serif;
   color: #404040;
 }
 
 h1, h2, h3, h4 {
-  font-family: 'Titillium Web', sans-serif;
+  font-family: 'Dosis', sans-serif;
 }
 
 h2, h3 {   
-  font-family: 'Titillium-Web', sans-serif;
+  font-family: 'Dosis', sans-serif;
 }
 .title {
-  font-family: 'Titillium-Web', sans-serif;
+  font-family: 'Dosis', sans-serif;
 }
 
 .subtitle {
-  font-family: 'Titillium-Web', sans-serif;
+  font-family: 'Dosis', sans-serif;
 }
 
 h1 {
@@ -85,14 +92,14 @@ h4 {
 }
 
 .title {
-  font-family: 'Titillium-Web', sans-serif;
+  font-family: 'Dosis', sans-serif;
   font-size: 3em !important;
   color: #3758a6;
   text-transform: none !important;
 }
 
 .subtitle {
-  font-family: 'Titillium-Web', sans-serif;
+  font-family: 'Dosis', sans-serif;
   color: #3758a6 !important;
 }
 
@@ -110,11 +117,15 @@ h4 {
 
 /*------------ TOC --------------*/
 .summary{
-  font-family: 'Titillium-Web', sans-serif;
+  font-family: 'Dosis', sans-serif;
 }
 
 .book .book-summary {
+  background: linear-gradient(to top, rgba(21, 6, 223,1.0), 1%,rgba(236, 240, 241,1.0));
+  /*
+  background: linear-gradient(to top, rgba(13, 6, 223,1.0), 1%,rgba(236, 240, 241,1.0));
   background: linear-gradient(to top, rgba(6, 82, 221,1.0), 1%,rgba(236, 240, 241,1.0));
+  */
   border-right: #d9d9d9 solid 1pt;
 }
 
@@ -131,7 +142,11 @@ li a b  {
   padding-bottom: 8px;
   padding-left: 15px;
   padding-right: 15px;
+  font-size: 15px !important;
+  color: #45516B;
+  /*
   color: #4c5975;
+  */
 }
 
 .summary a:hover {
@@ -150,7 +165,7 @@ li.appendix span, li.part span {
   opacity: 1 !important;
   text-transform: uppercase;
   letter-spacing: 1pt;
-  font-size: 11px !important;
+  font-size: 17px !important;
   font-weight: bold;
   white-space: normal !important;
 }

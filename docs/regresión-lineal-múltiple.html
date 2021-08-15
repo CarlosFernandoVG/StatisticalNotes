@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="regresión-lineal-simple.html"/>
-<link rel="next" href="otros-puntos-importantes-de-regresión-lineal.html"/>
+<link rel="next" href="otros-puntos-importantes-1.html"/>
 <script src="libs/header-attrs-2.7.3/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -217,16 +217,16 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="6.4" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#predicción"><i class="fa fa-check"></i><b>6.4</b> Predicción</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="otros-puntos-importantes-de-regresión-lineal.html"><a href="otros-puntos-importantes-de-regresión-lineal.html"><i class="fa fa-check"></i><b>7</b> Otros puntos importantes de regresión lineal</a>
+<li class="chapter" data-level="7" data-path="otros-puntos-importantes-1.html"><a href="otros-puntos-importantes-1.html"><i class="fa fa-check"></i><b>7</b> Otros puntos importantes</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="otros-puntos-importantes-de-regresión-lineal.html"><a href="otros-puntos-importantes-de-regresión-lineal.html#comparación-de-modelos"><i class="fa fa-check"></i><b>7.1</b> Comparación de modelos</a>
+<li class="chapter" data-level="7.1" data-path="otros-puntos-importantes-1.html"><a href="otros-puntos-importantes-1.html#comparación-de-modelos"><i class="fa fa-check"></i><b>7.1</b> Comparación de modelos</a>
 <ul>
-<li class="chapter" data-level="7.1.1" data-path="otros-puntos-importantes-de-regresión-lineal.html"><a href="otros-puntos-importantes-de-regresión-lineal.html#r2"><i class="fa fa-check"></i><b>7.1.1</b> R^2</a></li>
+<li class="chapter" data-level="7.1.1" data-path="otros-puntos-importantes-1.html"><a href="otros-puntos-importantes-1.html#r2"><i class="fa fa-check"></i><b>7.1.1</b> R^2</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="otros-puntos-importantes-de-regresión-lineal.html"><a href="otros-puntos-importantes-de-regresión-lineal.html#análisis-de-valores-influyentes"><i class="fa fa-check"></i><b>7.2</b> Análisis de valores influyentes</a>
+<li class="chapter" data-level="7.2" data-path="otros-puntos-importantes-1.html"><a href="otros-puntos-importantes-1.html#análisis-de-valores-influyentes"><i class="fa fa-check"></i><b>7.2</b> Análisis de valores influyentes</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="otros-puntos-importantes-de-regresión-lineal.html"><a href="otros-puntos-importantes-de-regresión-lineal.html#outliers"><i class="fa fa-check"></i><b>7.2.1</b> Outliers</a></li>
-<li class="chapter" data-level="7.2.2" data-path="otros-puntos-importantes-de-regresión-lineal.html"><a href="otros-puntos-importantes-de-regresión-lineal.html#valores-con-alto-apalancamiento"><i class="fa fa-check"></i><b>7.2.2</b> Valores con alto “apalancamiento”</a></li>
+<li class="chapter" data-level="7.2.1" data-path="otros-puntos-importantes-1.html"><a href="otros-puntos-importantes-1.html#outliers"><i class="fa fa-check"></i><b>7.2.1</b> Outliers</a></li>
+<li class="chapter" data-level="7.2.2" data-path="otros-puntos-importantes-1.html"><a href="otros-puntos-importantes-1.html#valores-con-alto-apalancamiento"><i class="fa fa-check"></i><b>7.2.2</b> Valores con alto “apalancamiento”</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="anova-vs-regresión-lineal.html"><a href="anova-vs-regresión-lineal.html"><i class="fa fa-check"></i><b>8</b> ANOVA vs Regresión lineal</a></li>
@@ -273,7 +273,7 @@ f(X) = Y = \beta_0 +\beta_1X_1+\beta_2X_2+\dots + \beta_pX_p+\epsilon = \beta_0 
 \begin{split}
 RSS &amp;= \sum_{i = 1}^n(y_i-f(x_i))^2 = \sum_{i = 1}^n(y_i-\hat y_i)^2 = \sum_{i = 1}^n(y_i-\hat\beta_0-\hat\beta_1x_{i1}-\hat\beta_2x_{i2}-\cdots-\hat\beta_px_{ip})^2\\
 &amp;= \sum_{i = 1}^n\left(y_i-\beta_0-\sum_{j = 1}^px_{ij}\beta_j\right)^2
-\end{esplit}
+\end{split}
 \]</span></p>
 <p>Vamos a seguir tomando el ejemplo de los ingresos en el estado de Aguascalientes de acuerdo a la <a href="https://www.inegi.org.mx/programas/enigh/nc/2018/#Microdatos">Encuesta Nacional de Ingresos y Gastos de los Hogares (ENIGH). 2018 Nueva serie</a>. Vamos a ajustar un modelo con las variables que tengan la mejor correlación con el ingreso eliminando previamente algunos outliers que se consiguen en ciertas variables.</p>
 <p>Para facilitarnos esto, veamos el siguiente gráfico de correlación con la correlación de spearman para ver relaciones monotonas y después diagramas de dispersión junto a la correlación de pearson que se consigue por pares.</p>
@@ -1350,7 +1350,7 @@ f(X) = \beta_0 + \beta_1X_1 + \cdots + \beta_{p}X_p
         </div>
       </div>
 <a href="regresión-lineal-simple.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="otros-puntos-importantes-de-regresión-lineal.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="otros-puntos-importantes-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -31,7 +31,7 @@ transformaciones
 interpretaciones
 validación
 predicción
-otros-puntos-importantes-de-regresión-lineal
+otros-puntos-importantes-1
 comparación-de-modelos
 r2
 análisis-de-valores-influyentes
