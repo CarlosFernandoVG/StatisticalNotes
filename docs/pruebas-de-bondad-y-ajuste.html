@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 4 Pruebas de bondad y ajuste | Statistical Notes</title>
+  <meta name="description" content="Notas sobre temas relacionados a la estadística" />
+  <meta name="generator" content="bookdown 0.21.6 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 4 Pruebas de bondad y ajuste | Statistical Notes" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Notas sobre temas relacionados a la estadística" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 4 Pruebas de bondad y ajuste | Statistical Notes" />
+  
+  <meta name="twitter:description" content="Notas sobre temas relacionados a la estadística" />
+  
+
+<meta name="author" content="Carlos Fernando Vásquez Guerra" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="tablas-de-contingencia.html"/>
+<link rel="next" href="regresión-lineal-simple.html"/>
+<script src="libs/header-attrs-2.7.3/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Statistical Notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefacio</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#objetivos"><i class="fa fa-check"></i>Objetivos</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#estructura"><i class="fa fa-check"></i>Estructura</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#detalles-técnicos"><i class="fa fa-check"></i>Detalles técnicos</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#licencia"><i class="fa fa-check"></i>Licencia</a></li>
+</ul></li>
+<li class="part"><span><b>I Estadística no paramétrica</b></span></li>
+<li class="chapter" data-level="1" data-path="pruebas-de-hipótesis.html"><a href="pruebas-de-hipótesis.html"><i class="fa fa-check"></i><b>1</b> Pruebas de hipótesis</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="pruebas-de-hipótesis.html"><a href="pruebas-de-hipótesis.html#qué-es-una-prueba-de-hipótesis"><i class="fa fa-check"></i><b>1.1</b> ¿Qué es una Prueba de Hipótesis?</a></li>
+<li class="chapter" data-level="1.2" data-path="pruebas-de-hipótesis.html"><a href="pruebas-de-hipótesis.html#dos-tipos-de-hipótesis"><i class="fa fa-check"></i><b>1.2</b> Dos tipos de hipótesis</a></li>
+<li class="chapter" data-level="1.3" data-path="pruebas-de-hipótesis.html"><a href="pruebas-de-hipótesis.html#significancia-y-confianza"><i class="fa fa-check"></i><b>1.3</b> Significancia y confianza</a></li>
+<li class="chapter" data-level="1.4" data-path="pruebas-de-hipótesis.html"><a href="pruebas-de-hipótesis.html#rechazar-h_0"><i class="fa fa-check"></i><b>1.4</b> Rechazar <span class="math inline">\(H_0\)</span></a></li>
+<li class="chapter" data-level="1.5" data-path="pruebas-de-hipótesis.html"><a href="pruebas-de-hipótesis.html#tipos-de-pruebas"><i class="fa fa-check"></i><b>1.5</b> Tipos de pruebas</a></li>
+<li class="chapter" data-level="1.6" data-path="pruebas-de-hipótesis.html"><a href="pruebas-de-hipótesis.html#p-value"><i class="fa fa-check"></i><b>1.6</b> <span class="math inline">\(P-value\)</span></a></li>
+<li class="chapter" data-level="1.7" data-path="pruebas-de-hipótesis.html"><a href="pruebas-de-hipótesis.html#algunos-puntos-a-recordar"><i class="fa fa-check"></i><b>1.7</b> Algunos puntos a recordar</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="pruebas-binomiales-y-de-rangos.html"><a href="pruebas-binomiales-y-de-rangos.html"><i class="fa fa-check"></i><b>2</b> Pruebas binomiales y de rangos</a></li>
+<li class="chapter" data-level="3" data-path="tablas-de-contingencia.html"><a href="tablas-de-contingencia.html"><i class="fa fa-check"></i><b>3</b> Tablas de contingencia</a></li>
+<li class="chapter" data-level="4" data-path="pruebas-de-bondad-y-ajuste.html"><a href="pruebas-de-bondad-y-ajuste.html"><i class="fa fa-check"></i><b>4</b> Pruebas de bondad y ajuste</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="pruebas-de-bondad-y-ajuste.html"><a href="pruebas-de-bondad-y-ajuste.html#funciones-de-distribución-comunes-y-técnicas-de-identificación"><i class="fa fa-check"></i><b>4.1</b> Funciones de distribución comunes y técnicas de identificación</a></li>
+<li class="chapter" data-level="4.2" data-path="pruebas-de-bondad-y-ajuste.html"><a href="pruebas-de-bondad-y-ajuste.html#programación-y-evaluación"><i class="fa fa-check"></i><b>4.2</b> Programación y evaluación</a></li>
+<li class="chapter" data-level="4.3" data-path="pruebas-de-bondad-y-ajuste.html"><a href="pruebas-de-bondad-y-ajuste.html#comparación-de-pruebas"><i class="fa fa-check"></i><b>4.3</b> Comparación de pruebas</a></li>
+<li class="chapter" data-level="4.4" data-path="pruebas-de-bondad-y-ajuste.html"><a href="pruebas-de-bondad-y-ajuste.html#el-caso-de-la-normal"><i class="fa fa-check"></i><b>4.4</b> El caso de la normal</a></li>
+</ul></li>
+<li class="part"><span><b>II Regresión lineal</b></span></li>
+<li class="chapter" data-level="5" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html"><i class="fa fa-check"></i><b>5</b> Regresión lineal simple</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#correlación-y-linearidad"><i class="fa fa-check"></i><b>5.1</b> Correlación y linearidad</a></li>
+<li class="chapter" data-level="5.2" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#variables-categóricas"><i class="fa fa-check"></i><b>5.2</b> Variables categóricas</a></li>
+<li class="chapter" data-level="5.3" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#paquetes-y-funciones-útiles"><i class="fa fa-check"></i><b>5.3</b> Paquetes y funciones útiles</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#correlación"><i class="fa fa-check"></i><b>5.3.1</b> Correlación</a></li>
+<li class="chapter" data-level="5.3.2" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#regresión"><i class="fa fa-check"></i><b>5.3.2</b> Regresión</a></li>
+<li class="chapter" data-level="5.3.3" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#tidymodelsbroom"><i class="fa fa-check"></i><b>5.3.3</b> TidyModels::Broom</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#ejemplo"><i class="fa fa-check"></i><b>5.4</b> Ejemplo</a></li>
+<li class="chapter" data-level="5.5" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#otros-puntos-importantes"><i class="fa fa-check"></i><b>5.5</b> Otros puntos importantes</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html"><i class="fa fa-check"></i><b>6</b> Regresión lineal múltiple</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#pruebas-de-hipótesis-y-anova-e-intervalos"><i class="fa fa-check"></i><b>6.1</b> Pruebas de hipótesis y ANOVA e intervalos</a></li>
+<li class="chapter" data-level="6.2" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#interacción-y-selección-de-variables"><i class="fa fa-check"></i><b>6.2</b> Interacción y selección de variables</a></li>
+<li class="chapter" data-level="6.3" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#supuestos-y-problemas-potenciales"><i class="fa fa-check"></i><b>6.3</b> Supuestos y problemas potenciales</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#transformaciones"><i class="fa fa-check"></i><b>6.3.1</b> +Transformaciones</a></li>
+<li class="chapter" data-level="6.3.2" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#interpretaciones"><i class="fa fa-check"></i><b>6.3.2</b> Interpretaciones</a></li>
+<li class="chapter" data-level="6.3.3" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#validación"><i class="fa fa-check"></i><b>6.3.3</b> Validación</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#predicción"><i class="fa fa-check"></i><b>6.4</b> Predicción</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="otros-puntos-importantes-de-regresión-lineal.html"><a href="otros-puntos-importantes-de-regresión-lineal.html"><i class="fa fa-check"></i><b>7</b> Otros puntos importantes de regresión lineal</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="otros-puntos-importantes-de-regresión-lineal.html"><a href="otros-puntos-importantes-de-regresión-lineal.html#comparación-de-modelos"><i class="fa fa-check"></i><b>7.1</b> Comparación de modelos</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="otros-puntos-importantes-de-regresión-lineal.html"><a href="otros-puntos-importantes-de-regresión-lineal.html#r2"><i class="fa fa-check"></i><b>7.1.1</b> R^2</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="otros-puntos-importantes-de-regresión-lineal.html"><a href="otros-puntos-importantes-de-regresión-lineal.html#análisis-de-valores-influyentes"><i class="fa fa-check"></i><b>7.2</b> Análisis de valores influyentes</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="otros-puntos-importantes-de-regresión-lineal.html"><a href="otros-puntos-importantes-de-regresión-lineal.html#outliers"><i class="fa fa-check"></i><b>7.2.1</b> Outliers</a></li>
+<li class="chapter" data-level="7.2.2" data-path="otros-puntos-importantes-de-regresión-lineal.html"><a href="otros-puntos-importantes-de-regresión-lineal.html#valores-con-alto-apalancamiento"><i class="fa fa-check"></i><b>7.2.2</b> Valores con alto “apalancamiento”</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="anova-vs-regresión-lineal.html"><a href="anova-vs-regresión-lineal.html"><i class="fa fa-check"></i><b>8</b> ANOVA vs Regresión lineal</a></li>
+<li class="chapter" data-level="9" data-path="librerías-para-eda.html"><a href="librerías-para-eda.html"><i class="fa fa-check"></i><b>9</b> Librerías para EDA</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="_blank">Hecho con bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Statistical Notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="pruebas-de-bondad-y-ajuste" class="section level1" number="4">
+<h1><span class="header-section-number">Capítulo 4</span> Pruebas de bondad y ajuste</h1>
+<p>De acuerdo al libro <a href="https://www.amazon.com/Fútbol-Matemáticas-Aventuras-matemáticas-deporte-ebook/dp/B01EP8PJUI"><em>“Futbol y Matemáticas, Aventuras matemáticas del deporte rey”</em></a>, la distribución de los máximos goleadores desde la temporada 1968/1987 a la temporada 2013/2014 queda representada con el siguiente histograma; ademas se menciona que dichos datos quedan modelados por una distribución Gumbel con parámetros <span class="math inline">\(a = 5.44\)</span> y <span class="math inline">\(b = 26.9\)</span>.</p>
+<center>
+<img src="Goles.png" alt="drawing" width="800" height="400"/>
+</center>
+<p><br></p>
+<p>Esto resulta muy interesante pero, ¿Cómo podemos tener certeza estadística de esta declaración? Bueno, esté será el objetivo de las pruebas de bondad de ajuste; determinan si cierta información queda ajustada bajo alguna distribución que propongamos.</p>
+<p>Bajo esta idea, es importante que utilicemos todas nuestras herramientas estadísticas y probabilísticas para determinan si una distribución <span class="math inline">\(F\)</span> es adecuada para mi información o no. Más adelante hablaremos un poco acerca del ejemplo anterior, por el momento es bueno tener en claro que deseamos probar la siguiente prueba de hipótesis:</p>
+<p><span class="math display">\[
+\begin{array}{c}
+\textbf{H}_0: \ \mbox{Los datos siguen una distribución} \ \ F_{0}(x) \\
+vs\\
+\textbf{H}_a: \ \mbox{Los datos no siguen una distribución} \ \ F_{0}(x)
+\end{array}
+\]</span></p>
+<div id="funciones-de-distribución-comunes-y-técnicas-de-identificación" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Funciones de distribución comunes y técnicas de identificación</h2>
+<p>Consideremos que tenemos los datos correspondientes al tiempo en segundos que tardar en pasar 100 automóviles por un cierto punto en una carretera. ¿Que distribución propondríamos como una primera idea? Aquí se muestran un poco los datos.</p>
+<pre><code># A tibble: 50 × 2
+   Observación Tiempos
+         &lt;int&gt;   &lt;dbl&gt;
+ 1           1    32.4
+ 2           2    28.8
+ 3           3    36.1
+ 4           4    28.7
+ 5           5    28.5
+ 6           6    34.1
+ 7           7    28.3
+ 8           8    33.0
+ 9           9    39.3
+10          10    37.1
+# … with 40 more rows</code></pre>
+<p>Para dar un conjunto de candidatos, sería buena práctica responder las siguientes preguntas:</p>
+<ul>
+<li>¿Que tipo de datos tengo, continuos o discretos?</li>
+<li>Sí son discretos, ¿Mis datos provienen de una variable de conteo?</li>
+<li>¿Que rango ocupan mis datos?</li>
+<li>¿Hay algún indicio de tratar con alguna cola pesada?</li>
+<li>¿Que tan simétrica es mi distribución?</li>
+<li>¿Cómo se comportan las estadísticas básicas en mis datos?</li>
+</ul>
+<p>Además de esto, no olvidemos que estamos tratando con datos que pueden tener diversos problemas, por lo que podríamos primero hacer aplicar una limpieza para después continuar con el verdadero proceso. En este caso podemos ver los valores perdidos de esta manera:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="pruebas-de-bondad-y-ajuste.html#cb20-1" aria-hidden="true" tabindex="-1"></a>visdat<span class="sc">::</span><span class="fu">vis_miss</span>(data_autos, <span class="at">sort_miss=</span><span class="cn">TRUE</span>, <span class="at">warn_large_data =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-24-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>De acuerdo a nuestro problema podemos tratar de diferente manera los valores perdidos, pero lo más sencillo (lo cual debe ser el último recurso para evitar pérdida de información) es eliminar estos registros para no tener problemas posteriores</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="pruebas-de-bondad-y-ajuste.html#cb21-1" aria-hidden="true" tabindex="-1"></a>data_autos <span class="ot">&lt;-</span> <span class="fu">drop_na</span>(data_autos)</span></code></pre></div>
+<p>Ahora, para este caso es evidente que nuestros datos son continuos, por lo que podemos descartar todas las distribuciones discretas como la son la poisson (ideal para conteos), binomial (combinaciones <span class="math inline">\(k\)</span> en <span class="math inline">\(n\)</span>), geométrica (número de fallos antes del primer éxito), bernoulli (eventos con solo dos opciones de resultado), hipergeométrica (<span class="math inline">\(k\)</span> éxitos en <span class="math inline">\(n\)</span> ensayos sin remplazo), alguna distribución de la familia (<span class="math inline">\(a\)</span>,<span class="math inline">\(b\)</span>), etc.</p>
+<p>Genial, ahora sólo nos falta infinidad de distribuciones, ya que podría hacer alguna función que cumpla las propiedades de una función de distribución de probabilidad. Bajo este caso, vamos a considerar distribuciones conocidas. Véase que por la naturaleza de nuestro problema no es ideal considerar una distribución Normal (¿Por qué?). Vamos a ver algunas gráficas que podrían ser de ayuda.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="pruebas-de-bondad-y-ajuste.html#cb22-1" aria-hidden="true" tabindex="-1"></a>boxplot_autos <span class="ot">&lt;-</span> data_autos <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Tiempos)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
+<span id="cb22-2"><a href="pruebas-de-bondad-y-ajuste.html#cb22-2" aria-hidden="true" tabindex="-1"></a>  general_theme <span class="sc">+</span> </span>
+<span id="cb22-3"><a href="pruebas-de-bondad-y-ajuste.html#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.x=</span><span class="fu">element_blank</span>(),</span>
+<span id="cb22-4"><a href="pruebas-de-bondad-y-ajuste.html#cb22-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x=</span><span class="fu">element_blank</span>(),</span>
+<span id="cb22-5"><a href="pruebas-de-bondad-y-ajuste.html#cb22-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.x=</span><span class="fu">element_blank</span>())</span>
+<span id="cb22-6"><a href="pruebas-de-bondad-y-ajuste.html#cb22-6" aria-hidden="true" tabindex="-1"></a>density_autos <span class="ot">&lt;-</span> data_autos <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Tiempos)) <span class="sc">+</span> </span>
+<span id="cb22-7"><a href="pruebas-de-bondad-y-ajuste.html#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Densidad&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb22-8"><a href="pruebas-de-bondad-y-ajuste.html#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..), <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> general_theme</span>
+<span id="cb22-9"><a href="pruebas-de-bondad-y-ajuste.html#cb22-9" aria-hidden="true" tabindex="-1"></a>ecdf_autos <span class="ot">&lt;-</span> data_autos <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Tiempos)) <span class="sc">+</span> </span>
+<span id="cb22-10"><a href="pruebas-de-bondad-y-ajuste.html#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_ecdf</span>(<span class="at">geom =</span> <span class="st">&quot;step&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Distribución empírica&quot;</span>) <span class="sc">+</span> general_theme</span>
+<span id="cb22-11"><a href="pruebas-de-bondad-y-ajuste.html#cb22-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-12"><a href="pruebas-de-bondad-y-ajuste.html#cb22-12" aria-hidden="true" tabindex="-1"></a>(density_autos <span class="sc">+</span> ecdf_autos)<span class="sc">/</span>boxplot_autos</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-26-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>¿Qué podemos decir ahora?</p>
+<p>Tal vez necesitamos más ayuda; véamos las estadísticas básicas sobre estos datos</p>
+<ol style="list-style-type: decimal">
+<li><strong><em>Media</em></strong> = 33.3707742</li>
+<li><strong><em>Mediana</em></strong> = 33.1964279</li>
+<li><strong><em>Moda</em></strong> = 31.64</li>
+<li><strong><em>Varianza</em></strong> = 10.8163016</li>
+<li><strong><em>Desviación estandar</em></strong> = 3.2888146</li>
+<li><strong><em>Rango intercuantil</em></strong> = [30.9755958, 35.6583154]</li>
+<li><strong><em>Coeficiente de variación</em></strong> = 10%</li>
+<li><strong><em>Coeficiente de asimetría (Skewness)</em></strong> = 0.2075035</li>
+<li><strong><em>Curtosis</em></strong> = 2.8698984</li>
+</ol>
+<p>Recordemos que tanto la media, la mediana y la moda son estadísticas de tendencias centrales; la varianza y la desviación estandar nos dan una cantidad asociada a lo disperso que son nuestros datos; el rango intercuantil es la diferencia entre el tercer y el primer cuartil y podemos pensarlo como una medida de variabilidad de acuerdo a la mediana. Por otro lado, el coeficiente de variación (<span class="math inline">\(C_V = \frac{\sigma}{\bar{x}}\)</span>) es la relación entre el tamaño de la media y la variabilidad de la variable que podemos interpretar como un grado de variabilidad independiente de la escala de la variable. El coeficiente de asimetría nos indica que tan simétrica es nuestra distribución, la normal tiene un coeficiente igual a 0. Finalmente la curtosis nos da una idea de la forma de nuestra distribución por la concentración de datos.</p>
+<p>Entonces, ya con las gráficas, la metadata de los datos y las estadísticas anteriores, podemos dar posibles distribuciones candidatas para nuestos datos.</p>
+<p>• Al ser los valores mayores a cero y continuos, descartamos cualquier variable discreta y cualquiera que tenga un rango con valores negativos (como la normal y la t de Student), además de que se tienen valores mayores a uno por lo que se descartan otras distribuciones como la beta.</p>
+<p>• La densidad no tiene colas pesadas, en todo caso, la cola donde tiene la mayor cantidad de outliers es la cola derecha; por lo que descartamos distribuciones con colas muy pesadas (como la log-Normal, Pareto y Burr)</p>
+<p>• Al tener una curtosis positiva, indica la presencia de un pico y al tener un coeficiente de variación del 10%; los valores no varían demasiado de la media, lo cual, generalmente no cumple la distribución exponencial, por lo que podemos pensar en una función gamma o weibull para ajustar estos datos.</p>
+<p>• Si bien la distribución Weibull nos ayuda a modelar el tiempo en algunos escenarios, con sólo leer el enunciado es natural proponer una distribución gamma, ya que esta variable nos ayuda a modelar el tiempo; además de que podemos pensar a una distribución gamma como una suma de <span class="math inline">\(n\)</span> variables independientes con distribución exponencial, la cual nos ayuda a modelar el tiempo de espera a que suceda un evento, en este caso el tiempo en que cada auto pasa por dicho punto en la carretera. Por si faltaba alguna otra razón si pensamos en su parámetro de escala como la cantidad de autos que estamos considerando (100), su coeficiente de simétrica teórica será <span class="math inline">\(2/\sqrt{100} = 0.2\)</span> la cual no es muy diferente al que obtuvimos.</p>
+<p>Ya tenemos propuesto uno de los parámetros para la distribución gamma, pero falta el parámetro de escala; (si conocieramoos cada cuanto pasan los coches de manera individual podríamos proponer este parámetro) por lo que podemos obtenerlo con alguna de las distintas técnicas que tenemos para calcular parámetros, ya sea por el método de momentos, máxima verosimilitud, con el UMVUE, etc.</p>
+<p>Para este caso, una <a href="https://en.wikipedia.org/wiki/Gamma_distribution#Maximum_likelihood_estimation">propuesta</a> para estos estimadores basados en la función de máxima verosimilitud son las siguientes:</p>
+<p><span class="math display">\[
+\hat{k} = \frac{N\sum_{i = 1}^Nx_i}{N\sum_{i = 1}^Nx_i\ln(x_i)-\sum_{i = 1}^N\ln(x_i)\sum_{i = 1}^Nx_i}\\
+\hat{\theta} = \frac{1}{N^2}\left(N\sum_{i = 1}^Nx_i\ln(x_i)-\sum_{i = 1}^N\ln(x_i)\sum_{i  =1}^Nx_i\right)
+\]</span></p>
+</div>
+<div id="programación-y-evaluación" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Programación y evaluación</h2>
+<p>Otra manera que tenemos de calcular los parámetros es a través de métodos numéricos, como lo realiza la función <code>fitdistrplus::fitdist()</code> y nos da diferentes estadísticas como el AIC, BIC y Likehood ratio test en diferentes métodos de estimación para que nosotros decidamos cual elegir. En este caso podemos aplicarlo de la siguiente manera</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="pruebas-de-bondad-y-ajuste.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fitdist</span>(<span class="at">data =</span> data_autos<span class="sc">$</span>Tiempos, <span class="at">distr =</span> <span class="st">&quot;gamma&quot;</span>, <span class="at">method =</span> <span class="st">&quot;mme&quot;</span>)</span></code></pre></div>
+<pre><code>Fitting of the distribution &#39; gamma &#39; by matching moments 
+Parameters:
+        estimate
+shape 103.162826
+rate    3.091412</code></pre>
+<p>Como vemos no estabamos tan alejados con nuestra propuesta, además, ya sabiendo que el parámetro de escala es <span class="math inline">\(\sim 3 = \lambda\)</span>, podemos pensar que la tasa a la que cada auto pasa, en promedio, es 3 segundos, es decir que cada .3 segundos un nuevo auto pasa.</p>
+<p>Vamos a ajustar con la prueba <span class="math inline">\(\chi^2\)</span> para determinar que tan bien se ajustan nuestros datos.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="pruebas-de-bondad-y-ajuste.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Observados</span></span>
+<span id="cb25-2"><a href="pruebas-de-bondad-y-ajuste.html#cb25-2" aria-hidden="true" tabindex="-1"></a>corte<span class="ot">&lt;-</span> <span class="fu">cut</span>(data_autos<span class="sc">$</span>Tiempos, <span class="at">breaks =</span> <span class="dv">5</span>)</span>
+<span id="cb25-3"><a href="pruebas-de-bondad-y-ajuste.html#cb25-3" aria-hidden="true" tabindex="-1"></a>observados<span class="ot">&lt;-</span><span class="fu">table</span>(corte)</span>
+<span id="cb25-4"><a href="pruebas-de-bondad-y-ajuste.html#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Levels: (24.7,28.8] (28.8,33] (33,37.2] (37.2,41.3] (41.3,45.5]</span></span>
+<span id="cb25-5"><a href="pruebas-de-bondad-y-ajuste.html#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="pruebas-de-bondad-y-ajuste.html#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Esperados</span></span>
+<span id="cb25-7"><a href="pruebas-de-bondad-y-ajuste.html#cb25-7" aria-hidden="true" tabindex="-1"></a>int1<span class="ot">&lt;-</span><span class="fu">pgamma</span>(<span class="at">q =</span> <span class="fl">28.8</span>, <span class="at">rate =</span> <span class="fl">3.091412</span>, <span class="at">shape=</span><span class="fl">103.162826</span>)<span class="sc">-</span><span class="fu">pgamma</span>(<span class="at">q =</span> <span class="dv">0</span>, <span class="at">rate =</span> <span class="fl">3.091412</span>, <span class="at">shape=</span><span class="fl">103.162826</span>)</span>
+<span id="cb25-8"><a href="pruebas-de-bondad-y-ajuste.html#cb25-8" aria-hidden="true" tabindex="-1"></a>int2<span class="ot">&lt;-</span><span class="fu">pgamma</span>(<span class="at">q =</span> <span class="dv">33</span>, <span class="at">rate =</span> <span class="fl">3.091412</span>, <span class="at">shape=</span><span class="fl">103.162826</span>)<span class="sc">-</span><span class="fu">pgamma</span>(<span class="at">q =</span> <span class="fl">28.8</span>, <span class="at">rate =</span> <span class="fl">3.091412</span>, <span class="at">shape=</span><span class="fl">103.162826</span>)</span>
+<span id="cb25-9"><a href="pruebas-de-bondad-y-ajuste.html#cb25-9" aria-hidden="true" tabindex="-1"></a>int3<span class="ot">&lt;-</span><span class="fu">pgamma</span>(<span class="at">q =</span> <span class="fl">37.2</span>, <span class="at">rate =</span> <span class="fl">3.091412</span>, <span class="at">shape=</span><span class="fl">103.162826</span>)<span class="sc">-</span><span class="fu">pgamma</span>(<span class="at">q =</span> <span class="dv">33</span>, <span class="at">rate =</span> <span class="fl">3.091412</span>, <span class="at">shape=</span><span class="fl">103.162826</span>)</span>
+<span id="cb25-10"><a href="pruebas-de-bondad-y-ajuste.html#cb25-10" aria-hidden="true" tabindex="-1"></a>int4<span class="ot">&lt;-</span><span class="fu">pgamma</span>(<span class="at">q =</span> <span class="fl">41.3</span>, <span class="at">rate =</span> <span class="fl">3.091412</span>, <span class="at">shape=</span><span class="fl">103.162826</span>)<span class="sc">-</span><span class="fu">pgamma</span>(<span class="at">q =</span> <span class="fl">37.2</span>, <span class="at">rate =</span> <span class="fl">3.091412</span>, <span class="at">shape=</span><span class="fl">103.162826</span>)</span>
+<span id="cb25-11"><a href="pruebas-de-bondad-y-ajuste.html#cb25-11" aria-hidden="true" tabindex="-1"></a>int5<span class="ot">&lt;-</span><span class="fu">pgamma</span>(<span class="at">q =</span> <span class="cn">Inf</span>, <span class="at">rate =</span> <span class="fl">3.091412</span>, <span class="at">shape=</span><span class="fl">103.162826</span>)<span class="sc">-</span><span class="fu">pgamma</span>(<span class="at">q =</span> <span class="fl">41.3</span>, <span class="at">rate =</span> <span class="fl">3.091412</span>, <span class="at">shape=</span><span class="fl">103.162826</span>)</span>
+<span id="cb25-12"><a href="pruebas-de-bondad-y-ajuste.html#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-13"><a href="pruebas-de-bondad-y-ajuste.html#cb25-13" aria-hidden="true" tabindex="-1"></a>esperados<span class="ot">&lt;-</span><span class="fu">c</span>(int1,int2,int3,int4,int5)</span>
+<span id="cb25-14"><a href="pruebas-de-bondad-y-ajuste.html#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="co">#Hacemos la prueba</span></span>
+<span id="cb25-15"><a href="pruebas-de-bondad-y-ajuste.html#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(<span class="at">x =</span> observados, <span class="at">p =</span> esperados)</span></code></pre></div>
+<pre><code>
+    Chi-squared test for given probabilities
+
+data:  observados
+X-squared = 1.3959, df = 4, p-value = 0.8449</code></pre>
+<p>¿Qué podemos concluir?</p>
+<p>Vamos a colocar unos parámetros con menos decimales para ver que sucede</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="pruebas-de-bondad-y-ajuste.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Esperados</span></span>
+<span id="cb27-2"><a href="pruebas-de-bondad-y-ajuste.html#cb27-2" aria-hidden="true" tabindex="-1"></a>int1<span class="ot">&lt;-</span><span class="fu">pgamma</span>(<span class="at">q =</span> <span class="fl">28.8</span>, <span class="at">rate =</span> <span class="dv">3</span>, <span class="at">shape=</span><span class="dv">100</span>)<span class="sc">-</span><span class="fu">pgamma</span>(<span class="at">q =</span> <span class="dv">0</span>, <span class="at">rate =</span> <span class="dv">3</span>, <span class="at">shape=</span><span class="dv">100</span>)</span>
+<span id="cb27-3"><a href="pruebas-de-bondad-y-ajuste.html#cb27-3" aria-hidden="true" tabindex="-1"></a>int2<span class="ot">&lt;-</span><span class="fu">pgamma</span>(<span class="at">q =</span> <span class="dv">33</span>, <span class="at">rate =</span> <span class="dv">3</span>, <span class="at">shape=</span><span class="dv">100</span>)<span class="sc">-</span><span class="fu">pgamma</span>(<span class="at">q =</span> <span class="fl">28.8</span>, <span class="at">rate =</span> <span class="dv">3</span>, <span class="at">shape=</span><span class="dv">100</span>)</span>
+<span id="cb27-4"><a href="pruebas-de-bondad-y-ajuste.html#cb27-4" aria-hidden="true" tabindex="-1"></a>int3<span class="ot">&lt;-</span><span class="fu">pgamma</span>(<span class="at">q =</span> <span class="fl">37.2</span>, <span class="at">rate =</span> <span class="dv">3</span>, <span class="at">shape=</span><span class="dv">100</span>)<span class="sc">-</span><span class="fu">pgamma</span>(<span class="at">q =</span> <span class="dv">33</span>, <span class="at">rate =</span> <span class="dv">3</span>, <span class="at">shape=</span><span class="dv">100</span>)</span>
+<span id="cb27-5"><a href="pruebas-de-bondad-y-ajuste.html#cb27-5" aria-hidden="true" tabindex="-1"></a>int4<span class="ot">&lt;-</span><span class="fu">pgamma</span>(<span class="at">q =</span> <span class="fl">41.3</span>, <span class="at">rate =</span> <span class="dv">3</span>, <span class="at">shape=</span><span class="dv">100</span>)<span class="sc">-</span><span class="fu">pgamma</span>(<span class="at">q =</span> <span class="fl">37.2</span>, <span class="at">rate =</span> <span class="dv">3</span>, <span class="at">shape=</span><span class="dv">100</span>)</span>
+<span id="cb27-6"><a href="pruebas-de-bondad-y-ajuste.html#cb27-6" aria-hidden="true" tabindex="-1"></a>int5<span class="ot">&lt;-</span><span class="fu">pgamma</span>(<span class="at">q =</span> <span class="cn">Inf</span>, <span class="at">rate =</span> <span class="dv">3</span>, <span class="at">shape=</span><span class="dv">100</span>)<span class="sc">-</span><span class="fu">pgamma</span>(<span class="at">q =</span> <span class="fl">41.3</span>, <span class="at">rate =</span> <span class="dv">3</span>, <span class="at">shape=</span><span class="dv">100</span>)</span>
+<span id="cb27-7"><a href="pruebas-de-bondad-y-ajuste.html#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-8"><a href="pruebas-de-bondad-y-ajuste.html#cb27-8" aria-hidden="true" tabindex="-1"></a>esperados<span class="ot">&lt;-</span><span class="fu">c</span>(int1,int2,int3,int4,int5)</span>
+<span id="cb27-9"><a href="pruebas-de-bondad-y-ajuste.html#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Hacemos la prueba</span></span>
+<span id="cb27-10"><a href="pruebas-de-bondad-y-ajuste.html#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(<span class="at">x =</span> observados, <span class="at">p =</span> esperados)</span></code></pre></div>
+<pre><code>
+    Chi-squared test for given probabilities
+
+data:  observados
+X-squared = 0.9446, df = 4, p-value = 0.9181</code></pre>
+<p>Mejoró considerablemente el ajuste.</p>
+<p>En cuanto al ejemplo de la cantidad de goles, la distribución que se ajusta es una distribución ideal para modelar datos extremos (<a href="https://en.wikipedia.org/wiki/Gumbel_distribution">Gumbel</a>). Esta se utiliza para mostrar que en la temporada 2011/2012, Messi anotó en total 50 goles y que esto fue un hecho excepcional ya que con esta modelación, la probabilidad acumulada de que alguien vuelva a anotar más de 50 goles es de 1.36% o 1/73, lo que quiere decir que “<em>deberíamos esperar una actuación como la de Messi una vez cada 73 años. La esperanza media de vida en Argentina es de 75 años. Visto desde esa perspectiva, Messi es realmente un acontecimiento que ocurre una vez en la vida</em>”[2]</p>
+<p>Una manera de proponer de manera inicial una distribución para un conjunto de datos es haciendo una gráfica donde se compare la curtosis (la forma de la distribución) contra el coeficiente de asimetría (comunmente tomado al cuadrado) en una gráfica conocida como Cullen and Frey graph. La idea es comparar estas dos estadísticas que ayudan a tener una idea de la forma de la distribución entre diversas distribuciones comunes y los datos muestrales. Esta gráfica la podemos obtener mediante la función <code>fitdistrplus::descdist()</code></p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="pruebas-de-bondad-y-ajuste.html#cb29-1" aria-hidden="true" tabindex="-1"></a>proposals_timeCar <span class="ot">&lt;-</span> fitdistrplus<span class="sc">::</span><span class="fu">descdist</span>(data_autos<span class="sc">$</span>Tiempos[<span class="sc">!</span><span class="fu">is.na</span>(data_autos<span class="sc">$</span>Tiempos)])</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-31-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Como se aprecia, la gráfica anterior nos sugiere diferentes distribuciones (normal, beta, gamma y log-normal) de la cual sabemos que la gamma es la que tiene una mejor justificación en este caso. Otro punto a considerar es que la función anterior otorga sugerencias en el ámbito continuo y discreto. Las distribuciones sugeridas sólo son propuestas, por lo que se recomienda siempre hacer pruebas de bondad y ajuste con dichas distribuciones.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="pruebas-de-bondad-y-ajuste.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">50</span>)</span>
+<span id="cb30-2"><a href="pruebas-de-bondad-y-ajuste.html#cb30-2" aria-hidden="true" tabindex="-1"></a>example_d <span class="ot">&lt;-</span> fitdistrplus<span class="sc">::</span><span class="fu">descdist</span>(<span class="fu">rpois</span>(<span class="dv">100</span>,<span class="at">lambda=</span><span class="dv">2</span>),<span class="at">discrete=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-32-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="comparación-de-pruebas" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Comparación de pruebas</h2>
+<p>Además de la prueba Ji-cuadrada tenemos distintas pruebas que tienen ciertas ventajas y desventajas. Algunas de ellas son las siguientes y las referencias se pueden consultar al final de este capítulo:</p>
+<center>
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-7btt{border-color:inherit;font-weight:bold;text-align:center;vertical-align:top}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+.tg .tg-amwm{font-weight:bold;text-align:center;vertical-align:top}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+<thead>
+<tr>
+<th class="tg-7btt">
+Prueba
+</th>
+<th class="tg-7btt">
+Ventajas
+</th>
+<th class="tg-7btt">
+Desventajas
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tg-7btt">
+<span class="math inline">\(\chi^2\)</span>
+</td>
+<td>
+<span class="math inline">\(\bullet\)</span> Utilizado para variables discretas y continuas.
+</td>
+<td>
+<span class="math inline">\(\bullet\)</span> Depende de un adecuado tamaño muestras.<br><span class="math inline">\(\bullet\)</span> No adecuado para muestras pequeñas.<br><span class="math inline">\(\bullet\)</span> Sensible a las agrupaciones propuestas (the choice of the bins).<br><span class="math inline">\(\bullet\)</span> El punto anterior afectará el poder de la prueba
+</td>
+</tr>
+<tr>
+<td class="tg-7btt">
+Kolmogorov-Smirnov
+</td>
+<td>
+<span class="math inline">\(\bullet\)</span> No depende de la función de distribución subyacente.<br><span class="math inline">\(\bullet\)</span> Test exacto.<br><span class="math inline">\(\bullet\)</span> Existen modificaciones para datos discretos y censurados.
+</td>
+<td>
+<span class="math inline">\(\bullet\)</span> Sólo para variables continuas.<br><span class="math inline">\(\bullet\)</span> Tiende a ser más sensible cerca del centro de la distribución que en las colas.<br><span class="math inline">\(\bullet\)</span> La distribución subyacente debe ser completamente especificada.<br><span class="math inline">\(\bullet\)</span> Se reduce la potencia cuando se estiman los parámetros de la distribución subyacente.
+</td>
+</tr>
+<tr>
+<td class="tg-7btt">
+Lilliefors
+</td>
+<td>
+<span class="math inline">\(\bullet\)</span> Prueba con mayor potencia que en K-S.<br><span class="math inline">\(\bullet\)</span> Prueba adecuada para normalidad cuando se estiman los parámetros desde la muestra.
+</td>
+<td>
+<span class="math inline">\(\bullet\)</span> Sólo para variables continuas.
+</td>
+</tr>
+<tr>
+<td class="tg-7btt">
+Anderson Darling
+</td>
+<td>
+<span class="math inline">\(\bullet\)</span> No depende de la función de distribución subyacente.<br><span class="math inline">\(\bullet\)</span> Da un mayor peso a las colas de la distribución<br><span class="math inline">\(\bullet\)</span> Existen ponderaciones para el estadístico que aumentan la potencia de la prueba.<br><span class="math inline">\(\bullet\)</span> Prueba con mayor potencia que en K-S.
+</td>
+<td>
+<span class="math inline">\(\bullet\)</span> La distribución subyacente debe ser completamente especificada.<br><span class="math inline">\(\bullet\)</span> Sólo para variables continuas.
+</td>
+</tr>
+<tr>
+<td class="tg-amwm">
+Cramér-von-Mises</span>
+</td>
+<td>
+<span class="math inline">\(\bullet\)</span> Prueba con mayor potencia que en K-S
+</td>
+<td>
+<span class="math inline">\(\bullet\)</span> Sólo para variables continuas.
+</td>
+</tr>
+</tbody>
+</table>
+</center>
+<p>También consideremos lo siguiente:</p>
+<ul>
+<li>Las últimas tres pruebas son mejoras sobre la prueba de Kolmogorov-Smirnov.</li>
+<li>La pruebas Anderson–Darling es una estadística EDF (empirical distribution function) cuadrática.</li>
+<li>Otra prueba con un estadístico EDF cuadrático es la prueba de Cramér–von Mises.</li>
+<li><a href="https://en.wikipedia.org/wiki/Cramér–von_Mises_criterion#Watson_test">La prueba de Watson</a> es una modificación de la prueba de Cramér–von Mises.</li>
+</ul>
+<p>Aquí se enlistan algunas opciones para realizar dichas pruebas en R:</p>
+<ul>
+<li>Prueba Chi-square: <code>stats::chisq.test()</code></li>
+<li>Prueba Kolmogorov-Smirnov: <code>stats::ks.test()</code></li>
+<li>Prueba Lilliefors: <code>KScorrect::LcKS()</code></li>
+<li>Prueba Anderson-Darling: <code>goftest::ad.test()</code></li>
+<li>Prueba Cramer-von Mises: <code>goftest::cvm.test()</code></li>
+</ul>
+<p>Otro punto interesante cuando se esta probando la pertenencia de una distribución sobre una muestra es el uso de gráficos para comprobar tal hipótesis. Esto se puede realizar mediante las gráficas Q-Q Plot y P-P Plot, donde básicamente se comparan los cuantiles o probabilidades muestrales contra los teóricos. La idea es que si la muestra sigue una cierta distribución <span class="math inline">\(F^*\)</span>, entonces los cuantiles de dicha distribución (por ejemplo) deberán ser muy cercanos a los cuantiles muestrales; si estos se comparan en una gráfica de dispersión y si lo anterior sucede, entonces las observaciones deberán caer sobre una recta con pendiente 1 e intercepto 0 como en los siguientes ejemplos.</p>
+<p><img src="_main_files/figure-html/unnamed-chunk-33-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>La pregunta natural que surge aquí es: Si tenemos pruebas estadísticas, ¿Para qué utilizar gráficas? Bueno, resulta que las pruebas aveces nos pueden dar resultados no adecuados a la realidad, ya sea por las mismas deficiencias de la prueba o por algunos otros factores como el tamaño muestral.</p>
+<p>En el siguiente <a href="https://cran.r-project.org/web/packages/fitdistrplus/vignettes/FAQ.html#is-it-reasonable-to-use-goodness-of-fit-tests-to-validate-the-fit-of-a-distribution">artículo</a> se puede ver como el tamaño muestral puede alterar los resultados de las pruebas (como en general sucede con pruebas de hipótesis) por lo que nunca estará demás (y es necesario) dar una justificación gráfica para reforzar nuestra conclusión sobre la hipótesis nula.</p>
+</div>
+<div id="el-caso-de-la-normal" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> El caso de la normal</h2>
+<p>Los puntos anteriores son consideraciones en general que se deben tener en cuenta al tratar con una distribución <span class="math inline">\(F^*\)</span>. El caso de la distribución es muy especial ya que es uno de las distribución más utilizadas en este tipo de pruebas al ser una distribución muy común que se utiliza como supuestos en distintas aplicaciones como en la regresión lineal y el análisis de discriminante.</p>
+<p>En el paper <a href="https://www.researchgate.net/publication/267205556_Power_Comparisons_of_Shapiro-Wilk_Kolmogorov-Smirnov_Lilliefors_and_Anderson-Darling_Tests">Power Comparisons of Shapiro-Wilk, Kolmogorov-Smirnov, Lilliefors and Anderson-Darling Tests</a> se hace una comparación entre diversas pruebas de bondad y ajuste sobre una distribución normal utilizando la potencia (simulada a través del método Monte Carlo) de cada una de las pruebas. Aquí se dejan algunas gráficas que se mencionan en dicho paper.</p>
+<div class="figure">
+<img src="Captura%20de%20Pantalla%202021-07-23%20a%20la(s)%201.30.57.png" alt="" />
+<p class="caption">Imagenes tomadas del artículo <em>Power Comparisons of Shapiro-Wilk, Kolmogorov-Smirnov, Lilliefors and Anderson-Darling Tests</em></p>
+</div>
+<p>Es clara la superioridad de la prueba Shapiro Wilks ya que de hecho esta fue diseñada para probar la normalidad en una muestra aleatoria, muchas veces esta es conocida como la prueba más potente para probar normalidad.</p>
+<p>Sea cual sea la prueba que se desee realizar, estas pueden ser efectuadas en R con las siguientes funciones:</p>
+<ul>
+<li>Prueba Shapiro-Wilk: <code>stats::shapiro.test</code></li>
+<li>Prueba Anderson-Darling: <code>nortest::ad.test()</code></li>
+<li>Prueba Cramer-von Mises: <code>nortest::cvm.test()</code></li>
+<li>Prueba Lilliefors: <code>nortest::lillie.test()</code></li>
+<li>Prueba Pearson chi-square: <code>nortest::pearson.test()</code>.</li>
+<li>Prueba Shapiro-Francia: <code>nortest::sf.test()</code>.</li>
+</ul>
+<p>El contenido visto hasta ahora es llamado no paramétrico porque no es necesario algún supuesto relacionado con alguna distribución. Aunque es importante siempre tener en cuenta que las técnicas basadas en supuestos distributivos específicos son en general más poderosas. Por lo que si se puede confirmar el supuesto distributivo, generalmente se prefieren las técnicas paramétricas.</p>
+<p>Finalmente, aquí se dejan ciertos enlaces que pueden ser de interés:</p>
+<ul>
+<li><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda35g.htm">Kolmogorov-Smirnov Goodness-of-Fit Test</a></li>
+<li><a href="https://influentialpoints.com/Training/Kolmogorov-Smirnov_test_use_and_misuse.htm">Kolmogorov-Smirnov and related tests: Use &amp; misuse</a>
+-<a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda35f.htm">Chi-Square Goodness-of-Fit Test</a>
+-<a href="https://www.itl.nist.gov/div898/handbook/prc/section2/prc211.htm">Chi-square goodness-of-fit test, more details</a></li>
+<li><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda35e.htm">Anderson-Darling Test</a></li>
+<li><a href="https://www.itl.nist.gov/div898/handbook/prc/section2/prc213.htm">Anderson-Darling and Shapiro-Wilk tests</a></li>
+<li><a href="http://www.statistics4u.com/fundstat_eng/cc_normality_test.html">Test for Normality</a></li>
+<li><a href="https://towardsdatascience.com/6-ways-to-test-for-a-normal-distribution-which-one-to-use-9dcf47d8fa93">6 ways to test for a Normal Distribution — which one to use?</a></li>
+<li><a href="https://www.statisticshowto.com/shapiro-wilk-test/">Shapiro-Wilk Test: What it is and How to Run it</a></li>
+<li><a href="http://ceae.colorado.edu/~balajir/CVEN5454/lectures/intro2fitdistrplus.pdf">Use of the package fitdistrplus to specify a distribution from non-censored or censored data</a></li>
+</ul>
+
+</div>
+</div>
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="tablas-de-contingencia.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="regresión-lineal-simple.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "github", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

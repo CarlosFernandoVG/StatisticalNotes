@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 6 Regresión lineal múltiple | Statistical Notes</title>
+  <meta name="description" content="Notas sobre temas relacionados a la estadística" />
+  <meta name="generator" content="bookdown 0.21.6 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 6 Regresión lineal múltiple | Statistical Notes" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Notas sobre temas relacionados a la estadística" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 6 Regresión lineal múltiple | Statistical Notes" />
+  
+  <meta name="twitter:description" content="Notas sobre temas relacionados a la estadística" />
+  
+
+<meta name="author" content="Carlos Fernando Vásquez Guerra" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="regresión-lineal-simple.html"/>
+<link rel="next" href="otros-puntos-importantes-de-regresión-lineal.html"/>
+<script src="libs/header-attrs-2.7.3/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Statistical Notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefacio</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#objetivos"><i class="fa fa-check"></i>Objetivos</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#estructura"><i class="fa fa-check"></i>Estructura</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#detalles-técnicos"><i class="fa fa-check"></i>Detalles técnicos</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#licencia"><i class="fa fa-check"></i>Licencia</a></li>
+</ul></li>
+<li class="part"><span><b>I Estadística no paramétrica</b></span></li>
+<li class="chapter" data-level="1" data-path="pruebas-de-hipótesis.html"><a href="pruebas-de-hipótesis.html"><i class="fa fa-check"></i><b>1</b> Pruebas de hipótesis</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="pruebas-de-hipótesis.html"><a href="pruebas-de-hipótesis.html#qué-es-una-prueba-de-hipótesis"><i class="fa fa-check"></i><b>1.1</b> ¿Qué es una Prueba de Hipótesis?</a></li>
+<li class="chapter" data-level="1.2" data-path="pruebas-de-hipótesis.html"><a href="pruebas-de-hipótesis.html#dos-tipos-de-hipótesis"><i class="fa fa-check"></i><b>1.2</b> Dos tipos de hipótesis</a></li>
+<li class="chapter" data-level="1.3" data-path="pruebas-de-hipótesis.html"><a href="pruebas-de-hipótesis.html#significancia-y-confianza"><i class="fa fa-check"></i><b>1.3</b> Significancia y confianza</a></li>
+<li class="chapter" data-level="1.4" data-path="pruebas-de-hipótesis.html"><a href="pruebas-de-hipótesis.html#rechazar-h_0"><i class="fa fa-check"></i><b>1.4</b> Rechazar <span class="math inline">\(H_0\)</span></a></li>
+<li class="chapter" data-level="1.5" data-path="pruebas-de-hipótesis.html"><a href="pruebas-de-hipótesis.html#tipos-de-pruebas"><i class="fa fa-check"></i><b>1.5</b> Tipos de pruebas</a></li>
+<li class="chapter" data-level="1.6" data-path="pruebas-de-hipótesis.html"><a href="pruebas-de-hipótesis.html#p-value"><i class="fa fa-check"></i><b>1.6</b> <span class="math inline">\(P-value\)</span></a></li>
+<li class="chapter" data-level="1.7" data-path="pruebas-de-hipótesis.html"><a href="pruebas-de-hipótesis.html#algunos-puntos-a-recordar"><i class="fa fa-check"></i><b>1.7</b> Algunos puntos a recordar</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="pruebas-binomiales-y-de-rangos.html"><a href="pruebas-binomiales-y-de-rangos.html"><i class="fa fa-check"></i><b>2</b> Pruebas binomiales y de rangos</a></li>
+<li class="chapter" data-level="3" data-path="tablas-de-contingencia.html"><a href="tablas-de-contingencia.html"><i class="fa fa-check"></i><b>3</b> Tablas de contingencia</a></li>
+<li class="chapter" data-level="4" data-path="pruebas-de-bondad-y-ajuste.html"><a href="pruebas-de-bondad-y-ajuste.html"><i class="fa fa-check"></i><b>4</b> Pruebas de bondad y ajuste</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="pruebas-de-bondad-y-ajuste.html"><a href="pruebas-de-bondad-y-ajuste.html#funciones-de-distribución-comunes-y-técnicas-de-identificación"><i class="fa fa-check"></i><b>4.1</b> Funciones de distribución comunes y técnicas de identificación</a></li>
+<li class="chapter" data-level="4.2" data-path="pruebas-de-bondad-y-ajuste.html"><a href="pruebas-de-bondad-y-ajuste.html#programación-y-evaluación"><i class="fa fa-check"></i><b>4.2</b> Programación y evaluación</a></li>
+<li class="chapter" data-level="4.3" data-path="pruebas-de-bondad-y-ajuste.html"><a href="pruebas-de-bondad-y-ajuste.html#comparación-de-pruebas"><i class="fa fa-check"></i><b>4.3</b> Comparación de pruebas</a></li>
+<li class="chapter" data-level="4.4" data-path="pruebas-de-bondad-y-ajuste.html"><a href="pruebas-de-bondad-y-ajuste.html#el-caso-de-la-normal"><i class="fa fa-check"></i><b>4.4</b> El caso de la normal</a></li>
+</ul></li>
+<li class="part"><span><b>II Regresión lineal</b></span></li>
+<li class="chapter" data-level="5" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html"><i class="fa fa-check"></i><b>5</b> Regresión lineal simple</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#correlación-y-linearidad"><i class="fa fa-check"></i><b>5.1</b> Correlación y linearidad</a></li>
+<li class="chapter" data-level="5.2" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#variables-categóricas"><i class="fa fa-check"></i><b>5.2</b> Variables categóricas</a></li>
+<li class="chapter" data-level="5.3" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#paquetes-y-funciones-útiles"><i class="fa fa-check"></i><b>5.3</b> Paquetes y funciones útiles</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#correlación"><i class="fa fa-check"></i><b>5.3.1</b> Correlación</a></li>
+<li class="chapter" data-level="5.3.2" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#regresión"><i class="fa fa-check"></i><b>5.3.2</b> Regresión</a></li>
+<li class="chapter" data-level="5.3.3" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#tidymodelsbroom"><i class="fa fa-check"></i><b>5.3.3</b> TidyModels::Broom</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#ejemplo"><i class="fa fa-check"></i><b>5.4</b> Ejemplo</a></li>
+<li class="chapter" data-level="5.5" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#otros-puntos-importantes"><i class="fa fa-check"></i><b>5.5</b> Otros puntos importantes</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html"><i class="fa fa-check"></i><b>6</b> Regresión lineal múltiple</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#pruebas-de-hipótesis-y-anova-e-intervalos"><i class="fa fa-check"></i><b>6.1</b> Pruebas de hipótesis y ANOVA e intervalos</a></li>
+<li class="chapter" data-level="6.2" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#interacción-y-selección-de-variables"><i class="fa fa-check"></i><b>6.2</b> Interacción y selección de variables</a></li>
+<li class="chapter" data-level="6.3" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#supuestos-y-problemas-potenciales"><i class="fa fa-check"></i><b>6.3</b> Supuestos y problemas potenciales</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#transformaciones"><i class="fa fa-check"></i><b>6.3.1</b> +Transformaciones</a></li>
+<li class="chapter" data-level="6.3.2" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#interpretaciones"><i class="fa fa-check"></i><b>6.3.2</b> Interpretaciones</a></li>
+<li class="chapter" data-level="6.3.3" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#validación"><i class="fa fa-check"></i><b>6.3.3</b> Validación</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#predicción"><i class="fa fa-check"></i><b>6.4</b> Predicción</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="otros-puntos-importantes-de-regresión-lineal.html"><a href="otros-puntos-importantes-de-regresión-lineal.html"><i class="fa fa-check"></i><b>7</b> Otros puntos importantes de regresión lineal</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="otros-puntos-importantes-de-regresión-lineal.html"><a href="otros-puntos-importantes-de-regresión-lineal.html#comparación-de-modelos"><i class="fa fa-check"></i><b>7.1</b> Comparación de modelos</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="otros-puntos-importantes-de-regresión-lineal.html"><a href="otros-puntos-importantes-de-regresión-lineal.html#r2"><i class="fa fa-check"></i><b>7.1.1</b> R^2</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="otros-puntos-importantes-de-regresión-lineal.html"><a href="otros-puntos-importantes-de-regresión-lineal.html#análisis-de-valores-influyentes"><i class="fa fa-check"></i><b>7.2</b> Análisis de valores influyentes</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="otros-puntos-importantes-de-regresión-lineal.html"><a href="otros-puntos-importantes-de-regresión-lineal.html#outliers"><i class="fa fa-check"></i><b>7.2.1</b> Outliers</a></li>
+<li class="chapter" data-level="7.2.2" data-path="otros-puntos-importantes-de-regresión-lineal.html"><a href="otros-puntos-importantes-de-regresión-lineal.html#valores-con-alto-apalancamiento"><i class="fa fa-check"></i><b>7.2.2</b> Valores con alto “apalancamiento”</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="anova-vs-regresión-lineal.html"><a href="anova-vs-regresión-lineal.html"><i class="fa fa-check"></i><b>8</b> ANOVA vs Regresión lineal</a></li>
+<li class="chapter" data-level="9" data-path="librerías-para-eda.html"><a href="librerías-para-eda.html"><i class="fa fa-check"></i><b>9</b> Librerías para EDA</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="_blank">Hecho con bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Statistical Notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="regresión-lineal-múltiple" class="section level1" number="6">
+<h1><span class="header-section-number">Capítulo 6</span> Regresión lineal múltiple</h1>
+<style type="text/css">
+pre {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+pre[class] {
+  max-height: 300px;
+}
+</style>
+<p>El mundo es complejo y aveces tratar de modelar el comportamiento de un evento sólo por una variable no es lo más conveniente; así que el camino natural para mejorar nuestro modelo de regresión simple es hacer múltiple agregando más variables. Así ya no estaríamos trabajando, geométricamente hablando, en una recta, si no en un hiperplano.Entonces, suponiendo <span class="math inline">\(p\)</span> predictores, una regresión múltiple queda expresada matematicamente como sigue:</p>
+<p><span class="math display">\[
+f(X) = Y = \beta_0 +\beta_1X_1+\beta_2X_2+\dots + \beta_pX_p+\epsilon = \beta_0 + \sum_{i = 1}^pX_i\beta_i + \epsilon = X\beta + \epsilon
+\]</span></p>
+<p>Donde <span class="math inline">\(\beta_i\)</span> son los parámetros del modelo representando el efecto promedio en <span class="math inline">\(Y\)</span> de un incremento de una unidad en <span class="math inline">\(X_i\)</span>, <strong>manteniendo todos los otros predictores fijos</strong> y <span class="math inline">\(\epsilon\sim N(0,\sigma^2)\)</span>.</p>
+<p>De igual manera, la forma habitual de estimar los parámetros es mediante el uso de mínimos cuadrados para minimizar la suma de los residuales al cuadrado:</p>
+<p><span class="math display">\[
+RSS = \sum_{i = 1}^n(y_i-f(x_i))^2 = \sum_{i = 1}^n(y_i-\hat y_i)^2 = \sum_{i = 1}^n(y_i-\hat\beta_0-\hat\beta_1x_{i1}-\hat\beta_2x_{i2}-\cdots-\hat\beta_px_{ip})^2 = \sum_{i = 1}^n\left(y_i-\beta_0-\sum_{j = 1}^px_{ij}\beta_j\right)^2
+\]</span></p>
+<p>Vamos a seguir tomando el ejemplo de los ingresos en el estado de Aguascalientes de acuerdo a la <a href="https://www.inegi.org.mx/programas/enigh/nc/2018/#Microdatos">Encuesta Nacional de Ingresos y Gastos de los Hogares (ENIGH). 2018 Nueva serie</a>. Vamos a ajustar un modelo con las variables que tengan la mejor correlación con el ingreso eliminando previamente algunos outliers que se consiguen en ciertas variables.</p>
+<p>Para facilitarnos esto, veamos el siguiente gráfico de correlación con la correlación de spearman para ver relaciones monotonas y después diagramas de dispersión junto a la correlación de pearson que se consigue por pares.</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="regresión-lineal-múltiple.html#cb67-1" aria-hidden="true" tabindex="-1"></a>(data_income <span class="sc">%&gt;%</span> <span class="fu">filter</span>(ing_cor <span class="sc">&lt;</span> <span class="dv">2000000</span> <span class="sc">&amp;</span> transporte <span class="sc">&lt;</span> <span class="dv">350000</span> <span class="sc">&amp;</span> limpieza <span class="sc">&lt;</span> <span class="dv">40000</span> <span class="sc">&amp;</span> personales <span class="sc">&lt;</span> <span class="dv">113246</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb67-2"><a href="regresión-lineal-múltiple.html#cb67-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>(<span class="at">method =</span> <span class="st">&quot;spearman&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb67-3"><a href="regresión-lineal-múltiple.html#cb67-3" aria-hidden="true" tabindex="-1"></a>  ggcorrplot<span class="sc">::</span><span class="fu">ggcorrplot</span>(<span class="at">hc.order =</span> <span class="cn">TRUE</span>, <span class="at">outline.col =</span> <span class="st">&quot;white&quot;</span>, <span class="at">type =</span> <span class="st">&quot;lower&quot;</span>, </span>
+<span id="cb67-4"><a href="regresión-lineal-múltiple.html#cb67-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">tl.cex =</span> <span class="dv">8</span><span class="co">#, lab = T</span></span>
+<span id="cb67-5"><a href="regresión-lineal-múltiple.html#cb67-5" aria-hidden="true" tabindex="-1"></a>                         )<span class="sc">+</span></span>
+<span id="cb67-6"><a href="regresión-lineal-múltiple.html#cb67-6" aria-hidden="true" tabindex="-1"></a>   general_theme <span class="sc">+</span> </span>
+<span id="cb67-7"><a href="regresión-lineal-múltiple.html#cb67-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>, <span class="at">face =</span> <span class="st">&quot;plain&quot;</span>), </span>
+<span id="cb67-8"><a href="regresión-lineal-múltiple.html#cb67-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>, <span class="at">face =</span> <span class="st">&quot;plain&quot;</span>), </span>
+<span id="cb67-9"><a href="regresión-lineal-múltiple.html#cb67-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.30</span>, <span class="fl">0.85</span>),</span>
+<span id="cb67-10"><a href="regresión-lineal-múltiple.html#cb67-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.direction =</span> <span class="st">&quot;horizontal&quot;</span>,</span>
+<span id="cb67-11"><a href="regresión-lineal-múltiple.html#cb67-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.box =</span> <span class="st">&quot;horizontal&quot;</span>,</span>
+<span id="cb67-12"><a href="regresión-lineal-múltiple.html#cb67-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>())) <span class="sc">+</span> </span>
+<span id="cb67-13"><a href="regresión-lineal-múltiple.html#cb67-13" aria-hidden="true" tabindex="-1"></a>(data_income <span class="sc">%&gt;%</span> <span class="fu">filter</span>(ing_cor <span class="sc">&lt;</span> <span class="dv">2000000</span> <span class="sc">&amp;</span> transporte <span class="sc">&lt;</span> <span class="dv">350000</span> <span class="sc">&amp;</span> limpieza <span class="sc">&lt;</span> <span class="dv">40000</span> <span class="sc">&amp;</span> personales <span class="sc">&lt;</span> <span class="dv">113246</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb67-14"><a href="regresión-lineal-múltiple.html#cb67-14" aria-hidden="true" tabindex="-1"></a>   dplyr<span class="sc">::</span><span class="fu">select</span>(ing_cor, transporte, alimentos, limpieza, personales) <span class="sc">%&gt;%</span></span>
+<span id="cb67-15"><a href="regresión-lineal-múltiple.html#cb67-15" aria-hidden="true" tabindex="-1"></a>   GGally<span class="sc">::</span><span class="fu">ggscatmat</span>() <span class="sc">+</span> </span>
+<span id="cb67-16"><a href="regresión-lineal-múltiple.html#cb67-16" aria-hidden="true" tabindex="-1"></a>   general_theme <span class="sc">+</span> </span>
+<span id="cb67-17"><a href="regresión-lineal-múltiple.html#cb67-17" aria-hidden="true" tabindex="-1"></a>   <span class="fu">theme</span>(<span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>), </span>
+<span id="cb67-18"><a href="regresión-lineal-múltiple.html#cb67-18" aria-hidden="true" tabindex="-1"></a>         <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>)))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-62-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Por lo que proponemos distintas transformaciones; el resultado de esto lo podemos ver en la siguiente matriz de dispersión</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="regresión-lineal-múltiple.html#cb68-1" aria-hidden="true" tabindex="-1"></a>data_income <span class="sc">%&gt;%</span> <span class="fu">filter</span>(ing_cor <span class="sc">&lt;</span> <span class="dv">2000000</span> <span class="sc">&amp;</span> transporte <span class="sc">&lt;</span> <span class="dv">350000</span> <span class="sc">&amp;</span> limpieza <span class="sc">&lt;</span> <span class="dv">40000</span> <span class="sc">&amp;</span> personales <span class="sc">&lt;</span> <span class="dv">113246</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb68-2"><a href="regresión-lineal-múltiple.html#cb68-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(ing_cor, transporte, alimentos, limpieza, personales) <span class="sc">%&gt;%</span> </span>
+<span id="cb68-3"><a href="regresión-lineal-múltiple.html#cb68-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ing_cor =</span> <span class="fu">log</span>(ing_cor),</span>
+<span id="cb68-4"><a href="regresión-lineal-múltiple.html#cb68-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">transporte =</span> <span class="fu">sqrt</span>(transporte),</span>
+<span id="cb68-5"><a href="regresión-lineal-múltiple.html#cb68-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">alimentos =</span> <span class="fu">sqrt</span>(alimentos),</span>
+<span id="cb68-6"><a href="regresión-lineal-múltiple.html#cb68-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">limpieza =</span> <span class="fu">sqrt</span>(limpieza),</span>
+<span id="cb68-7"><a href="regresión-lineal-múltiple.html#cb68-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">personales =</span> <span class="fu">sqrt</span>(personales)) <span class="sc">%&gt;%</span> </span>
+<span id="cb68-8"><a href="regresión-lineal-múltiple.html#cb68-8" aria-hidden="true" tabindex="-1"></a>  GGally<span class="sc">::</span><span class="fu">ggscatmat</span>() <span class="sc">+</span> general_theme</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-63-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Entonces, ajustando un modelo de regresión con los siguientes datos obtenemos el siguiente modelo junto con la implementación de dicho modelo en R:</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="regresión-lineal-múltiple.html#cb69-1" aria-hidden="true" tabindex="-1"></a>mutated_data_income <span class="ot">&lt;-</span> data_income <span class="sc">%&gt;%</span> <span class="fu">filter</span>(ing_cor <span class="sc">&lt;</span> <span class="dv">2000000</span> <span class="sc">&amp;</span> transporte <span class="sc">&lt;</span> <span class="dv">350000</span> <span class="sc">&amp;</span> limpieza <span class="sc">&lt;</span> <span class="dv">40000</span> <span class="sc">&amp;</span> personales <span class="sc">&lt;</span> <span class="dv">113246</span>) </span>
+<span id="cb69-2"><a href="regresión-lineal-múltiple.html#cb69-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">#dplyr::select(ing_cor, transporte, alimentos, limpieza, personales) </span></span>
+<span id="cb69-3"><a href="regresión-lineal-múltiple.html#cb69-3" aria-hidden="true" tabindex="-1"></a><span class="co">#%&gt;% dplyr::select(ing_cor_log, transporte_sqrt, alimentos_sqrt, limpieza_sqrt, personales_sqrt)</span></span>
+<span id="cb69-4"><a href="regresión-lineal-múltiple.html#cb69-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-5"><a href="regresión-lineal-múltiple.html#cb69-5" aria-hidden="true" tabindex="-1"></a>first_m_model <span class="ot">&lt;-</span> mutated_data_income <span class="sc">%&gt;%</span> <span class="fu">lm</span>(<span class="fu">log</span>(ing_cor)<span class="sc">~</span><span class="fu">sqrt</span>(transporte) <span class="sc">+</span> <span class="fu">sqrt</span>(alimentos) <span class="sc">+</span> <span class="fu">sqrt</span>(limpieza) <span class="sc">+</span> <span class="fu">sqrt</span>(personales), <span class="at">data =</span> .)</span>
+<span id="cb69-6"><a href="regresión-lineal-múltiple.html#cb69-6" aria-hidden="true" tabindex="-1"></a>first_m_model <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span></code></pre></div>
+<pre><code>
+Call:
+lm(formula = log(ing_cor) ~ sqrt(transporte) + sqrt(alimentos) + 
+    sqrt(limpieza) + sqrt(personales), data = .)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.5269 -0.3109 -0.0043  0.3218  2.6055 
+
+Coefficients:
+                  Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)      9.3424687  0.0351277 265.957  &lt; 2e-16 ***
+sqrt(transporte) 0.0053498  0.0002970  18.010  &lt; 2e-16 ***
+sqrt(alimentos)  0.0049731  0.0003956  12.571  &lt; 2e-16 ***
+sqrt(limpieza)   0.0045630  0.0006180   7.383 2.15e-13 ***
+sqrt(personales) 0.0054216  0.0005851   9.266  &lt; 2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.5266 on 2297 degrees of freedom
+Multiple R-squared:  0.479, Adjusted R-squared:  0.4781 
+F-statistic: 528.1 on 4 and 2297 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="regresión-lineal-múltiple.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(equatiomatic)</span>
+<span id="cb71-2"><a href="regresión-lineal-múltiple.html#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="fu">extract_eq</span>(first_m_model)</span></code></pre></div>
+<p><span class="math display">\[
+\operatorname{log(ing\_cor)} = \alpha + \beta_{1}(\operatorname{sqrt(transporte)}) + \beta_{2}(\operatorname{sqrt(alimentos)}) + \beta_{3}(\operatorname{sqrt(limpieza)}) + \beta_{4}(\operatorname{sqrt(personales)}) + \epsilon
+\]</span></p>
+<p>O mejor dicho</p>
+<p><span class="math display">\[
+\log(ing\_cor) = \alpha + \beta_{1}\sqrt{transporte} + \beta_{2}\sqrt{alimentos} + \beta_{3}\sqrt{limpieza} + \beta_{4}\sqrt{personales} + \epsilon
+\]</span></p>
+<p>Como vemos, con todas las variables se rechaza la hipótesis <span class="math inline">\(H_0: \beta_i = 0\)</span>, además de que también se rechaza la hipótesis <span class="math inline">\(H_0: \beta_1 = \beta_2 = \beta_3 = \beta_4 = 0\)</span> con la prueba ANOVA y tenemos un <span class="math inline">\(R^2\)</span> ajustado del 0.4781, por lo que el modelo recupera un 47% de la variabilidad de los datos, lo cual no significa que sea un mal modelo. Veamos un poco más a detalle que significa todo esto, además de hacer ver posibles problemas que hagan que nuestro modelo no sea adecuado.</p>
+<div id="pruebas-de-hipótesis-y-anova-e-intervalos" class="section level2" number="6.1">
+<h2><span class="header-section-number">6.1</span> Pruebas de hipótesis y ANOVA e intervalos</h2>
+<p>Lo primero que nos otorga el <code>summary</code> del modelo anterior es lo siguiente:</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="regresión-lineal-múltiple.html#cb72-1" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(first_m_model)</span></code></pre></div>
+<pre><code># A tibble: 5 × 5
+  term             estimate std.error statistic  p.value
+  &lt;chr&gt;               &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)       9.34     0.0351      266.   0       
+2 sqrt(transporte)  0.00535  0.000297     18.0  6.18e-68
+3 sqrt(alimentos)   0.00497  0.000396     12.6  4.24e-35
+4 sqrt(limpieza)    0.00456  0.000618      7.38 2.15e-13
+5 sqrt(personales)  0.00542  0.000585      9.27 4.30e-20</code></pre>
+<p>Con esto obtenemos:</p>
+<ol style="list-style-type: decimal">
+<li>Los coeficientes de nuestro modelo (columna <code>estimate</code>)</li>
+<li>El error estandar sobre para parámetro (columna <code>std.error</code>)</li>
+<li>El estadístico de la prueba sobre los coeficientes (columna <code>statistic</code>)</li>
+<li>El <span class="math inline">\(p-value\)</span> sobre la prueba mencionada en el anterior punto (columna <code>p.value</code>)</li>
+</ol>
+<p>Hay que recordar que el error estandar nos ayuda a crear los intervalos de confianza sobre cada parámetro del modelo. Tomemos como ejemplo el termino <span class="math inline">\(\beta_1\)</span> asociado a la raíz cuadrada del gasto en transporte. El intervalo de confianza en este caso sería, <strong>aproximadamente</strong>, el siguiente:</p>
+<p><span class="math display">\[
+\hat{\beta_i}\pm 2\cdot SE(\hat{\beta_i}) = \left[\hat{\beta_1}-2\cdot SE(\hat{\beta_1}), \hat{\beta_1}+2\cdot SE(\hat{\beta_1})\right] = [0.004755661, 0.005943853]
+\]</span></p>
+<p>Lo que significa que, hay aproximadamente un 95% de probabilidad de que el intervalo <span class="math inline">\([0.004755661, 0.005943853]\)</span> contiene <strong>el verdadero valor de <span class="math inline">\(\beta_1\)</span></strong>. También podríamos haber utilizado el hecho de que suponemos en la construcción de intervalos de confianza que todos los coeficientes se distribuyen de manera normal (<span class="math inline">\(\hat{\beta_i} = N(\beta_i, \sigma^2C_{(i+1)(i+1)})\)</span> donde <span class="math inline">\(C_{(i+1)(i+1)})\)</span> es el i-ésimo coeficiente de la diagonal de la matriz <span class="math inline">\((X&#39;X)^{-1}\)</span>) y haber calculado los intervalos como:</p>
+<p><span class="math display">\[
+\hat{\beta_i}\pm 1.96\cdot SE(\hat{\beta_i}) = \left[\hat{\beta_1}-2\cdot SE(\hat{\beta_1}), \hat{\beta_1}+1.96\cdot SE(\hat{\beta_1})\right] = [0.004755661, 0.005943853]
+\]</span></p>
+<p>Aunque para ser más precisos, los intervalos de confianza, de manera general, están determinados por la siguiente ecuación:</p>
+<p><span class="math display">\[
+\hat{\beta_i}\pm t_{n-k-1}^{\alpha/2} \sqrt{\hat{\sigma}^2C_{(i+1)(i+1)}}
+\]</span></p>
+<p>Para nuestro caso podemos calcularlos de la siguiente manera:</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="regresión-lineal-múltiple.html#cb74-1" aria-hidden="true" tabindex="-1"></a>sfm <span class="ot">&lt;-</span> <span class="fu">summary</span>(first_m_model)</span>
+<span id="cb74-2"><a href="regresión-lineal-múltiple.html#cb74-2" aria-hidden="true" tabindex="-1"></a>interval_confidence_firstM <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb74-3"><a href="regresión-lineal-múltiple.html#cb74-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(sfm<span class="sc">$</span>coefficients[,<span class="dv">1</span>] <span class="sc">-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> sfm<span class="sc">$</span>df[<span class="dv">2</span>]) <span class="sc">*</span> sfm<span class="sc">$</span>coefficients[, <span class="dv">2</span>],</span>
+<span id="cb74-4"><a href="regresión-lineal-múltiple.html#cb74-4" aria-hidden="true" tabindex="-1"></a>  sfm<span class="sc">$</span>coefficients[,<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> sfm<span class="sc">$</span>df[<span class="dv">2</span>]) <span class="sc">*</span> sfm<span class="sc">$</span>coefficients[, <span class="dv">2</span>]),</span>
+<span id="cb74-5"><a href="regresión-lineal-múltiple.html#cb74-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="dv">2</span></span>
+<span id="cb74-6"><a href="regresión-lineal-múltiple.html#cb74-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb74-7"><a href="regresión-lineal-múltiple.html#cb74-7" aria-hidden="true" tabindex="-1"></a><span class="fu">row.names</span>(interval_confidence_firstM) <span class="ot">&lt;-</span> <span class="fu">row.names</span>(sfm<span class="sc">$</span>coefficients)</span>
+<span id="cb74-8"><a href="regresión-lineal-múltiple.html#cb74-8" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(interval_confidence_firstM) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;lower&quot;</span>, <span class="st">&quot;upper&quot;</span>)</span>
+<span id="cb74-9"><a href="regresión-lineal-múltiple.html#cb74-9" aria-hidden="true" tabindex="-1"></a>interval_confidence_firstM</span></code></pre></div>
+<pre><code>                       lower       upper
+(Intercept)      9.273583316 9.411354045
+sqrt(transporte) 0.004767247 0.005932267
+sqrt(alimentos)  0.004197295 0.005748825
+sqrt(limpieza)   0.003351097 0.005774906
+sqrt(personales) 0.004274251 0.006569003</code></pre>
+<p>Los cuales se pudieron haber obtenido con la función <code>stats::confint.lm()</code></p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="regresión-lineal-múltiple.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(first_m_model)</span></code></pre></div>
+<pre><code>                       2.5 %      97.5 %
+(Intercept)      9.273583316 9.411354045
+sqrt(transporte) 0.004767247 0.005932267
+sqrt(alimentos)  0.004197295 0.005748825
+sqrt(limpieza)   0.003351097 0.005774906
+sqrt(personales) 0.004274251 0.006569003</code></pre>
+<p>Una manera elegante que podemos utilizar para visualizar la anterior información no las proporciona la función <code>modelsummary::modelplot()</code></p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="regresión-lineal-múltiple.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">modelplot</span>(first_m_model) <span class="sc">+</span>  general_theme <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">panel.background =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-69-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>Por la escala que tenemos en nuestro intercepto, tenemos poca apreciación del resto de coeficientes</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="regresión-lineal-múltiple.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">modelplot</span>(first_m_model, <span class="at">coef_omit =</span> <span class="st">&quot;Intercept&quot;</span>) <span class="sc">+</span> general_theme <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">panel.background =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-70-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>Retomando el ejemplo, podemos decir que en la ausencia de cualquiera de nuestras variables, el ingreso, en promedio, estará entre $10652.86 (=exp(9.273583316)) y 12226.41 pesos mexicanos. Y, por ejemplo, con un aumento de $1,000 pesos en el gasto de alimentos, el ingreso debe aumentar, en promedio para los ciudadanos de Aguascalientes, entre $1000.018 y $1000.033 pesos mexicanos.</p>
+<p>Respecto a los valores obtenidos en la columna <code>statistic</code>, estos corresponden a un estadístico <span class="math inline">\(t\)</span> para determinar si hay una relación entre la variable asociada a dicho parámetro y la variable a predecir. Para tales fines nuestro estadístico mide el número de desviaciones estandar que nuestro coeficientes lejanas desde el 0, es decir:</p>
+<p><span class="math display">\[
+t = \frac{\hat{\beta_i}-0}{SE(\hat{\beta_i})}
+\]</span></p>
+<p>Y la prueba de hipótesis en la que se utiliza dicho estadístico queda determinada de la siguiente manera:</p>
+<p><span class="math display">\[
+\begin{array}{c}
+H_0: \mbox{No hay alguna relación entre }X \mbox{ y }Y \equiv \beta_i = 0\\
+H_a: \mbox{Hay alguna relación entre }X \mbox{ y }Y \equiv \beta_i \neq 0
+\end{array}
+\]</span></p>
+<p>Entonces lo que buscamos es que <span class="math inline">\(\hat{\beta_i}\)</span> este lo más alejado del 0, es decir que si <span class="math inline">\(SE(\hat{\beta_i})\)</span> es pequeño, <span class="math inline">\(\hat{\beta_i}\)</span> puede ser pequeño y si <span class="math inline">\(SE(hat{\beta_i})\)</span> es grande, entonces <span class="math inline">\(\hat{\beta_i}\)</span> debe ser lo suficientemente grande en valor absoluto. En la siguiente gráfica podemos ver que todas nuestras variables son relevantes para modelar el ingreso (gracias a que los <span class="math inline">\(p-values\)</span> indican de la información no es compatible con la hipótesis nula), así como una comparación entre los valores de cada uno de los coeficientes.</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="regresión-lineal-múltiple.html#cb80-1" aria-hidden="true" tabindex="-1"></a>GGally<span class="sc">::</span><span class="fu">ggcoef_model</span>(first_m_model) <span class="sc">+</span> general_theme</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-71-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Por lo que, al considerar que la raíz cuadrada es una función monótona y creciente, al igual que el logaritmo en el rango que estamos considerando (<span class="math inline">\(\mathbb{R^{+}}\)</span>), los cambios en los gastos personales, en promedio, son lo que más puede afectar en el ingreso si los demás gastos permanecen constantes; de hecho por cada $1,000 más en los gastos personales, se necesitará entre $1000.018 y $1000.043 pesos mexicanos que aumente el ingreso.</p>
+<p>Lo último que se visualiza en un <code>summary</code> de un modelo lineal son algunas estadísticas sobre el rendimiento del modelo e información sobre la prueba ANOVA, por el momento sólo se analizará esto último.</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="regresión-lineal-múltiple.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(first_m_model) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(statistic, p.value, df)</span></code></pre></div>
+<pre><code># A tibble: 1 × 3
+  statistic p.value    df
+      &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
+1      528.  3e-323     4</code></pre>
+<p>La prueba <strong>ANOVA</strong> (<a href="https://en.wikipedia.org/wiki/Analysis_of_variance#Textbook_analysis_using_a_normal_distribution">Análisis de Varianza</a>) es un prueba que nos ayudará a determinar la significancia del modelo, es decir que se desea probar si la ecuación de regresión no explica una proporción considerable de la variabilidad en la variable respuesta, contra la hipótesis alternativa de que sí la explica, es decir:</p>
+<p><span class="math display">\[
+\begin{array}{c}
+H_0 : \beta_1 = \beta_2 = \cdots = \beta_p = 0\\
+vs\\
+H_1 : \beta_i \neq 0 \mbox{ p.a }i, i\in\{1,2,\dots, p\}
+\end{array}
+\]</span></p>
+<p>El estadístico para esta prueba hace entender el nombre de la prueba y para obtenerlo necesitamos diferentes estadísticas. De acuerdo a la bibliografía se pueden encontrar diferentes nomenclaturas, aquí se colocan algunas ejemplos:</p>
+<!-- $TSS = \sum(y_i-\bar{y_i})^2$ : Total sum of squares -->
+<!-- $RSS = \sum(y_i-\hat{y_i})^2$: Residual sum of squares -->
+<!-- $SC_T = \sum(y_i-\bar{y_i})^2$ : Suma de cuadrados total -->
+<!-- $SC_{reg} = \sum(\hat{y}_i-\bar{y})^2$: Suma de cuadrados de la regresión -->
+<!-- $SC_{error} = \sum(y_i-\hat{y_i})^2$: Suma de cuadrados del error -->
+<!-- $SSM = \sum(\hat{y}_i-\bar{y})^2$: Sum of Squares of the model -->
+<!-- $SSE = \sum(y_i-\hat{y_i})^2$: Sum of Squares of the error -->
+<!-- $CM_{reg} = SC_{reg}/p$: Cuadrado medio de la regresión -->
+<!-- $CM_{error} = SC_{error}/n-p-1$: Cuadrado medio del error -->
+<!-- $MSM = SSM/p$: Mean Square of Model -->
+<!-- $MSE = SSE/n-p-1$: Mean Square of error -->
+<!-- $F = \frac{CM_{reg}}{CM_{error}}$ -->
+<!-- $F = \frac{MSM}{MSE}$ -->
+<ul>
+<li><span class="math inline">\(TSS = SC_{total} = \sum(y_i-\bar{y_i})^2\)</span>: Total sum of squares o la suma de cuadrados total.</li>
+<li><span class="math inline">\(SC_{reg} = SSM = SSR = \sum(\hat{y}_i-\bar{y})^2\)</span>: La suma de cuadrados de la regresión o del modelo.</li>
+<li><span class="math inline">\(RSS = SC_{error} = SSE = \sum(y_i-\hat{y_i})^2\)</span>: La suma de cuadrados del error o de los residuales</li>
+</ul>
+<p>La segunda estadística la podemos interpretar como la cantidad de varianza explicada por la regresión, por el modelo o por las variables; mientras la tercera se puede interpretar como la cantidad de varianza que no se explica por la regresión.</p>
+<ul>
+<li><span class="math inline">\(CM_{reg} = SC_{reg}/p; MSM = MSR = SSM/p\)</span>: Cuadrado medio de la regresión o Mean Square of model/regression</li>
+<li><span class="math inline">\(CM_{error} = SC_{error}/n-p-1; MSE = SSE/n-p-1\)</span>: Cuadrado medio del error</li>
+</ul>
+<p>Y con esto ya podemos obtener nuestro estadístico <span class="math inline">\(F\)</span>:</p>
+<ul>
+<li><span class="math inline">\(F = \frac{CM_{reg}}{CM_{error}}\)</span></li>
+<li><span class="math inline">\(F = \frac{MSM}{MSE}\)</span></li>
+</ul>
+<p><span class="math display">\[
+F = \frac{MSR}{MSE} = \frac{CM_{reg}}{CM_{error}} = \frac{(TSS-RSS)/p}{RSS/(n-p-1)}
+\]</span></p>
+<p>Este estadístico tiene una distribución <span class="math inline">\(F_{p, n-p-1}\)</span> y rechazaremos la hipótesis nula cuando <span class="math inline">\(F&gt;F^{(\alpha)}_{k, n-k-1}\)</span>. Si los supuestos del modelo de regresión lineal son validos, se puede ver que <span class="math inline">\(\mathbb{E}[RSS/(n-p-1)] = \sigma^2\)</span>, es decir la <span class="math inline">\(\sigma^2\)</span> estimada para todo el modelo, y bajo la hipótesis nula <span class="math inline">\(\mathbb{E}[(TSS-RSS)/p] = \sigma^2\)</span>. Por lo que cuando NO hay relación entre la variable dependiente y los predictores, se esperaría que el estadístico <span class="math inline">\(F\)</span> sea cercano a 1.</p>
+<p>Si <span class="math inline">\(H_a\)</span> es cierta <span class="math inline">\(\mathbb{E}[(TSS-RSS)/p] &gt; \sigma^2\)</span>, por lo que tendríamos valores más grandes que 1 en el estadístico.</p>
+<p>Entonces podemos interpretar este estadístico como la razón entre la variabilidad explicada por los regresores entre la variabilidad no explicada por el modelo, ponderando con los respectivos grados de libertad que contiene cada estadístico. Por lo que buscamos que nuestro modelo contenga la mayor cantidad de información proporcionada por los datos. Sólo para aclarar, <span class="math inline">\(TSS-RSS = SC_{total}-SC_{error} = SC_{reg}\)</span> y esto es gracias a la siguiente igualdad</p>
+<p><span class="math display">\[
+SC_{total} = SC_{reg} + SC_{error}
+\]</span></p>
+<p>La cual proviene de la <a href="https://en.wikipedia.org/wiki/Law_of_total_variance">ley total de la varianza</a> donde los sumandos igual pueden ser interpretados como la cantidad de varianza explicada y no explicada:</p>
+<p><span class="math display">\[
+Var(Y) = \mathbb{E}[Var(Y|X)] + Var(\mathbb{E}[Y|X])
+\]</span></p>
+<p>Esto puede ser entendido de manera sencilla con la siguiente gráfica</p>
+<!-- ![](RegPlot.png) -->
+<center>
+<img src="RegPlot.png" alt="drawing" width="750"/>
+</center>
+<p><br></br></p>
+<p>Para resumir la información de dicha prueba tenemos la tabla ANOVA:</p>
+<p><span class="math display">\[
+\begin{array}{|c| c| c| c| c|}
+\hline
+&amp;Grados\ de\ libertad &amp; Suma\ de\ Cuadrados &amp; Cuadrado\ Medio &amp; Prueba\ F \\
+\hline
+\hline
+Regresión &amp; k   &amp; SSR = \hat{\beta}&#39;X&#39;\underline{Y}-n\overline{y}^2 &amp; MSR = \frac{SC_{reg}}{k} &amp; \frac{CM_{reg}}{CM_{error}} \\
+\hline
+Error     &amp; n-k-1&amp; SSE = \underline{Y}&#39;(I-H)\underline{Y} &amp; MSE = \frac{SC_{error}}{n-k-1} &amp; -\\
+\hline 
+Total     &amp; n-1 &amp; TSS = \underline{Y}&#39;\underline{Y}-n\overline{y}^2 &amp; - &amp; - \\
+\hline
+\end{array}
+\]</span></p>
+<p>Y en R podemos utilizar la siguiente función con nuestro modelo previamente ajustado</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="regresión-lineal-múltiple.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(first_m_model)</span></code></pre></div>
+<pre><code>Analysis of Variance Table
+
+Response: log(ing_cor)
+                   Df Sum Sq Mean Sq  F value    Pr(&gt;F)    
+sqrt(transporte)    1 416.14  416.14 1500.362 &lt; 2.2e-16 ***
+sqrt(alimentos)     1 108.51  108.51  391.233 &lt; 2.2e-16 ***
+sqrt(limpieza)      1  37.38   37.38  134.757 &lt; 2.2e-16 ***
+sqrt(personales)    1  23.81   23.81   85.862 &lt; 2.2e-16 ***
+Residuals        2297 637.09    0.28                       
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="regresión-lineal-múltiple.html#cb85-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> mutated_data_income <span class="sc">%&gt;%</span> <span class="fu">lm</span>(ing_cor_log<span class="sc">~</span>transporte_sqrt <span class="sc">+</span> alimentos_sqrt <span class="sc">+</span>limpieza_sqrt <span class="sc">+</span> personales_sqrt, <span class="at">data =</span> .)</span>
+<span id="cb85-2"><a href="regresión-lineal-múltiple.html#cb85-2" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span>  mutated_data_income <span class="sc">%&gt;%</span> <span class="fu">lm</span>(ing_cor_log<span class="sc">~</span> alimentos_sqrt <span class="sc">+</span>limpieza_sqrt <span class="sc">+</span> personales_sqrt, <span class="at">data =</span> .)</span>
+<span id="cb85-3"><a href="regresión-lineal-múltiple.html#cb85-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(m2, m1)</span></code></pre></div>
+<p>Aquí se dejan algunos enlaces que pueden ayudar a aclarar todos los conceptos</p>
+<ul>
+<li><a href="https://bookdown.org/egarpor/SSS2-UC3M/multlin-aovfit.html">Lab notes for Statistics for Social Sciences II: Multivariate Techniques :ANOVA and model fit</a></li>
+<li></li>
+</ul>
+</div>
+<div id="interacción-y-selección-de-variables" class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> Interacción y selección de variables</h2>
+<p>Entre todos los factores que tenemos que considerar en nuestro modelo lineal múltiple, tenemos dos que pueden causar graves problemas: <strong>Aditividad</strong> y <strong>linearidad</strong> entre los predictores y la variable respuesta. El concepto (y supuesto) de Linearidad es claro para este momento (1 cambio en X implica un cambio constante en Y), por otro lado hemos utilizado la aditividad en nuestras interpretaciones de los coeficientes.</p>
+<p>La aditividad significa que el efecto que tiene una variable predictora sobre el modelo es independiente de otra regresora sobre la variable respuesta lo cual podría no suceder. Véamos un ejemplo con la misma base de los ingresos en Aguascalientes. Para esto vamos a considerar un modelo más grande, tomando en cuenta las variables de calzado y vestido. Primero veamos la siguiente gráfica en la cual se plasman los datos ya transformados, considerando los filtros anteriores, agregando la significancia de la variable regresora sobre modelos lineales simples</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="regresión-lineal-múltiple.html#cb86-1" aria-hidden="true" tabindex="-1"></a>m_calzado <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(ing_cor)<span class="sc">~</span><span class="fu">sqrt</span>(calzado) , <span class="at">data =</span> mutated_data_income) <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span>
+<span id="cb86-2"><a href="regresión-lineal-múltiple.html#cb86-2" aria-hidden="true" tabindex="-1"></a>m_vestido <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(ing_cor)<span class="sc">~</span><span class="fu">sqrt</span>(vestido) , <span class="at">data =</span> mutated_data_income) <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span>
+<span id="cb86-3"><a href="regresión-lineal-múltiple.html#cb86-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-4"><a href="regresión-lineal-múltiple.html#cb86-4" aria-hidden="true" tabindex="-1"></a>(mutated_data_income <span class="sc">%&gt;%</span></span>
+<span id="cb86-5"><a href="regresión-lineal-múltiple.html#cb86-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">sqrt</span>(calzado), <span class="at">y =</span> <span class="fu">log</span>(ing_cor))) <span class="sc">+</span></span>
+<span id="cb86-6"><a href="regresión-lineal-múltiple.html#cb86-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb86-7"><a href="regresión-lineal-múltiple.html#cb86-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="at">x =</span> <span class="dv">70</span>, <span class="at">y =</span> <span class="dv">9</span>, <span class="at">family=</span><span class="st">&quot;Dosis&quot;</span>,</span>
+<span id="cb86-8"><a href="regresión-lineal-múltiple.html#cb86-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">&quot;p-value: &quot;</span>, m_calzado<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="dv">4</span>])) <span class="sc">+</span> </span>
+<span id="cb86-9"><a href="regresión-lineal-múltiple.html#cb86-9" aria-hidden="true" tabindex="-1"></a>  general_theme) <span class="sc">+</span></span>
+<span id="cb86-10"><a href="regresión-lineal-múltiple.html#cb86-10" aria-hidden="true" tabindex="-1"></a>(mutated_data_income <span class="sc">%&gt;%</span> </span>
+<span id="cb86-11"><a href="regresión-lineal-múltiple.html#cb86-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">sqrt</span>(vestido), <span class="at">y =</span> <span class="fu">log</span>(ing_cor))) <span class="sc">+</span></span>
+<span id="cb86-12"><a href="regresión-lineal-múltiple.html#cb86-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb86-13"><a href="regresión-lineal-múltiple.html#cb86-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="cn">NULL</span>) <span class="sc">+</span> </span>
+<span id="cb86-14"><a href="regresión-lineal-múltiple.html#cb86-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="at">x =</span> <span class="dv">100</span>, <span class="at">y =</span> <span class="dv">9</span>, <span class="at">family=</span><span class="st">&quot;Dosis&quot;</span>,</span>
+<span id="cb86-15"><a href="regresión-lineal-múltiple.html#cb86-15" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">&quot;p-value: &quot;</span>, m_vestido<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="dv">4</span>])) <span class="sc">+</span> </span>
+<span id="cb86-16"><a href="regresión-lineal-múltiple.html#cb86-16" aria-hidden="true" tabindex="-1"></a>  general_theme)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-76-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Como vemos, ambas variables variables tiene un p-value muy pequeño para no considerarlas importantes en nuestro modelo, veamos si mejora nuestro modelo con dichas variables y de paso veamos el uso de la función <code>stats::update()</code></p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="regresión-lineal-múltiple.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">update</span>(first_m_model, . <span class="sc">~</span> .<span class="sc">+</span> <span class="fu">sqrt</span>(calzado) <span class="sc">+</span> <span class="fu">sqrt</span>(vestido), <span class="at">data =</span> mutated_data_income) <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span></code></pre></div>
+<pre><code>
+Call:
+lm(formula = log(ing_cor) ~ sqrt(transporte) + sqrt(alimentos) + 
+    sqrt(limpieza) + sqrt(personales) + sqrt(calzado) + sqrt(vestido), 
+    data = mutated_data_income)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.4248 -0.3146 -0.0112  0.3175  2.6405 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)       9.3719803  0.0352492 265.878  &lt; 2e-16 ***
+sqrt(transporte)  0.0052574  0.0002955  17.789  &lt; 2e-16 ***
+sqrt(alimentos)   0.0046875  0.0003982  11.773  &lt; 2e-16 ***
+sqrt(limpieza)    0.0040612  0.0006197   6.554 6.90e-11 ***
+sqrt(personales)  0.0045262  0.0006040   7.493 9.52e-14 ***
+sqrt(calzado)    -0.0001498  0.0007305  -0.205    0.838    
+sqrt(vestido)     0.0032308  0.0006085   5.309 1.21e-07 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.523 on 2295 degrees of freedom
+Multiple R-squared:  0.4867,    Adjusted R-squared:  0.4854 
+F-statistic: 362.7 on 6 and 2295 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>Comparado con el anterior modelo, nuestra <span class="math inline">\(R^2\)</span> ajustada aumento y sigue siendo válida la prueba ANOVA, pero ¿Qué notamos ahora en nuestro modelo?</p>
+<p>Al considerar la variable <span class="math inline">\(\sqrt{calzado}\)</span>, esta ya no es importante para el modelo de acuerdo a la prueba <span class="math inline">\(H_0: \beta_i = 0\)</span>. ¿Esto por qué sucede?</p>
+<p>Al parecer el efecto que tenía la raíz cuadrado del calzado sobre el logaritmo de los ingresos ya no es relevante y esto es porque de alguna manera esta relación queda explicada por la otra variable que agregamos, es decir: <span class="math inline">\(\sqrt{vestido}\)</span>. Lo cual tiene sentido ya que si se hace un gasto en el vestido, es muy probable que sea haga un gasto en el calzado y si se hace un gasto en calzado, seguramente los encuestados consideraron esto en la variable vestido. De hecho, veamos que tan correlacionadas están estas variables</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="regresión-lineal-múltiple.html#cb89-1" aria-hidden="true" tabindex="-1"></a>mutated_data_income <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(vestido, calzado, ing_cor) <span class="sc">%&gt;%</span> <span class="fu">cor</span>() <span class="sc">%&gt;%</span> <span class="fu">ggcorrplot</span>(<span class="at">type =</span> <span class="st">&quot;lower&quot;</span>, <span class="at">lab =</span> T) <span class="sc">+</span> general_theme <span class="sc">+</span> </span>
+<span id="cb89-2"><a href="regresión-lineal-múltiple.html#cb89-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>, <span class="at">face =</span> <span class="st">&quot;plain&quot;</span>), </span>
+<span id="cb89-3"><a href="regresión-lineal-múltiple.html#cb89-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>, <span class="at">face =</span> <span class="st">&quot;plain&quot;</span>), </span>
+<span id="cb89-4"><a href="regresión-lineal-múltiple.html#cb89-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.direction =</span> <span class="st">&quot;vertical&quot;</span>,<span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>,</span>
+<span id="cb89-5"><a href="regresión-lineal-múltiple.html#cb89-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-78-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>Entoces, al tener que los aumentos en el calzado aumentaran los del vestido y veceversa, esto viola el supuesto de aditividad en el modelo lineal. Para solucionar esto agregamos una <strong>interacción</strong> al modelo con estas variables, es decir que agregaremos el término <span class="math inline">\(\beta_iX_{calzado}X_{vestido}\)</span> al modelo, entonces ahora nuestro modelo sería el siguiente:</p>
+<p><span class="math display">\[
+\begin{split}
+\log(ing\_cor) = &amp; \beta_{0} + \beta_{1}\sqrt{transporte} + \beta_{2}\sqrt{alimentos} + \beta_{3}\sqrt{limpieza} + \beta_{4}\sqrt{personales} + \beta_5\sqrt{calzado} + \beta_6\sqrt{vestido} + \beta_7\sqrt{calzado}\times \sqrt{vestido} + \epsilon\\
+&amp; \beta_{0} + \beta_{1}\sqrt{transporte} + \beta_{2}\sqrt{alimentos} + \beta_{3}\sqrt{limpieza} + \beta_{4}\sqrt{personales} + \widetilde{\beta_5}\sqrt{calzado} + \beta_6\sqrt{vestido} + \epsilon
+\end{split}
+\]</span></p>
+<p>En la última expresión suponemos que <span class="math inline">\(\widetilde{\beta_5} = \beta_5+\beta_7\sqrt{X_{vestido}}\)</span> y así podemos seguir viendo nuestro modelo “sin interacciones,” sólo que ahora un cambio en el calzado tendrá un efecto en el vestido y veceversa</p>
+<p>Para agregar una interacción entre variables, utilizamos <code>var1:var2</code> en la formula. Veamos el <code>summary</code> que obtenemos de nuestro nuevo modelo</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="regresión-lineal-múltiple.html#cb90-1" aria-hidden="true" tabindex="-1"></a>second_m_model <span class="ot">&lt;-</span> <span class="fu">update</span>(first_m_model, . <span class="sc">~</span> .<span class="sc">+</span> <span class="fu">sqrt</span>(calzado) <span class="sc">+</span> <span class="fu">sqrt</span>(vestido) <span class="sc">+</span> <span class="fu">sqrt</span>(calzado)<span class="sc">:</span><span class="fu">sqrt</span>(vestido),</span>
+<span id="cb90-2"><a href="regresión-lineal-múltiple.html#cb90-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">data =</span> mutated_data_income) </span>
+<span id="cb90-3"><a href="regresión-lineal-múltiple.html#cb90-3" aria-hidden="true" tabindex="-1"></a>second_m_model <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span></code></pre></div>
+<pre><code>
+Call:
+lm(formula = log(ing_cor) ~ sqrt(transporte) + sqrt(alimentos) + 
+    sqrt(limpieza) + sqrt(personales) + sqrt(calzado) + sqrt(vestido) + 
+    sqrt(calzado):sqrt(vestido), data = mutated_data_income)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.3987 -0.3134 -0.0097  0.3153  2.6469 
+
+Coefficients:
+                              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                  9.351e+00  3.592e-02 260.359  &lt; 2e-16 ***
+sqrt(transporte)             5.253e-03  2.951e-04  17.802  &lt; 2e-16 ***
+sqrt(alimentos)              4.568e-03  3.997e-04  11.431  &lt; 2e-16 ***
+sqrt(limpieza)               4.136e-03  6.192e-04   6.680 3.00e-11 ***
+sqrt(personales)             4.578e-03  6.033e-04   7.588 4.68e-14 ***
+sqrt(calzado)                1.467e-03  9.206e-04   1.594  0.11108    
+sqrt(vestido)                4.718e-03  7.974e-04   5.916 3.79e-09 ***
+sqrt(calzado):sqrt(vestido) -5.275e-05  1.832e-05  -2.879  0.00403 ** 
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.5221 on 2294 degrees of freedom
+Multiple R-squared:  0.4886,    Adjusted R-squared:  0.487 
+F-statistic: 313.1 on 7 and 2294 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>Es evidente, bajo una significancia del 5% que la ponderación de la interacción es estadísticamente diferente de cero, dándole un peso relevante a nuestro modelo. Con esto podemos decir que por cada $100 pesos de aumento en el calzado, tendremos un aumento de <span class="math inline">\((\beta_5+\beta_7\sqrt{X_{vestido}})\times 10 = (0.001467 + 0.004718\times X_{vestido})\times 10 = 0.01467 + 0.04718\times X_{vestido}\)</span> unidades sobre el logaritmo de los ingresos.</p>
+<p>Véase que seguimos viendo que <span class="math inline">\(\sqrt{calzado}\)</span> sigue sin ser relevante.entonces ¿Por qué no consideramos un modelo sin esta variable?</p>
+<p>Para evitar inconsistencias en los modelos, si se realiza una interacción, en el modelo se debe tener presente las variables de la interacción, a esto se le llama <strong>principio jerárquico</strong>, independientemente si el coeficiente de alguna de las variables es estadísticamente 0 o no. ¿Qué pasaría por ejemplo si omitimos el calzado en nuestro modelo? en tal caso, si hay un aumento en calzado pero no hay presencial del gasto en vestido <span class="math inline">\(\beta_7\sqrt{calzado\times vestido} = 0\)</span> cuando debe ser así ya que realmente hubo un aumento en al menos una de las variables. Además de cumplir ahora el supuesto de aditividad, véase que nuestro modelo mejoro en comparación del anterior.</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="regresión-lineal-múltiple.html#cb92-1" aria-hidden="true" tabindex="-1"></a>second_m_model <span class="sc">%&gt;%</span> </span>
+<span id="cb92-2"><a href="regresión-lineal-múltiple.html#cb92-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glance</span>() <span class="sc">%&gt;%</span> <span class="fu">gather</span>(<span class="st">&quot;Estadística&quot;</span>, <span class="st">&quot;Nuevo modelo&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb92-3"><a href="regresión-lineal-múltiple.html#cb92-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(</span>
+<span id="cb92-4"><a href="regresión-lineal-múltiple.html#cb92-4" aria-hidden="true" tabindex="-1"></a>    first_m_model <span class="sc">%&gt;%</span> <span class="fu">glance</span>() <span class="sc">%&gt;%</span>  <span class="fu">gather</span>(<span class="st">&quot;Estadística&quot;</span>, <span class="st">&quot;Anterior modelo&quot;</span>),</span>
+<span id="cb92-5"><a href="regresión-lineal-múltiple.html#cb92-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> <span class="st">&quot;Estadística&quot;</span></span>
+<span id="cb92-6"><a href="regresión-lineal-múltiple.html#cb92-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code># A tibble: 12 × 3
+   Estadística   `Nuevo modelo` `Anterior modelo`
+   &lt;chr&gt;                  &lt;dbl&gt;             &lt;dbl&gt;
+ 1 r.squared              0.489         4.79e-  1
+ 2 adj.r.squared          0.487         4.78e-  1
+ 3 sigma                  0.522         5.27e-  1
+ 4 statistic            313.            5.28e+  2
+ 5 p.value                0             3   e-323
+ 6 df                     7             4   e+  0
+ 7 logLik             -1767.           -1.79e+  3
+ 8 AIC                 3551.            3.59e+  3
+ 9 BIC                 3603.            3.62e+  3
+10 deviance             625.            6.37e+  2
+11 df.residual         2294             2.30e+  3
+12 nobs                2302             2.30e+  3</code></pre>
+<p>Con este nuevo modelo aumento el <span class="math inline">\(R^2\)</span> ajustada, el <span class="math inline">\(p-value\)</span> de la prueba ANOVA indica que nuestras variables son significativas y las estadísticas AIC y BIC disminuyeron.</p>
+<p>La interacción con datos categóricos cambia un poco en el sentido de que puede ser más fácil identificar dichas interacciones.</p>
+<p>Considerando el AIC, por ejemplo, podemos utilizar algunas técnicas para elegir el mejor modelo, de acuerdo a una estadística como esta, omitiendo diferentes variables al modelo o agregándolas. Estas técnicas son llamadas <strong><strong>Forward Selection</strong></strong>, <strong><strong>Backward Selection</strong></strong> y <strong><strong>Mixed Selection</strong></strong> en los cuales simplemente se comienza con un modelo base y se van agregando o eliminando variables de acuerdo a la significancia que se vaya obteniendo con los coeficientes o con otro criterio como el AIC.</p>
+<p>Veamos como aplicarlo a nuestro modelo</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="regresión-lineal-múltiple.html#cb94-1" aria-hidden="true" tabindex="-1"></a>best_second_model <span class="ot">&lt;-</span> second_m_model <span class="sc">%&gt;%</span> MASS<span class="sc">::</span><span class="fu">stepAIC</span>(<span class="at">direction =</span> <span class="st">&quot;backward&quot;</span>)</span></code></pre></div>
+<pre><code>Start:  AIC=-2983.78
+log(ing_cor) ~ sqrt(transporte) + sqrt(alimentos) + sqrt(limpieza) + 
+    sqrt(personales) + sqrt(calzado) + sqrt(vestido) + sqrt(calzado):sqrt(vestido)
+
+                              Df Sum of Sq    RSS     AIC
+&lt;none&gt;                                     625.42 -2983.8
+- sqrt(calzado):sqrt(vestido)  1     2.260 627.68 -2977.5
+- sqrt(limpieza)               1    12.164 637.58 -2941.4
+- sqrt(personales)             1    15.699 641.11 -2928.7
+- sqrt(alimentos)              1    35.621 661.04 -2858.3
+- sqrt(transporte)             1    86.397 711.81 -2687.9</code></pre>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="regresión-lineal-múltiple.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(best_second_model)</span></code></pre></div>
+<pre><code>
+Call:
+lm(formula = log(ing_cor) ~ sqrt(transporte) + sqrt(alimentos) + 
+    sqrt(limpieza) + sqrt(personales) + sqrt(calzado) + sqrt(vestido) + 
+    sqrt(calzado):sqrt(vestido), data = mutated_data_income)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.3987 -0.3134 -0.0097  0.3153  2.6469 
+
+Coefficients:
+                              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                  9.351e+00  3.592e-02 260.359  &lt; 2e-16 ***
+sqrt(transporte)             5.253e-03  2.951e-04  17.802  &lt; 2e-16 ***
+sqrt(alimentos)              4.568e-03  3.997e-04  11.431  &lt; 2e-16 ***
+sqrt(limpieza)               4.136e-03  6.192e-04   6.680 3.00e-11 ***
+sqrt(personales)             4.578e-03  6.033e-04   7.588 4.68e-14 ***
+sqrt(calzado)                1.467e-03  9.206e-04   1.594  0.11108    
+sqrt(vestido)                4.718e-03  7.974e-04   5.916 3.79e-09 ***
+sqrt(calzado):sqrt(vestido) -5.275e-05  1.832e-05  -2.879  0.00403 ** 
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.5221 on 2294 degrees of freedom
+Multiple R-squared:  0.4886,    Adjusted R-squared:  0.487 
+F-statistic: 313.1 on 7 and 2294 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>En este caso tenemos un bueno modelo ya que algorítmicamente si eliminamos alguna de las variables, perderíamos información con el subsequente modelo (esto mediante el AIC). Sólo para ejemplificar, veáse que pasaría con nuestros datos originales</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="regresión-lineal-múltiple.html#cb98-1" aria-hidden="true" tabindex="-1"></a>model_zero <span class="ot">&lt;-</span> <span class="fu">lm</span>(ing_cor<span class="sc">~</span>., <span class="at">data =</span> mutated_data_income) <span class="sc">%&gt;%</span> <span class="fu">stepAIC</span>(<span class="at">direction =</span> <span class="st">&quot;backward&quot;</span>)</span></code></pre></div>
+<pre><code>Start:  AIC=48539.95
+ing_cor ~ edad_jefe + tot_integ + percep_ing + alimentos + vestido + 
+    calzado + vivienda + limpieza + salud + transporte + personales + 
+    educacion + esparcimiento
+
+                Df  Sum of Sq        RSS   AIC
+- tot_integ      1 1.8169e+09 3.2703e+12 48539
+&lt;none&gt;                        3.2685e+12 48540
+- calzado        1 4.8737e+09 3.2734e+12 48541
+- educacion      1 8.1884e+09 3.2767e+12 48544
+- vestido        1 8.6011e+09 3.2771e+12 48544
+- vivienda       1 1.0226e+10 3.2787e+12 48545
+- edad_jefe      1 2.4454e+10 3.2930e+12 48555
+- salud          1 3.5137e+10 3.3037e+12 48563
+- percep_ing     1 5.0741e+10 3.3193e+12 48573
+- personales     1 8.5543e+10 3.3541e+12 48597
+- limpieza       1 8.8024e+10 3.3565e+12 48599
+- esparcimiento  1 8.9726e+10 3.3582e+12 48600
+- transporte     1 1.5210e+11 3.4206e+12 48643
+- alimentos      1 1.7074e+11 3.4393e+12 48655
+
+Step:  AIC=48539.23
+ing_cor ~ edad_jefe + percep_ing + alimentos + vestido + calzado + 
+    vivienda + limpieza + salud + transporte + personales + educacion + 
+    esparcimiento
+
+                Df  Sum of Sq        RSS   AIC
+&lt;none&gt;                        3.2703e+12 48539
+- calzado        1 5.6047e+09 3.2759e+12 48541
+- educacion      1 7.5215e+09 3.2779e+12 48543
+- vestido        1 9.2882e+09 3.2796e+12 48544
+- vivienda       1 1.0559e+10 3.2809e+12 48545
+- edad_jefe      1 2.8199e+10 3.2985e+12 48557
+- salud          1 3.5594e+10 3.3059e+12 48562
+- percep_ing     1 6.8639e+10 3.3390e+12 48585
+- personales     1 8.4152e+10 3.3545e+12 48596
+- limpieza       1 8.9924e+10 3.3603e+12 48600
+- esparcimiento  1 9.5439e+10 3.3658e+12 48603
+- transporte     1 1.5196e+11 3.4223e+12 48642
+- alimentos      1 1.6893e+11 3.4393e+12 48653</code></pre>
+<p>Véase que con todos los datos y sin ninguno tipo de limpieza el AIC determinado por el segundo modelo (se elimino la variable <code>tot_integ</code>) es mejor. Un punto importante que hay que remarcar es que este modelo no significa que sea el mejor que podamos obtener, de hecho nuestro último modelo (<code>second_model</code>) es hasta ahora el mejor.</p>
+<p>Por razones que se explorarán posteriormente, vamos a eliminar la interacción y las variables <code>calzada</code> y <code>vestido</code> ya que el modelo es mejor sin estas variables (es mejor en los supuestos, lo cual nos importará más que obtener el mejor AIC o mejor <span class="math inline">\(R^2\)</span>).</p>
+</div>
+<div id="supuestos-y-problemas-potenciales" class="section level2" number="6.3">
+<h2><span class="header-section-number">6.3</span> Supuestos y problemas potenciales</h2>
+<p>Antes de pasar con los supuestos del modelo lineal, véamos un poco más a detalle las transformaciones más comunes para obtener un comportamiento lineal entre nuestros predictores y la variable respuesta.</p>
+<div id="transformaciones" class="section level3" number="6.3.1">
+<h3><span class="header-section-number">6.3.1</span> +Transformaciones</h3>
+<p>Hasta el momento se han mencionado algunas transformaciones que nos pueden ayudar a conseguir linealidad entre dos variables, por ejemplo cuando deseamos reducir la variabilidad de la variable a predecir o cambiar la escala de la variable predictora:</p>
+<!-- véamos por ejemplo la siguiente gráfica basada en la información proporcionada por el libro [4] -->
+<ul>
+<li><span class="math inline">\(log()\)</span>: Función monótona creciente definida para los positivos e indefinida para el 0.</li>
+<li><span class="math inline">\(sqrt()\)</span>: Función monótona creciente definida para los positivos y el 0.</li>
+<li><span class="math inline">\(1/x\)</span>: Función monótona creciente definida para los positivos e indefinida para el 0.</li>
+</ul>
+<p>De acuerdo al comportamiento de los datos podemos aplicar cualquiera de estas variables siempre que este bien definida la función. ¿Qué podemos hacer cuando tenemos ceros? ¿Qué otras propuestas comunes existen?</p>
+<p>Para el primer punto hay que pensar que los ceros pueden tener diferentes significados en nuestras variables, en una pregunta que se realizo en StackExchange: <a href="https://stats.stackexchange.com/questions/1444/how-should-i-transform-non-negative-data-including-zeros">How should I transform non-negative data including zeros?</a> se porponen diferentes puntos de vista validos que hay que pensar sobre los ceros en nuestros datos:</p>
+<ul>
+<li>Truncamiento: Puede ser que un modelaje para los datos sea un modelo de mezclas, un modelo de supervivencia, etc.</li>
+<li>Valores perdidos: Es natural que esto puedan ser valores perdidos y no un valor obtenido de la variable, por lo que se puede imputar información o eliminarla si se considera apropiado.</li>
+<li>Punto cero natural: Por ejemplo con niveles de ingreso (puede tratarse de una situación de desemepleo) y en tal caso una transformación sería lo indicado.</li>
+<li>Sensibilidad del instrumento de medición: Una solución podría ser agregar un pequeño valor a la información.</li>
+</ul>
+<p>Sea cual sea el caso, podemos eliminarlos si no perdemos una gran cantidad de información o usar dichos datos como un segregador de la información. También podemos utilizar una transformación donde no existan problemas en este valor específico y una de las más populares es una de las parametrizaciones de la familia de transformaciones <strong>Box-Cox</strong>:</p>
+<p><span class="math display">\[
+g_{\lambda}(y) = \Bigg\{\begin{array}{rl}\frac{y^{\lambda}-1}{\lambda} &amp; \lambda \neq 0\\ \log(y) &amp; \lambda = 0\end{array}
+\]</span></p>
+<p>Donde la función inversa es:</p>
+<p><span class="math display">\[
+y = \Bigg\{\begin{array}{cc}\exp\left(\frac{\log(1+\lambda g_{\lambda}(y))}{\lambda}\right) &amp; \lambda \neq 0 \\ \exp(g_{\lambda}(y) &amp; \lambda = 0\end{array}
+\]</span></p>
+<p>Y para diferentes valores de <span class="math inline">\(\lambda\)</span> tenemos diversas funciones asociadas:</p>
+<ul>
+<li><span class="math inline">\(\lambda = 1\)</span>: No se requiere alguna transformación ya que se producen resultados idénticos a los originales y no se alteraría la variabilidad</li>
+<li><span class="math inline">\(\lambda = 0.50\)</span>: Raíz cuadrada</li>
+<li><span class="math inline">\(\lambda = 0.33\)</span>: Raíz cúbica</li>
+<li><span class="math inline">\(\lambda = 0.25\)</span>: Raíz cuarta</li>
+<li><span class="math inline">\(\lambda = 0\)</span>: Logaritmo natural</li>
+<li><span class="math inline">\(\lambda = -0.50\)</span>: raíz cuadrada recíproca</li>
+<li><span class="math inline">\(\lambda = -1\)</span>: Transformación inversa</li>
+</ul>
+<p>La obtención de <span class="math inline">\(\lambda\)</span> es mediante el método de máxima verosimilitud para obtener el valor más probable que haya dado lugar a la distribución observada de los residuos del modelo</p>
+<p><span class="math display">\[
+\log\mathbb{L} = -\frac{n}{2}\log(2\pi) - n\log \sigma - \frac{1}{2\sigma^2}\sum_{i = 1}^n\left[g_{\lambda}(y)-(\beta_0+\beta X)\right]^2 + (\lambda-1)\sum_{i = 1}^n \log Y_i
+\]</span></p>
+<p>Este es obtenido de manera numérica y en general se elige un valor en el intervalo de confianza para dicho parámetro</p>
+<p><span class="math display">\[
+\left\{\lambda: \mathbb{L}(\lambda) &gt; \mathbb{L}(\hat{\lambda}-\frac{1}{2}\chi_{1,\alpha}^2)\right\}
+\]</span></p>
+<p>Tal información la podemos obtener de la función <code>MASS::boxcox()</code> la cual proporciona un gráfica donde podemos apreciar el intervalo de confianza y la verosimilitud para diferentes valores de <span class="math inline">\(\lambda\)</span>. Como argumento le pasamos a la función el modelo de regresión que hemos creado.</p>
+<p>Es común que esta transformación es aplicada a la variable respuesta, ya que al hacer esto generalmente se reduce la no normalidad de los residuales, al igual que la no linearidad (relacionado con la independencia de estos) y se mejoran problemas de homocedasticidad.</p>
+<!-- ¿Cuánto sería la cantidad de valores que eliminaríamos si quitamos registros con ceros? -->
+<!-- ```{r} -->
+<!-- k <- data_income_sexo %>% dplyr::select(-c("vestido", "calzado", "salud", "esparcimiento" ,"educacion")) %>% map_dfr(~sum(.x == 0)) %>% gather("Variable", "Conteo") -->
+<!-- sum(k$Conteo)/dim(data_income_sexo %>% dplyr::select(-c("vestido", "calzado", "salud", "esparcimiento" ,"educacion")))[1] -->
+<!-- ``` -->
+<p>Con nuestros datos, se decidió eliminar las observaciones donde se tengan ceros en las variables predictoras (ya que estos representan menos del 10% de información y, se puede comprobar, dejando dichas observaciones se obtienen diversos problemas con las pruebas de hipótesis y el análisis de valores influyentes). También se cambiaron algunas transformaciones ya que, al no tener valores que afecten el logaritmo se mejoró la relación lineal de algunos predictores con la variable respuesta</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="regresión-lineal-múltiple.html#cb100-1" aria-hidden="true" tabindex="-1"></a>filter_data <span class="ot">&lt;-</span> data_income_sexo <span class="sc">%&gt;%</span> </span>
+<span id="cb100-2"><a href="regresión-lineal-múltiple.html#cb100-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ing_cor <span class="sc">&lt;</span> <span class="dv">2000000</span> <span class="sc">&amp;</span> transporte <span class="sc">&lt;</span> <span class="dv">350000</span> <span class="sc">&amp;</span> limpieza <span class="sc">&lt;</span> <span class="dv">40000</span> <span class="sc">&amp;</span> personales <span class="sc">&lt;</span> <span class="dv">113246</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb100-3"><a href="regresión-lineal-múltiple.html#cb100-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(transporte <span class="sc">!=</span> <span class="dv">0</span> <span class="sc">&amp;</span> limpieza <span class="sc">!=</span> <span class="dv">0</span> <span class="sc">&amp;</span> personales <span class="sc">!=</span> <span class="dv">0</span> <span class="sc">&amp;</span> alimentos <span class="sc">!=</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb100-4"><a href="regresión-lineal-múltiple.html#cb100-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(ing_cor, transporte, alimentos, limpieza, personales)</span>
+<span id="cb100-5"><a href="regresión-lineal-múltiple.html#cb100-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-6"><a href="regresión-lineal-múltiple.html#cb100-6" aria-hidden="true" tabindex="-1"></a>third_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(ing_cor<span class="sc">~</span><span class="fu">log</span>(transporte) <span class="sc">+</span> <span class="fu">sqrt</span>(alimentos) <span class="sc">+</span> <span class="fu">log</span>(limpieza) <span class="sc">+</span></span>
+<span id="cb100-7"><a href="regresión-lineal-múltiple.html#cb100-7" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">log</span>(personales), <span class="at">data =</span> filter_data)</span>
+<span id="cb100-8"><a href="regresión-lineal-múltiple.html#cb100-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-9"><a href="regresión-lineal-múltiple.html#cb100-9" aria-hidden="true" tabindex="-1"></a>boxCox_third_model <span class="ot">&lt;-</span> <span class="fu">boxcox</span>(third_model, </span>
+<span id="cb100-10"><a href="regresión-lineal-múltiple.html#cb100-10" aria-hidden="true" tabindex="-1"></a>                             <span class="at">plotit =</span> <span class="cn">TRUE</span>, <span class="co">#Deseamos ver la gráfica</span></span>
+<span id="cb100-11"><a href="regresión-lineal-múltiple.html#cb100-11" aria-hidden="true" tabindex="-1"></a>                             <span class="at">lambda =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="at">by =</span> <span class="fl">0.1</span>) <span class="co"># Con esto modificamos el rango</span></span>
+<span id="cb100-12"><a href="regresión-lineal-múltiple.html#cb100-12" aria-hidden="true" tabindex="-1"></a>                             )</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-85-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Entonces no estábamos mal al proponer al logaritmo en el ingreso como una transformación que ayudaría a nuestro modelo lineal. Podemos obtener el valor exacto en el que se maximiza la verosimilitud</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="regresión-lineal-múltiple.html#cb101-1" aria-hidden="true" tabindex="-1"></a>(lambdaBCox_tM <span class="ot">&lt;-</span> boxCox_third_model<span class="sc">$</span>x[<span class="fu">which.max</span>(boxCox_third_model<span class="sc">$</span>y)])</span></code></pre></div>
+<pre><code>[1] 0.02222222</code></pre>
+<p>Es decir, esto nos sugiere hacer un modelo con la siguiente variable repuesta</p>
+<p><span class="math display">\[
+\frac{y^{\lambda}-1}{\lambda} = \frac{y^{0.022}-1}{0.022}
+\]</span></p>
+<p>Y con esto tendríamos el siguiente <code>summary</code> del correspondiente modelo:</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="regresión-lineal-múltiple.html#cb103-1" aria-hidden="true" tabindex="-1"></a>third_model_BX <span class="ot">&lt;-</span> <span class="fu">lm</span>(((ing_cor<span class="sc">^</span>lambdaBCox_tM<span class="dv">-1</span>)<span class="sc">/</span>lambdaBCox_tM) <span class="sc">~</span> </span>
+<span id="cb103-2"><a href="regresión-lineal-múltiple.html#cb103-2" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">log</span>(transporte) <span class="sc">+</span> <span class="fu">sqrt</span>(alimentos) <span class="sc">+</span> <span class="fu">log</span>(limpieza) <span class="sc">+</span> <span class="fu">log</span>(personales), </span>
+<span id="cb103-3"><a href="regresión-lineal-múltiple.html#cb103-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">data =</span> filter_data)</span>
+<span id="cb103-4"><a href="regresión-lineal-múltiple.html#cb103-4" aria-hidden="true" tabindex="-1"></a>third_model_BX <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span></code></pre></div>
+<pre><code>
+Call:
+lm(formula = ((ing_cor^lambdaBCox_tM - 1)/lambdaBCox_tM) ~ log(transporte) + 
+    sqrt(alimentos) + log(limpieza) + log(personales), data = filter_data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4.3384 -0.4054 -0.0169  0.3843  3.3192 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)     6.9124443  0.1361592  50.767   &lt;2e-16 ***
+log(transporte) 0.2564575  0.0142296  18.023   &lt;2e-16 ***
+sqrt(alimentos) 0.0060496  0.0005121  11.813   &lt;2e-16 ***
+log(limpieza)   0.1503380  0.0180963   8.308   &lt;2e-16 ***
+log(personales) 0.1762014  0.0186708   9.437   &lt;2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.6418 on 2139 degrees of freedom
+Multiple R-squared:  0.4886,    Adjusted R-squared:  0.4876 
+F-statistic: 510.9 on 4 and 2139 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>¿Cómo se compara con nuestro anterior mejor modelo?</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="regresión-lineal-múltiple.html#cb105-1" aria-hidden="true" tabindex="-1"></a>second_m_model <span class="sc">%&gt;%</span> </span>
+<span id="cb105-2"><a href="regresión-lineal-múltiple.html#cb105-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glance</span>() <span class="sc">%&gt;%</span> <span class="fu">gather</span>(<span class="st">&quot;Estadística&quot;</span>, <span class="st">&quot;Viejo modelo&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb105-3"><a href="regresión-lineal-múltiple.html#cb105-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(</span>
+<span id="cb105-4"><a href="regresión-lineal-múltiple.html#cb105-4" aria-hidden="true" tabindex="-1"></a>    third_model_BX <span class="sc">%&gt;%</span> <span class="fu">glance</span>() <span class="sc">%&gt;%</span>  <span class="fu">gather</span>(<span class="st">&quot;Estadística&quot;</span>, <span class="st">&quot;Nuevo modelo&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb105-5"><a href="regresión-lineal-múltiple.html#cb105-5" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">mutate_if</span>(is.numeric, round, <span class="at">digits =</span> <span class="dv">8</span>),</span>
+<span id="cb105-6"><a href="regresión-lineal-múltiple.html#cb105-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> <span class="st">&quot;Estadística&quot;</span></span>
+<span id="cb105-7"><a href="regresión-lineal-múltiple.html#cb105-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code># A tibble: 12 × 3
+   Estadística   `Viejo modelo` `Nuevo modelo`
+   &lt;chr&gt;                  &lt;dbl&gt;          &lt;dbl&gt;
+ 1 r.squared              0.489          0.489
+ 2 adj.r.squared          0.487          0.488
+ 3 sigma                  0.522          0.642
+ 4 statistic            313.           511.   
+ 5 p.value                0              0    
+ 6 df                     7              4    
+ 7 logLik             -1767.         -2089.   
+ 8 AIC                 3551.          4190.   
+ 9 BIC                 3603.          4224.   
+10 deviance             625.           881.   
+11 df.residual         2294           2139    
+12 nobs                2302           2144    </code></pre>
+<p>Si bien parece ser mejor el nuevo modelo por centésimas en el <span class="math inline">\(R^2\)</span> ajustado, otras estadísticas como el logLik, IAC y BIC indican que nuestro modelo no mejoro y pero es relevante ver si mejora este modelo omitiendo outliers y valores influyentes.</p>
+<p>Otras propuestas son las transformación Box-Cox que permiten un desplazamiento en los datos y la transformación inversa del seno hiperbólico.</p>
+<p><span class="math display">\[
+g_{\lambda_1, \lambda_2}(y) = \Bigg\{\begin{array}{rl}\frac{(y+\lambda_2)^{\lambda_1}-1}{\lambda_1} &amp; \lambda_1 \neq 0\\ \log(y + \lambda_2) &amp; \lambda_1 = 0\end{array}
+\]</span></p>
+<p><span class="math display">\[
+\begin{array}{lr}
+f(y, \theta) = \sinh^{-1}(\theta y)/\theta = \log\left(\theta y + (\theta^2y^2+1)^{1/2}\right)/\theta &amp; ;\theta&gt;0
+\end{array}
+\]</span></p>
+<p>Aquí se dejan otros enlaces interesantes sobre la transformación Box-Cox</p>
+<ul>
+<li><a href="https://robjhyndman.com/hyndsight/transformations/">Transforming data with zeros</a></li>
+<li><a href="https://daviddalpiaz.github.io/appliedstats/transformations.html#box-cox-transformations">14.1.2 Box-Cox Transformations</a></li>
+<li><a href="http://www.css.cornell.edu/faculty/dgr2/_static/files/R_html/Transformations.html#6_analyzing_the_linear_model_of_the_transformed_variable">Box-cox transformation</a></li>
+<li><a href="https://recipes.tidymodels.org/reference/step_BoxCox.html">recipes: Box-Cox Transformation for Non-Negative Data</a></li>
+<li><a href="https://www.frontiersin.org/articles/10.3389/fams.2015.00012/full">A new approach to the Box–Cox transformation</a></li>
+<li><a href="https://www.statisticshowto.com/box-cox-transformation/">Statistics How To: Box Cox Transformation</a></li>
+<li><a href="https://onlinestatbook.com/2/transformations/box-cox.html">OnlineStatBook Project Home: Box-Cox Transformations</a></li>
+<li><a href="https://www.ime.usp.br/~abe/lista/pdfm9cJKUmFZp.pdf">Box-Cox Transformations: An Overview</a></li>
+</ul>
+</div>
+<div id="interpretaciones" class="section level3" number="6.3.2">
+<h3><span class="header-section-number">6.3.2</span> Interpretaciones</h3>
+<p>Es importante hacer ver que al modificar alguna de las variables con alguna transformación, ya sea la variable respuesta o alguna de las variables independientes, también se modifica la interpretación de todo. Generalmente podemos aplicar transformaciones inversas para dar una interpretación de nuestras variables originales, hay que tener en cuenta ciertos detalles con algunas funciones.</p>
+<ul>
+<li>Logaritmo</li>
+<li>Raíz cuadrada</li>
+</ul>
+<!-- ```{r} -->
+<!-- library(lmtest) -->
+<!-- bptest(second_m_model) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- mutated_data_income %>%  -->
+<!--          mutate(index = row_number()) %>% filter(!(index %in% c(2173, 2265, 1995))) %>%  -->
+<!--   mutate(index  = row_number()) %>% filter(!index %in% c(2029, 589, 6)) %>%  -->
+<!--   mutate(index  = row_number()) %>% filter(!index %in% c(635, 506)) %>%  -->
+<!--   mutate(index  = row_number()) %>% filter(!index %in% c(1792, 2180, 316)) %>%  -->
+<!--   mutate(index  = row_number()) %>% filter(index %in% c(1373, 378, 1631)) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- update(first_m_model, . ~ .+ sqrt(calzado) + sqrt(vestido) + sqrt(calzado):sqrt(vestido), -->
+<!--        data = mutated_data_income %>%  -->
+<!--          mutate(index = row_number()) %>% filter(!(index %in% c(2173, 2265, 1995))) %>% -->
+<!--          mutate(index  = row_number()) %>% filter(!index %in% c(2029, 589, 6)) %>%  -->
+<!--          mutate(index  = row_number()) %>% filter(!index %in% c(607, 263, 2089)) %>%  -->
+<!--          mutate(index  = row_number()) %>% filter(!index %in% c(635, 506)) %>%  -->
+<!--          mutate(index  = row_number()) %>% filter(!index %in% c(1792, 2180, 316)) %>%  -->
+<!--          mutate(index  = row_number()) %>% filter(!index %in% c(1373, 378, 1631)) %>%  -->
+<!--          mutate(index  = row_number()) %>% filter(!index %in% c(1267, 1323, 272)) %>%  -->
+<!--          mutate(index  = row_number()) %>% filter(!index %in% c(898, 1326, 3)) %>%  -->
+<!--          mutate(index  = row_number()) %>% filter(!index %in% c(1309, 1284, 491)) %>%  -->
+<!--          mutate(index  = row_number()) %>% filter(!index %in% c(1218, 340, 714)) %>%  -->
+<!--          mutate(index  = row_number()) %>% filter(!index %in% c(1908, 580, 1040)) %>%  -->
+<!--          mutate(index  = row_number()) %>% filter(!index %in% c(1973, 513, 414)) %>%  -->
+<!--          mutate(index  = row_number()) %>% filter(!index %in% c(1295, 1106, 1867)) %>%  -->
+<!--          mutate(index  = row_number()) %>% filter(!index %in% c(1797, 1452, 562)) %>%  -->
+<!--          mutate(index  = row_number()) %>% filter(!index %in% c(1349, 232, 1028))) %>%  -->
+<!--   bptest() -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- update(first_m_model, . ~ .+ sqrt(calzado) + sqrt(vestido) + sqrt(calzado):sqrt(vestido), -->
+<!--        data = mutated_data_income %>%  -->
+<!--          mutate(index = row_number()) %>% filter(!(index %in% c(2173, 2265, 1995))) %>% -->
+<!--          mutate(index  = row_number()) %>% filter(!index %in% c(2029, 589, 6)) %>%  -->
+<!--          mutate(index  = row_number()) %>% filter(!index %in% c(607, 263, 2089)) %>%  -->
+<!--          mutate(index  = row_number()) %>% filter(!index %in% c(635, 506)) %>%  -->
+<!--          mutate(index  = row_number()) %>% filter(!index %in% c(1792, 2180, 316)) %>%  -->
+<!--          mutate(index  = row_number()) %>% filter(!index %in% c(1373, 378, 1631)) %>%  -->
+<!--          mutate(index  = row_number()) %>% filter(!index %in% c(1267, 1323, 272)) %>%  -->
+<!--          mutate(index  = row_number()) %>% filter(!index %in% c(898, 1326, 3)) %>%  -->
+<!--          mutate(index  = row_number()) %>% filter(!index %in% c(1309, 1284, 491)) %>%  -->
+<!--          mutate(index  = row_number()) %>% filter(!index %in% c(1218, 340, 714)) %>%  -->
+<!--          mutate(index  = row_number()) %>% filter(!index %in% c(1908, 580, 1040)) %>%  -->
+<!--          mutate(index  = row_number()) %>% filter(!index %in% c(1973, 513, 414)) %>%  -->
+<!--          mutate(index  = row_number()) %>% filter(!index %in% c(1295, 1106, 1867)) %>%  -->
+<!--          mutate(index  = row_number()) %>% filter(!index %in% c(1797, 1452, 562)) %>%  -->
+<!--          mutate(index  = row_number()) %>% filter(!index %in% c(1349, 232, 1028)))  %>%  -->
+<!--   plot() -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- data_income_sexo %>% map_dfr(~sum(.x == 0)) %>% gather("Variable", "Ceros") %>% inner_join( -->
+<!--   data_income_sexo %>% map_dfr(~sum(.x == 0)/length(.x)*100) %>% gather("Variable", "Porcentaje"), by = "Variable" -->
+<!-- ) %>% mutate(Variable = factor(Variable, levels = (k %>% arrange(Porcentaje))$Variable)) %>%  -->
+<!--   ggplot(aes(x = Variable, y = Porcentaje)) + geom_bar(stat = "identity") +  -->
+<!--   theme(axis.text.x = element_text(angle = 45)) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- k <- data_income_sexo %>% dplyr::select(-c("vestido", "calzado", "salud", "esparcimiento" ,"educacion")) %>% map_dfr(~sum(.x == 0)/length(.x)*100) %>%  -->
+<!--   gather("Variable", "Porcentaje") -->
+<!--  k %>%  -->
+<!--   mutate(Variable = factor(Variable, levels = (k %>% arrange(Porcentaje))$Variable)) %>%  -->
+<!--   ggplot(aes(x = Variable, y = Porcentaje)) + geom_bar(stat = "identity") +  -->
+<!--   theme(axis.text.x = element_text(angle = 45)) -->
+<!-- ``` -->
+<!-- Entonces vamos a hacer el modelo sin ceros -->
+<!-- ```{r} -->
+<!-- (data_income_sexo %>% dplyr::select(-c("vestido", "calzado", "salud", "esparcimiento" ,"educacion", "sexo_jefe")) %>% filter(ing_cor < 2000000 & transporte < 350000 & limpieza < 40000 & personales < 113246) %>%  -->
+<!--    filter(transporte != 0 & limpieza != 0 & personales != 0 & alimentos != 0) %>% cor(method = "spearman") %>%  -->
+<!--   ggcorrplot::ggcorrplot(hc.order = TRUE, outline.col = "white", type = "lower",  -->
+<!--                          tl.cex = 8#, lab = T -->
+<!--                          )+ -->
+<!--    general_theme +  -->
+<!--   theme(legend.text = element_text(size = 8, face = "plain"),  -->
+<!--         legend.title = element_text(size = 8, face = "plain"),  -->
+<!--         legend.position = c(0.30, 0.85), -->
+<!--         legend.direction = "horizontal", -->
+<!--         legend.box = "horizontal", -->
+<!--         panel.background = element_blank())) +  -->
+<!-- (data_income_sexo %>% dplyr::select(-c("vestido", "calzado", "salud", "esparcimiento" ,"educacion", "sexo_jefe")) %>% -->
+<!--    filter(ing_cor < 2000000 & transporte < 350000 & limpieza < 40000 & personales < 113246)%>% -->
+<!--    filter(transporte != 0 & limpieza != 0 & personales != 0 & alimentos != 0) %>%  -->
+<!--    dplyr::select(ing_cor, transporte, alimentos, limpieza, personales) %>% -->
+<!--    GGally::ggscatmat() +  -->
+<!--    general_theme +  -->
+<!--    theme(axis.text = element_text(size = 8),  -->
+<!--          axis.text.x = element_text(angle = 45))) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- data_income_sexo %>% dplyr::select(-c("vestido", "calzado", "salud", "esparcimiento" ,"educacion", "sexo_jefe")) %>% filter(ing_cor < 2000000 & transporte < 350000 & limpieza < 40000 & personales < 113246) %>%  -->
+<!--   filter(transporte != 0 & limpieza != 0 & personales != 0 & alimentos != 0) %>%  -->
+<!--   dplyr::select(ing_cor, transporte, alimentos, limpieza, personales) %>%  -->
+<!--   mutate(ing_cor = log(ing_cor), -->
+<!--          transporte = sqrt(transporte), -->
+<!--          alimentos = sqrt(alimentos), -->
+<!--          limpieza = sqrt(limpieza), -->
+<!--          personales = sqrt(personales)) %>%  -->
+<!--   GGally::ggscatmat() + general_theme -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- data_income_sexo %>% dplyr::select(-c("vestido", "calzado", "salud", "esparcimiento" ,"educacion", "sexo_jefe")) %>% filter(ing_cor < 2000000 & transporte < 350000 & limpieza < 40000 & personales < 113246) %>%  -->
+<!--   filter(transporte != 0 & limpieza != 0 & personales != 0 & alimentos != 0) %>%  -->
+<!--   dplyr::select(ing_cor, transporte, alimentos, limpieza, personales) %>%  -->
+<!--   mutate(ing_cor = log(ing_cor), -->
+<!--          transporte = log(transporte), -->
+<!--          alimentos = log(alimentos), -->
+<!--          limpieza = log(limpieza), -->
+<!--          personales = log(personales)) %>%  -->
+<!--   GGally::ggscatmat() + general_theme -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- data_income_sexo %>% dplyr::select(-c("vestido", "calzado", "salud", "esparcimiento" ,"educacion", "sexo_jefe")) %>% filter(ing_cor < 2000000 & transporte < 350000 & limpieza < 40000 & personales < 113246) %>%  -->
+<!--   filter(transporte != 0 & limpieza != 0 & personales != 0 & alimentos != 0) %>%  -->
+<!--   dplyr::select(ing_cor, transporte, alimentos, limpieza, personales) %>%  -->
+<!--   mutate(ing_cor = log(ing_cor), -->
+<!--          transporte = log(transporte), -->
+<!--          alimentos = sqrt(alimentos), -->
+<!--          limpieza = log(limpieza), -->
+<!--          personales = log(personales)) %>%  -->
+<!--   GGally::ggscatmat() + general_theme -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- data_income_sexo %>% dplyr::select(-c("vestido", "calzado", "salud", "esparcimiento" ,"educacion", "sexo_jefe")) %>% filter(ing_cor < 2000000 & transporte < 350000 & limpieza < 40000 & personales < 113246) %>%  -->
+<!--   filter(transporte != 0 & limpieza != 0 & personales != 0 & alimentos != 0) %>%  -->
+<!--   dplyr::select(ing_cor, transporte, alimentos, limpieza, personales) %>%  -->
+<!--   lm(log(ing_cor)~log(transporte) + sqrt(alimentos) + log(limpieza) + log(personales), data = .) %>% summary() -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- data_income_sexo %>% dplyr::select(-c("vestido", "calzado", "salud", "esparcimiento" ,"educacion", "sexo_jefe")) %>% filter(ing_cor < 2000000 & transporte < 350000 & limpieza < 40000 & personales < 113246) %>%  -->
+<!--   filter(transporte != 0 & limpieza != 0 & personales != 0 & alimentos != 0) %>%  -->
+<!--   dplyr::select(ing_cor, transporte, alimentos, limpieza, personales) %>%  -->
+<!--   lm(log(ing_cor)~log(transporte) + sqrt(alimentos) + log(limpieza) + log(personales), data = .) %>% plot() -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- data_income_sexo %>% dplyr::select(-c("vestido", "calzado", "salud", "esparcimiento" ,"educacion", "sexo_jefe")) %>% filter(ing_cor < 2000000 & transporte < 350000 & limpieza < 40000 & personales < 113246) %>%  -->
+<!--   filter(transporte != 0 & limpieza != 0 & personales != 0 & alimentos != 0) %>%  -->
+<!--   dplyr::select(ing_cor, transporte, alimentos, limpieza, personales) %>%  -->
+<!--   lm(log(ing_cor)~log(transporte) + sqrt(alimentos) + log(limpieza) + log(personales), data = .) %>% bptest() -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- data_income_sexo %>% dplyr::select(-c("vestido", "calzado", "salud", "esparcimiento" ,"educacion", "sexo_jefe")) %>% filter(ing_cor < 2000000 & transporte < 350000 & limpieza < 40000 & personales < 113246) %>%  -->
+<!--   filter(transporte != 0 & limpieza != 0 & personales != 0 & alimentos != 0) %>%  -->
+<!--   dplyr::select(ing_cor, transporte, alimentos, limpieza, personales) %>%  -->
+<!--   lm(log(ing_cor)~log(transporte) + sqrt(alimentos) + log(limpieza) + log(personales), data = .) %>% residuals() %>% shapiro.test() -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- data_income_sexo %>% dplyr::select(-c("vestido", "calzado", "salud", "esparcimiento" ,"educacion", "sexo_jefe")) %>% filter(ing_cor < 2000000 & transporte < 350000 & limpieza < 40000 & personales < 113246) %>%  -->
+<!--   filter(transporte != 0 & limpieza != 0 & personales != 0 & alimentos != 0) %>%  -->
+<!--   mutate(index = row_number()) %>% filter(!(index %in% c(2023, 881, 1858))) %>%  -->
+<!--   dplyr::select(ing_cor, transporte, alimentos, limpieza, personales) %>%  -->
+<!--   lm(log(ing_cor)~log(transporte) + sqrt(alimentos) + log(limpieza) + log(personales), data = .) %>% bptest() -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- data_income_sexo %>% dplyr::select(-c("vestido", "calzado", "salud", "esparcimiento" ,"educacion", "sexo_jefe")) %>% filter(ing_cor < 2000000 & transporte < 350000 & limpieza < 40000 & personales < 113246) %>%  -->
+<!--   filter(transporte != 0 & limpieza != 0 & personales != 0 & alimentos != 0) %>%  -->
+<!--   mutate(index = row_number()) %>% filter(!(index %in% c(2023, 881, 1858))) %>%  -->
+<!--   dplyr::select(ing_cor, transporte, alimentos, limpieza, personales) %>%  -->
+<!--   lm(log(ing_cor)~log(transporte) + sqrt(alimentos) + log(limpieza) + log(personales), data = .) %>% residuals() %>% shapiro.test() -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- library(MASS) -->
+<!-- other_model_dat <- data_income_sexo %>% dplyr::select(-c("vestido", "calzado", "salud", "esparcimiento" ,"educacion", "sexo_jefe")) %>% filter(ing_cor < 2000000 & transporte < 350000 & limpieza < 40000 & personales < 113246) %>%  -->
+<!--   filter(transporte != 0 & limpieza != 0 & personales != 0 & alimentos != 0) %>%  -->
+<!--   mutate(index = row_number()) %>% filter(!(index %in% c(2023, 881, 1858))) %>%  -->
+<!--   dplyr::select(ing_cor, transporte, alimentos, limpieza, personales) -->
+<!-- other_model <- lm(ing_cor~log(transporte) + sqrt(alimentos) + log(limpieza) + -->
+<!--                     log(personales), data = other_model_dat) -->
+<!-- p <- boxcox(other_model, plotit = TRUE) -->
+<!-- ``` -->
+<!-- Máximo Labmda -->
+<!-- ```{r} -->
+<!-- (lambda <- p$x[which.max(p$y)]) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- new_model <- lm(((ing_cor^lambda-1)/lambda) ~ log(transporte) + sqrt(alimentos) + log(limpieza) + -->
+<!--                     log(personales),  -->
+<!--                 data = data_income_sexo %>% dplyr::select(-c("vestido", "calzado", "salud", "esparcimiento" ,"educacion", "sexo_jefe")) %>% filter(ing_cor < 2000000 & transporte < 350000 & limpieza < 40000 & personales < 113246) %>%  -->
+<!--   filter(transporte != 0 & limpieza != 0 & personales != 0 & alimentos != 0) %>%  -->
+<!--   mutate(index = row_number()) %>% filter(!(index %in% c(2023, 881, 1858)))) -->
+<!-- new_model %>% summary() -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- #Residuales normales -->
+<!-- new_model %>% residuals() %>% shapiro.test() -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- #residuales estandarizados -->
+<!-- new_model  %>% rstandard() %>% shapiro.test() -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- new_model %>% bptest() -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- g <- stepAIC(new_model,direction = "backward") -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- summary(g) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- full_model <- lm(ing_cor ~transporte + alimentos +limpieza + personales + ,  -->
+<!--                 data = data_income_sexo%>% filter(ing_cor < 2000000 & transporte < 350000 & limpieza < 40000 & personales < 113246) %>%  -->
+<!--   filter(transporte != 0 & limpieza != 0 & personales != 0 & alimentos != 0) %>%  -->
+<!--   mutate(index = row_number()) %>% filter(!(index %in% c(2023, 881, 1858)))) -->
+<!-- full_model_AIC <- stepAIC(full_model,direction = "backward") -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- summary(full_model_AIC) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- data_income_sexo %>% dplyr::select(-c("vestido", "calzado", "salud", "esparcimiento" ,"educacion", "sexo_jefe")) %>% filter(ing_cor < 2000000 & transporte < 350000 & limpieza < 40000 & personales < 113246) %>%  -->
+<!--   filter(transporte != 0 & limpieza != 0 & personales != 0 & alimentos != 0) %>%  -->
+<!--   dplyr::select(ing_cor, transporte, alimentos, limpieza, personales) %>% cor() %>% det() -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- X1=scale(cigarros[,-5]) -->
+<!-- o_s <- data_income_sexo %>% dplyr::select(-c("vestido", "calzado", "salud", "esparcimiento" ,"educacion", "sexo_jefe")) %>% filter(ing_cor < 2000000 & transporte < 350000 & limpieza < 40000 & personales < 113246) %>%  -->
+<!--   filter(transporte != 0 & limpieza != 0 & personales != 0 & alimentos != 0) %>%  -->
+<!--   dplyr::select(ing_cor, transporte, alimentos, limpieza, personales) %>% scale() -->
+<!-- A=t(o_s)%*%o_s -->
+<!-- kappa=max(eigen(A)$values)/min(eigen(A)$values) -->
+<!-- kappa -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- library(faraway) -->
+<!-- second_m_model %>% vif() -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- new_model %>% summary() -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- second_m_model %>% summary() -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- l <- second_m_model %>% stepAIC(direction = "backward") -->
+<!-- summary(l) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- l$ -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- data_income_sexo %>% dplyr::select(-c("vestido", "calzado", "salud", "esparcimiento" ,"educacion", "sexo_jefe")) %>% filter(ing_cor < 2000000 & transporte < 350000 & limpieza < 40000 & personales < 113246) %>%  -->
+<!--   filter(transporte != 0 & limpieza != 0 & personales != 0 & alimentos != 0) %>%  -->
+<!--   mutate(index = row_number()) %>% filter(!(index %in% c(1232, 1216, 1858))) %>%  -->
+<!--   mutate(index = row_number()) %>% filter(!(index %in% c(181, 190, 1672))) %>%  -->
+<!--   dplyr::select(ing_cor, transporte, alimentos, limpieza, personales) %>%  -->
+<!--   lm(log(ing_cor)~log(transporte) + sqrt(alimentos) + log(limpieza) + log(personales), data = .) %>%  bptest() -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- data_income_sexo %>% dplyr::select(-c("vestido", "calzado", "salud", "esparcimiento" ,"educacion", "sexo_jefe")) %>% filter(ing_cor < 2000000 & transporte < 350000 & limpieza < 40000 & personales < 113246) %>%  -->
+<!--   filter(transporte != 0 & limpieza != 0 & personales != 0 & alimentos != 0) %>%  -->
+<!--   mutate(index = row_number()) %>% filter(!(index %in% c(1232, 1216, 1858))) %>%  -->
+<!--   mutate(index = row_number()) %>% filter(!(index %in% c(515, 2044, 124))) %>%  -->
+<!--   mutate(index = row_number()) %>% filter(!(index %in% c(1669, 879, 2017))) %>%  -->
+<!--   dplyr::select(ing_cor, transporte, alimentos, limpieza, personales) %>%  -->
+<!--   lm(log(ing_cor)~log(transporte) + sqrt(alimentos) + log(limpieza) + log(personales), data = .) %>%  bptest() -->
+<!-- ``` -->
+</div>
+<div id="validación" class="section level3" number="6.3.3">
+<h3><span class="header-section-number">6.3.3</span> Validación</h3>
+<p>Para que nuestros resultados tengan validez, necesitamos cumplir una serie de supuestos y es recomendable verificar algunos problemas potenciales. De lo principal que debemos verificar en cada modelo es lo siguiente:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Linearidad</strong>: La respuesta puede ser escrita como una combinación lineal de los predictores: <span class="math inline">\(\mathbb{E}[Y|X_1 = x_1, \dots, X_k = x_k] = \beta_0+\beta_1x_1+\cdots+\beta_kx_k\)</span>.</p></li>
+<li><p><strong>Homocedasticidad</strong>: La varianza de los errores es la misma en cualquier conjunto de los valores predichos: <span class="math inline">\(\mathbb{V}ar(\epsilon_i) = \sigma^2\)</span>, con <span class="math inline">\(\sigma^2\)</span> constante para <span class="math inline">\(i = 1, \dots, n\)</span>.</p></li>
+<li><p><strong>Normalidad</strong>: La distribución de los errores deben seguir una distribución normal: <span class="math inline">\(\epsilon_i \sim \mathbb{N}(0,\sigma^2)\)</span> para <span class="math inline">\(i = 1, \dots, n\)</span>.</p></li>
+<li><p><strong>Independencia</strong>: Los errores son independientes: <span class="math inline">\(\epsilon_1, \dots, \epsilon_n\)</span> son independientes o <span class="math inline">\(\mathbb{E}[\epsilon_i\epsilon_j] = 0, i\neq j\)</span>, es decir, que los errores no estan correlacionados ya que asumimos que son normales.</p></li>
+<li><p><strong>Aditividad</strong>: El efecto que tiene una variable predictora sobre el modelo es independiente de otra regresora sobre la variable respuesta. En caso de tener problemas con esto, podríamos tener problemas de multicolinealidad.</p></li>
+</ol>
+<p>Este último es considerado como supuesto del modelo en los libros <span class="citation"><a href="#ref-james2013introduction" role="doc-biblioref">James et al.</a> (<a href="#ref-james2013introduction" role="doc-biblioref">2013</a>)</span> y <span class="citation"><a href="#ref-friedman2001elements" role="doc-biblioref">Friedman et al.</a> (<a href="#ref-friedman2001elements" role="doc-biblioref">2001</a>)</span> pero es común que sólo los primeros 4 sean considerados los supuestos del modelo. Si bien es cierto que es ideal que todos nuestros supuestos se cumplan, podemos dar cierta tolerancia a ellos por su <strong>Robustez</strong>. El libro <span class="citation"><a href="#ref-gelman2006data" role="doc-biblioref">Gelman and Hill</a> (<a href="#ref-gelman2006data" role="doc-biblioref">2006</a>)</span> enlista los anteriores supuestos en orden de importancia (de manera descendente) y el libro <span class="citation"><a href="#ref-ramsey2012statistical" role="doc-biblioref">Ramsey and Schafer</a> (<a href="#ref-ramsey2012statistical" role="doc-biblioref">2012</a>)</span> se dan algunos puntos importantes sobre esto.</p>
+<ol style="list-style-type: decimal">
+<li><p><em>Validez</em>: La información debe ser adecuada para responder tu pregunta objetivo</p></li>
+<li><p><em>Aditividad y linearidad</em>: El supuesto matemático más importante del modelo de regresión es que su componente determinista es una función lineal de los predictores separados. Esto puede ser corregido con diferentes transformaciones.</p></li>
+</ol>
+<p>Este supuesto puede ser violado cuando la recta de ajuste entre los datos no es recta (una curva por ejemplo) o cuando la cantidad y fuerza de los valores atípicos no permiten que el modelo sea adecuado. Ambas violaciones pueden hacer que las estimaciones de mínimos cuadrados den respuestas engañosas a las preguntas de interés. Las medias y las predicciones estimadas pueden estar sesgadas (subestiman o sobrestiman sistemáticamente la cantidad prevista) y las pruebas y los intervalos de confianza pueden reflejar de forma inexacta la incertidumbre</p>
+<ol start="3" style="list-style-type: decimal">
+<li><p><em>Independencia de los errores</em>: La falta de independencia no provoca sesgos en las estimaciones de mínimos cuadrados de los coeficientes, pero los errores estándar se ven seriamente afectados. Este problema puede ser dado, por ejemplo, cuando los individuos en un estudio pertenecen a un mismo grupo o comparten características similares que no se consideraron como que tenga la misma dieta, sean de la misma familia o hayan sido expuestos a las mismas condiciones ambientales.</p></li>
+<li><p><em>Homocedasticidad</em>: Si la varianza de los errores de regresión es desigual, la estimación se realiza de manera más eficiente utilizando mínimos cuadrados ponderados, donde cada punto se pondera inversamente proporcional a su varianza. En la mayoría de los casos, sin embargo, este problema es menor. La varianza desigual no afecta el aspecto más importante de un modelo de regresión, que es la forma del predictor <span class="math inline">\(X\beta\)</span>.</p></li>
+</ol>
+<p>Las consecuencias de violar este supuesto son las mismas que las del análisis de varianza unidireccional. Aunque las estimaciones de mínimos cuadrados siguen siendo insesgadas incluso si la varianza no es constante, los errores estándar describen de manera inexacta la incertidumbre en las estimaciones. Las pruebas y los intervalos de confianza pueden ser engañosos.</p>
+<ol start="5" style="list-style-type: decimal">
+<li><em>Normalidad</em>: El supuesto de regresión que generalmente es menos importante es que los errores se distribuyen normalmente. De hecho, para estimar la línea de regresión (en comparación con la predicción de puntos de datos individuales), el supuesto de normalidad apenas tiene importancia.</li>
+</ol>
+<p>Las estimaciones de los coeficientes y sus errores estándar son robustas a distribuciones no normales. Aunque las pruebas y los intervalos de confianza se originan en distribuciones normales, las consecuencias de violar este supuesto suelen ser menores. La única situación de gran preocupación es cuando las distribuciones tienen colas largas (existen valores atípicos) y los tamaños de muestra son de moderados a pequeños.
+Si se utilizan intervalos de predicción, por otro lado, las desviaciones de la normalidad se vuelven importantes. Esto se debe a que los intervalos de predicción se basan directamente en la normalidad de las distribuciones de la población, mientras que las pruebas y los intervalos de confianza se basan en la normalidad de las distribuciones muestrales de las estimaciones (que pueden ser aproximadamente normales incluso cuando las distribuciones de la población no lo son).</p>
+<p>Por lo que en este punto, si tenemos una buena cantidad de datos, podemos ser flexibles con este último supuesto.</p>
+<p>La manera más sencilla de ver la mayoría de estos supuestos es mediante una gráfica de residuales vs los valores ajustados donde, para la linealidad deseamos ver que los residuales tengan un comportamiento aleatorio con una varianza constante y media cero, lo cual implicitamente también ayuda con la homocedasticidad y normalidad. Esta gráfica y otras no las proporciona el comando <code>plot()</code> para un modelo lineal</p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="regresión-lineal-múltiple.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb107-2"><a href="regresión-lineal-múltiple.html#cb107-2" aria-hidden="true" tabindex="-1"></a>third_model_BX <span class="sc">%&gt;%</span> <span class="fu">plot</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-89-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>O bien con la función <code>ggfortify::autoplot()</code></p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="regresión-lineal-múltiple.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify)</span>
+<span id="cb108-2"><a href="regresión-lineal-múltiple.html#cb108-2" aria-hidden="true" tabindex="-1"></a>third_model_BX <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-90-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Para más detalles de estas gráficas véase la sección de <em>Análisis de valores influyentes</em>. Finalmente aplicamos diversas pruebas para probar cada uno de los supuestos:</p>
+<ul>
+<li>Normalidad:
+<ul>
+<li>Todas las pruebas que se vieron anteriormente.</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="regresión-lineal-múltiple.html#cb109-1" aria-hidden="true" tabindex="-1"></a>third_model_BX <span class="sc">%&gt;%</span> <span class="fu">residuals</span>() <span class="sc">%&gt;%</span> <span class="fu">shapiro.test</span>()</span></code></pre></div>
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  .
+W = 0.98185, p-value = 6.856e-16</code></pre>
+<ul>
+<li>Homocedasticidad:
+<ul>
+<li>Prueba de Breusch-Pagan: <code>lmtest::bptest()</code></li>
+<li>Prueba de White: <code>lmtest::bptest()</code></li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="regresión-lineal-múltiple.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmtest)</span>
+<span id="cb111-2"><a href="regresión-lineal-múltiple.html#cb111-2" aria-hidden="true" tabindex="-1"></a>third_model_BX <span class="sc">%&gt;%</span> <span class="fu">bptest</span>()</span></code></pre></div>
+<pre><code>
+    studentized Breusch-Pagan test
+
+data:  .
+BP = 6.2836, df = 4, p-value = 0.1789</code></pre>
+<ul>
+<li>Autocorrelación (independencia):
+<ul>
+<li>Durbin Watson: <code>lmtest::dwtest()</code></li>
+<li>Breusch-Godfrey Test: <code>lmtest::bgtest()</code></li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="regresión-lineal-múltiple.html#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dwtest</span>(third_model_BX)</span></code></pre></div>
+<pre><code>
+    Durbin-Watson test
+
+data:  third_model_BX
+DW = 1.8388, p-value = 9.232e-05
+alternative hypothesis: true autocorrelation is greater than 0</code></pre>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="regresión-lineal-múltiple.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bgtest</span>(third_model_BX)</span></code></pre></div>
+<pre><code>
+    Breusch-Godfrey test for serial correlation of order up to 1
+
+data:  third_model_BX
+LM test = 13.716, df = 1, p-value = 0.0002126</code></pre>
+<ul>
+<li><p><a href="https://thomaselove.github.io/431-notes/Reg-Diag.html#the-independence-assumption">The Independence Assumption</a></p></li>
+<li><p><a href="https://fhernanb.github.io/libro_regresion/indep.html#durbin-watson-test">Pruebas de independencia de los errores</a></p></li>
+<li><p><a href="https://www.statisticshowto.com/durbin-watson-test-coefficient/">Durbin Watson Test &amp; Test Statistic</a></p></li>
+<li><p><a href="https://www.statology.org/breusch-godfrey-test-in-r/">How to Perform a Breusch-Godfrey Test in R</a></p></li>
+<li><p>Colinearidad/Multicolinealidad</p></li>
+</ul>
+<p>Una manera sencilla para detecetar la colinearidad es ver un correlograma y tomar aquellas variables que tengan fuerte relación entre ellas. Así sabiendo que una variable explica a otra, podríamos omitirla del modelo y determinar si esto mejora nuestro rendimiento, o bien crear una nueva variable. Otra solución en caso de colinearidad podría ser una interacción como ya se vio previamente.</p>
+<p>El problema con lo anterior es que no todos los problemas de colinearidad pueden ser detectados mediante un correlograma, ya que puede existe una relación entre tres o más variables sin que sea visible tomándolo por pares. A lo anterior es lo que llamaremos <strong>multicolinearidad</strong></p>
+<p>Lo recomendable, y más sencillo, es visualizar el <strong><strong>factor de inflación de varianza: VIF</strong></strong> el cual es la razón de la varianza de <span class="math inline">\(\beta_j\)</span> cuando</p>
+<p><span class="math display">\[
+VIF\left(\hat{\beta}_i\right) = \frac{1}{1-R^2_{X_j|X_{-j}}}
+\]</span></p>
+<p>Donde <span class="math inline">\(R^2_{X_j|X_{-j}}\)</span> es la <span class="math inline">\(R^2\)</span> de la regresión de <span class="math inline">\(X_j\)</span> a todos los demás predictores; es decir, la proporción de variabilidad en <span class="math inline">\(X_j\)</span> que es explicada por su relación lineal a las otras variables del modelo. Cuando <span class="math inline">\(X_j\)</span> puede ser bien explicada por la adicción de las demas variables; es decir cuando <span class="math inline">\(R^2_{X_j|X_{-j}}\)</span> es cercano a 1, entonces el valor <span class="math inline">\(VIF\)</span> será grande e indicaría problas de colinearidad.</p>
+<p>Buscamos valores pequeños y lo más pequeño que se puede obtener para cada variable es un <span class="math inline">\(VIF = 1\)</span> lo cual indica una completa ausencia de colinearidad. Por regla de dedo, un <span class="math inline">\(VIF\)</span> mayor a 5 o 10 indica problemas de colinearidad. En R podemos obtener el <span class="math inline">\(VIF\)</span> para cada variable con la función <code>faraway::vif()</code></p>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="regresión-lineal-múltiple.html#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(faraway)</span>
+<span id="cb117-2"><a href="regresión-lineal-múltiple.html#cb117-2" aria-hidden="true" tabindex="-1"></a>third_model_BX <span class="sc">%&gt;%</span> <span class="fu">vif</span>()</span></code></pre></div>
+<pre><code>log(transporte) sqrt(alimentos)   log(limpieza) log(personales) 
+       1.409547        1.469732        1.560714        1.649865 </code></pre>
+<p>No tenemos problemas de colinearidad.</p>
+<p>¿Qué sucedió con nuestro segundo modelo?</p>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="regresión-lineal-múltiple.html#cb119-1" aria-hidden="true" tabindex="-1"></a>second_m_model <span class="sc">%&gt;%</span> <span class="fu">residuals</span>() <span class="sc">%&gt;%</span> <span class="fu">shapiro.test</span>()</span></code></pre></div>
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  .
+W = 0.98339, p-value = 9.574e-16</code></pre>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="regresión-lineal-múltiple.html#cb121-1" aria-hidden="true" tabindex="-1"></a>second_m_model <span class="sc">%&gt;%</span> <span class="fu">bptest</span>()</span></code></pre></div>
+<pre><code>
+    studentized Breusch-Pagan test
+
+data:  .
+BP = 51.355, df = 7, p-value = 7.823e-09</code></pre>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="regresión-lineal-múltiple.html#cb123-1" aria-hidden="true" tabindex="-1"></a>second_m_model <span class="sc">%&gt;%</span> <span class="fu">bgtest</span>()</span></code></pre></div>
+<pre><code>
+    Breusch-Godfrey test for serial correlation of order up to 1
+
+data:  .
+LM test = 14.285, df = 1, p-value = 0.0001571</code></pre>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="regresión-lineal-múltiple.html#cb125-1" aria-hidden="true" tabindex="-1"></a>second_m_model <span class="sc">%&gt;%</span> <span class="fu">vif</span>()</span></code></pre></div>
+<pre><code>           sqrt(transporte)             sqrt(alimentos) 
+                   1.475002                    1.546820 
+             sqrt(limpieza)            sqrt(personales) 
+                   1.631803                    1.816380 
+              sqrt(calzado)               sqrt(vestido) 
+                   2.500522                    2.971420 
+sqrt(calzado):sqrt(vestido) 
+                   4.387703 </code></pre>
+<p>Invalidamos el supuesto de homocedasticidad que ya habíamos conseguido con nuestro tercer modelo, por lo que preferiremos el tercer modelo desde ahora.</p>
+<ul>
+<li><a href="https://www.econometrics-with-r.org/6-4-ols-assumptions-in-multiple-regression.html">Introduction to Econometrics with R: OLS Assumptions in Multiple Regression</a></li>
+<li><a href="https://bookdown.org/egarpor/SSS2-UC3M/multlin-assumps.html">Lab notes for Statistics for Social Sciences II: Multivariate Techniques: 3.3 Assumptions of the model</a></li>
+<li><a href="https://fhernanb.github.io/libro_regresion/diag1.html#chequeando-si-errores-no-están-correlacionados">Modelos de Regresión con R: 9. Diagnósticos parte I</a></li>
+<li><a href="https://daviddalpiaz.github.io/appliedstats/model-diagnostics.html">Applied Statistics with R: Chapter 13 Model Diagnostics</a></li>
+<li><a href="https://bookdown.org/egarpor/SSS2-UC3M/multlin-diagnostics.html">Lab notes for Statistics for Social Sciences II: Multivariate Techniques: 3.8 Model diagnostics and multicollinearity</a></li>
+<li><a href="http://www.sthda.com/english/articles/39-regression-model-diagnostics/161-linear-regression-assumptions-and-diagnostics-in-r-essentials/">Regression Model Diagnostics</a></li>
+</ul>
+</div>
+</div>
+<div id="predicción" class="section level2" number="6.4">
+<h2><span class="header-section-number">6.4</span> Predicción</h2>
+<p>Uno de los puntos más objetivos principales de crear un modelo de regresión es predecir un valor futuro de acuerdo a diferentes valores de nuestras variables predictoras. Esto es sencillo teniendo ya el modelo. Vamos a suponer que nuestro último modelo es adecuado (ya que aún no hemos tratado el tema de validación de supuestos, los cuales en predicción son vitales para su credibilidad)</p>
+<p>En <code>R</code> podemos utilizar el comando <code>predict()</code> para obtener fácilmente las predicciones de nueva información sobre un modelo. En esta caso vamos a realizar un ejemplo con regresión simple ya que es análogo para el modelo de regresión múltiple.</p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="regresión-lineal-múltiple.html#cb127-1" aria-hidden="true" tabindex="-1"></a>new_data <span class="ot">&lt;-</span>  <span class="fu">data.frame</span>(<span class="at">vestido =</span> <span class="dv">100</span>)</span>
+<span id="cb127-2"><a href="regresión-lineal-múltiple.html#cb127-2" aria-hidden="true" tabindex="-1"></a>simple_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(ing_cor)<span class="sc">~</span><span class="fu">sqrt</span>(vestido), <span class="at">data =</span> mutated_data_income <span class="sc">%&gt;%</span> <span class="fu">filter</span>(vestido<span class="sc">&lt;</span><span class="dv">7500</span> <span class="sc">&amp;</span> vestido<span class="sc">&gt;</span><span class="dv">0</span>))</span>
+<span id="cb127-3"><a href="regresión-lineal-múltiple.html#cb127-3" aria-hidden="true" tabindex="-1"></a>simple_model <span class="sc">%&gt;%</span> <span class="fu">predict</span>(new_data)</span></code></pre></div>
+<pre><code>       1 
+10.42712 </code></pre>
+<p>Véase que R se encarga de las transformaciones en las variables predictoras (en este caso el modelo queda expresado como <span class="math inline">\(y = 10.26570 + 0.01614\times \sqrt{X_{vestido}}\)</span>)</p>
+<ul>
+<li><span class="math inline">\(10.26570 + 0.01614\times100 = 11.8797\)</span></li>
+<li><span class="math inline">\(10.26570 + 0.01614\times\sqrt{100} = 10.42712\)</span></li>
+</ul>
+<p>Entonces, en este caso podemos decir que con un gasto de $100 mexicanos en vestido (con esta base de datos), un ciudadano de Aguascalientes, en promedio tiene que ganar <span class="math inline">\(e^{10.26570}\times e^{(0.01614\times\sqrt(100)} = exp(10.42712) = \$33762.97\)</span> pesos mexicanos.</p>
+<p>La misma función <code>predict()</code> nos permite obtener los intervalos de confianza para la respuesta media y los intervalos de predicción con el argumento <code>interval = c("confidence", "prediction")</code></p>
+<p>¿Cuál es la diferencia entre estos?</p>
+<p>Como sabemos, nuestro modelo sólo es una representación de la realidad ya que mediante algún método obtenemos estimaciones sobre los parámetro (los <span class="math inline">\(\beta_i\)</span>s); es decir, sólo estamos obteniendo una estimación del verdadero plano poblacional de regresión</p>
+<p><span class="math display">\[
+f(X) = \beta_0 + \beta_1X_1 + \cdots + \beta_{p}X_p 
+\]</span></p>
+<p>con nuestro plano obtenido por el método de mínimos cuadrados</p>
+<p><span class="math display">\[
+\hat{Y} = \hat{\beta}_0 + \hat{\beta_1}X_1 + \cdots + \hat{\beta}_{p}X_p 
+\]</span></p>
+<p>en el cual controlamos un error que se puede reducir. Sobre dicha respuesta promedio es donde tenemos nuestros intervalos de confianza. Por ejemplo, si nosotros recolectamos distintas bases de datos con las variables que tenemos en nuestro último modelo del ingreso en Aguascalientes, digamos 100, y obtenemos el intervalo de confianza sobre el promedio del gasto en cada una de esas bases (con las variables explicativas fijas), 95% de dichos intervalos contendrán el verdadero valor promedio del gasto (la respuesta media en este caso). Recordemos que este valor promedio es lo que tenemos con la evaluación de un vector X conocido.</p>
+<p>En el caso del intervalo de predicción, estamos haciendo inferencia sobre el error que no controlamos en el modelo (<span class="math inline">\(\epsilon\)</span>), por lo que es común que el intervalo de predicción sea más amplio que los intervalos de confianza al incorporar esta incertidumbre. Si bien, al igual que en el intervalo de confianza estaríamos dando un intervalo para un valor de la respuesta, en este caso es de manera específica y no sobre una aproximación hacia la población.</p>
+<p>Entonces, sí se desea dar un intervalo para un punto en particular, utilizaremos los intervalos de predicción y si deseamos hablar de los valores medios de predicción, usaríamos un intervalo de confianza.</p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="regresión-lineal-múltiple.html#cb129-1" aria-hidden="true" tabindex="-1"></a>new_data <span class="ot">&lt;-</span>  <span class="fu">data.frame</span>(<span class="at">vestido =</span> <span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">150</span>)</span>
+<span id="cb129-2"><a href="regresión-lineal-múltiple.html#cb129-2" aria-hidden="true" tabindex="-1"></a>simple_model <span class="sc">%&gt;%</span> <span class="fu">predict</span>(new_data, <span class="at">interval =</span> <span class="st">&quot;confidence&quot;</span>)</span></code></pre></div>
+<pre><code>       fit      lwr      upr
+1 10.42712 10.37179 10.48246</code></pre>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="regresión-lineal-múltiple.html#cb131-1" aria-hidden="true" tabindex="-1"></a>simple_model <span class="sc">%&gt;%</span> <span class="fu">predict</span>(new_data, <span class="at">interval =</span> <span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
+<pre><code>       fit      lwr      upr
+1 10.42712 9.206192 11.64806</code></pre>
+<p>En este caso de una regresión lineal simple podemos visualizar mejor dichos intervalos</p>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="regresión-lineal-múltiple.html#cb133-1" aria-hidden="true" tabindex="-1"></a>pred_int <span class="ot">&lt;-</span> <span class="fu">predict</span>(simple_model, <span class="at">interval =</span> <span class="st">&quot;prediction&quot;</span>)</span>
+<span id="cb133-2"><a href="regresión-lineal-múltiple.html#cb133-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb133-3"><a href="regresión-lineal-múltiple.html#cb133-3" aria-hidden="true" tabindex="-1"></a>mutated_data_income <span class="sc">%&gt;%</span> <span class="fu">filter</span>(vestido<span class="sc">&lt;</span><span class="dv">7500</span> <span class="sc">&amp;</span> vestido<span class="sc">&gt;</span><span class="dv">0</span>) <span class="sc">%&gt;%</span> <span class="fu">bind_cols</span>(pred_int <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb133-4"><a href="regresión-lineal-múltiple.html#cb133-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">sqrt</span>(vestido), <span class="at">y =</span> <span class="fu">log</span>(ing_cor))) <span class="sc">+</span> </span>
+<span id="cb133-5"><a href="regresión-lineal-múltiple.html#cb133-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb133-6"><a href="regresión-lineal-múltiple.html#cb133-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="sc">+</span> <span class="co">#Intervalos de confianza</span></span>
+<span id="cb133-7"><a href="regresión-lineal-múltiple.html#cb133-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> lwr), <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span> <span class="co">#intervalos de predicción</span></span>
+<span id="cb133-8"><a href="regresión-lineal-múltiple.html#cb133-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> upr), <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb133-9"><a href="regresión-lineal-múltiple.html#cb133-9" aria-hidden="true" tabindex="-1"></a>  general_theme</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-98-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-friedman2001elements" class="csl-entry">
+<p>Friedman, Jerome, Trevor Hastie, Robert Tibshirani, and others. 2001. <em>The Elements of Statistical Learning</em>. Vol. 1. 10. Springer series in statistics New York.</p>
+</div>
+<div id="ref-gelman2006data" class="csl-entry">
+<p>Gelman, Andrew, and Jennifer Hill. 2006. <em>Data Analysis Using Regression and Multilevel/Hierarchical Models</em>. Cambridge university press.</p>
+</div>
+<div id="ref-james2013introduction" class="csl-entry">
+<p>James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2013. <em>An Introduction to Statistical Learning</em>. Vol. 112. Springer.</p>
+</div>
+<div id="ref-ramsey2012statistical" class="csl-entry">
+<p>Ramsey, Fred, and Daniel Schafer. 2012. <em>The Statistical Sleuth: A Course in Methods of Data Analysis</em>. Cengage Learning.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="regresión-lineal-simple.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="otros-puntos-importantes-de-regresión-lineal.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "github", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
