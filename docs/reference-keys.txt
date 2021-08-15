@@ -1,4 +1,4 @@
-tab:unnamed-chunk-56
+tab:unnamed-chunk-57
 pruebas-de-hipótesis
 qué-es-una-prueba-de-hipótesis
 dos-tipos-de-hipótesis

@@ -13,6 +13,12 @@ pre[class] {
 }
 ```
 
+```{css, echo=FALSE}
+.to_left {
+  text-align: left;;
+}
+```
+
 
 Nuestro objetivo en un modelo de regresión será ajustar o asociar una variable, a la que llamaremos variable __respuesta__ o __dependediente__, con una o más variables distintas llamadas variables __predictoras__ o __independientes__, con el fin de poder predecir valores futuros de la variable respuesta y analizar los efectos que tendría esta variable con alteraciones en el resto de variables del modelo.
 
